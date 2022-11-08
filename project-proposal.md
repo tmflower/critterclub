@@ -1,5 +1,5 @@
-# Project Proposal: Critter Club: A Science Learning App for Kids
-
+# Project Proposal 
+## Critter Club: A Science Learning App for Kids
 #### What tech stack will you use for your final project?
 React-Node-Postgres
 #### Is the front-end UI or the back-end going to be the focus of your project? Or are you going to make an evenly focused full-stack application?
