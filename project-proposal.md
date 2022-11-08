@@ -1,4 +1,4 @@
-# Project Proposal: Gamified Learning App
+# Project Proposal: Critter Club: A Science Learning App for Kids
 
 #### What tech stack will you use for your final project?
 React-Node-Postgres
