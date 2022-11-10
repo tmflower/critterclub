@@ -1,5 +1,5 @@
-# Project Proposal: Gamified Learning App
-
+# Project Proposal 
+## Critter Club: A Science Learning App for Kids
 #### What tech stack will you use for your final project?
 React-Node-Postgres
 #### Is the front-end UI or the back-end going to be the focus of your project? Or are you going to make an evenly focused full-stack application?
@@ -38,6 +38,7 @@ The user will be able to:
 #### What features make your site more than a CRUD app? What are your stretch goals?
 - The interactive nature of a game takes it beyond being a basic CRUD app. Stretch goals include:
     -  Avatars that users can select from, scaled according to their player status level
+    -  A chat feature where users can interact with each other
     -  Inclusion of a geolocation API so that the location data displays a map instead of just text
     -  A parent portal that allows parents to track student progress
     -  A teacher portal that allows teachers to track student progress
