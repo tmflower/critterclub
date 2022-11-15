@@ -11,6 +11,7 @@ To help students learn science content in a fun and engaging way
 #### What kind of users will visit your app? In other words, what is the demographic of your users?
 Students in grades 2-5
 #### What data do you plan on using? How are you planning on collecting your data?
+- User data (username & password) will come from form submission, then build as users collect cards
 - Animal data (except photos) will come from [Animals API](https://api-ninjas.com/api/animals)
 - Animal photos will come from [Unsplash API](https://unsplash.com/developers)
 #### What does your database schema look like?
