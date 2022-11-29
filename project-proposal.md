@@ -15,7 +15,7 @@ Students in grades 2-5
 - User data (username & password) will come from form submission, then build as users collect cards
 - Basic animal data will come from [Animals API](https://api-ninjas.com/api/animals)
 - Animal photos will come from [Unsplash API](https://unsplash.com/developers)
-- Animal videos will come from [YouTube API] (https://developers.google.com/youtube/v3)
+- Animal videos will come from [YouTube API](https://developers.google.com/youtube/v3)
 #### What does your database schema look like?
 ![Screen Shot 2022-11-28 at 3 49 02 PM](https://user-images.githubusercontent.com/94068349/204418554-32f94664-7fb3-45f1-8e0a-d1a81f759082.png)
 
