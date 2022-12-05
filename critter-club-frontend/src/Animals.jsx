@@ -1,10 +1,45 @@
-import { Animal } from './Animal';
- 
+import { useState, useEffect } from "react";
+import AnimalsAPI from "./api/animalsAPI";
+import { NavLink } from "react-router-dom";
+
 export function Animals() {
+
+    const [allAnimals, setAllAnimals] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [animalName, setAnimalName] = useState("");
+
+    useEffect(() => {
+        async function getAllAnimals() {
+            setAllAnimals(await AnimalsAPI.getAllAnimals());
+        }
+        getAllAnimals();
+    }, [])
+
+    // console.log(allAnimals);
+
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    }
+
+    // TODO: have search term list all matches and user choose desired one...this means rendering Animal component after clicking
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(searchTerm);
+        setAnimalName(searchTerm);
+        setSearchTerm("");
+    }
+
+    // TODO: REPLACE "LOADING..." WITH LOADING ICON
     return (
         <div>
-            <h1>Animals</h1>
-            <Animal />
+        {!allAnimals.length ? "Loading..." :
+            <div>
+                <h1>Animals</h1>
+                <form onSubmit={handleSubmit}>Search for an animal
+                    <input type="search" onChange={handleSearch}></input>
+                </form>
+            </div>}
+        {/* {animalName ? <NavLink to={`/animals/${animalName}`}><p>{animalName}</p></NavLink> : <p>no animal yet</p>} */}
         </div>
     )
 }
