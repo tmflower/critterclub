@@ -1,0 +1,94 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "common_name",
+        "latin_name",
+        "photo",
+        "group",
+        "locations",
+        "random_fact"
+    ],
+    "properties": {
+        "id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The id Schema",
+            "examples": [
+                1
+            ]
+        },
+        "common_name": {
+            "type": "string",
+            "default": "",
+            "title": "The common_name Schema",
+            "examples": [
+                "cheetah"
+            ]
+        },
+        "latin_name": {
+            "type": "string",
+            "default": "",
+            "title": "The latin_name Schema",
+            "examples": [
+                "acinonyx jubatus"
+            ]
+        },
+        "photo": {
+            "type": "string",
+            "default": "",
+            "title": "The photo Schema",
+            "examples": [
+                "https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?ixlib=rb-4.0.3\u0026ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8\u0026auto=format\u0026fit=crop\u0026w=1215\u0026q=80"
+            ]
+        },
+        "group": {
+            "type": "string",
+            "default": "",
+            "title": "The group Schema",
+            "examples": [
+                "mammalia"
+            ]
+        },
+        "locations": {
+            "type": "array",
+            "default": [],
+            "title": "The locations Schema",
+            "items": {
+                "type": "string",
+                "default": "",
+                "title": "A Schema",
+                "examples": [
+                    "Africa"
+                ]
+            },
+            "examples": [
+                [
+                    "Africa"]
+            ]
+        },
+        "random_fact": {
+            "type": "string",
+            "default": "",
+            "title": "The random_fact Schema",
+            "examples": [
+                "Cheetahs are the fastest land animal on Earth."
+            ]
+        }
+    },
+    "examples": [{
+        "id": 1,
+        "common_name": "cheetah",
+        "latin_name": "acinonyx jubatus",
+        "photo": "https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?ixlib=rb-4.0.3\u0026ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8\u0026auto=format\u0026fit=crop\u0026w=1215\u0026q=80",
+        "group": "mammalia",
+        "locations": [
+            "Africa"
+        ],
+        "random_fact": "Cheetahs are the fastest land animal on Earth."
+    }]
+}

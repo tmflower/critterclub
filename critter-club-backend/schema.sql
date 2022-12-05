@@ -1,10 +1,22 @@
+CREATE TABLE parents (
+    id PRIMARY KEY,
+    username UNIQUE VARCHAR(15) NOT NULL,
+    password TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL
+        CHECK (position('@' IN email) > 1),
+    access_code INTEGER,
+)
+
 CREATE TABLE users (
     id PRIMARY KEY,
     username UNIQUE VARCHAR(15) NOT NULL,
     password TEXT NOT NULL,
     access_code INTEGER,
     num_cards INTEGER,
-    level TEXT
+    level TEXT,
+    parent_id INTEGER REFERENCES parents ON DELETE CASCADE
 )
 
 CREATE TABLE animals (
@@ -13,7 +25,7 @@ CREATE TABLE animals (
     latin_name TEXT, 
     photo TEXT,
     group TEXT,
-    location TEXT[],
+    locations TEXT[],
     random_fact TEXT
 )
 
