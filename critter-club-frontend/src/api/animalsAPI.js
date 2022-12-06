@@ -2,24 +2,31 @@ import axios from "axios";
 
 const completeList = "a";
 const BASE_URL_ANIMALS = "https://api.api-ninjas.com/v1/animals?name=";
+let API_KEY_ANIMALS;
 
-const getKey = async function() {
+const getKey = async () => {
     const res = await axios.get("http://localhost:3001/keys");
-    console.log(res.data.animals_api_key);
-    return res.data.animals_api_key;
+    API_KEY_ANIMALS = res.data.animals_api_key;
+    return API_KEY_ANIMALS;
 }
 
-const key = getKey();
-const API_KEY_ANIMALS = key;
+API_KEY_ANIMALS = getKey();
 
 class AnimalsAPI {
     
     static async getAllAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
         const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});   
         return response.data; 
+
     }
 
     static async getSingleAnimal(animalName) {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
         const response = await axios.get(`${BASE_URL_ANIMALS}${animalName}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
         return response.data[0];  
     }    

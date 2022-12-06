@@ -38,8 +38,10 @@ export function Animals() {
                 <form onSubmit={handleSubmit}>Search for an animal
                     <input type="search" onChange={handleSearch}></input>
                 </form>
+                {animalName ? <NavLink to={`/animals/${animalName}`}><p>{animalName}</p></NavLink> : null}
+                {allAnimals.map((animal, i) =>  (<NavLink to={`/animals/${animal.name}`} key={i}><p key={i}>{animal.name}</p></NavLink>))}
             </div>}
-        {/* {animalName ? <NavLink to={`/animals/${animalName}`}><p>{animalName}</p></NavLink> : <p>no animal yet</p>} */}
+        
         </div>
     )
 }
