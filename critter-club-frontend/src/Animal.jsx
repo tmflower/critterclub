@@ -1,8 +1,7 @@
 import AnimalsAPI from './api/animalsAPI.js';
 import { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-// import PhotosAPI from './photosAPI.js';
-// import Photo from './Photo.jsx';
+import { Photo } from './Photo.jsx';
 
 export function Animal() {
 
@@ -16,14 +15,13 @@ export function Animal() {
     const [habitat, setHabitat] = useState("");
     const [phylum, setPhylum] = useState("");
     const [locations, setLocations] = useState([]);
-    // const [photo, setPhoto] = useState("");
 
     useEffect(() => {
         async function getAnimal() {
             setAnimal(await AnimalsAPI.getSingleAnimal(animalName))
         }
         getAnimal();
-    }, []);
+    }, [animalName]);
 
     useEffect(() => {
         if (animal) {     
@@ -35,21 +33,14 @@ export function Animal() {
             setLocations(animal.locations);
         }
     }, [animal]);
-
-    // useEffect(() => {
-    //     async function getPhoto() {
-    //         setPhoto(await PhotosAPI.getPhoto());
-    //     }
-    //     getPhoto();
-    // }, [animalName]);
-
+    
     return (
         <div>
             {!animal ? "Loading..." :
             <div>
                 <div>
-                    <h2>Animal Card</h2>
-                    {/* <Photo animalName={animalName}/> */}
+                    <h2>Animal Info</h2>
+                    <Photo animalName={animalName}/>
                     <p>{commonName}</p>
                     <p>{group}</p>
                     <p>{habitat}</p>

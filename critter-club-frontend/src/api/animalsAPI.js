@@ -10,8 +10,6 @@ const getKey = async () => {
     return API_KEY_ANIMALS;
 }
 
-API_KEY_ANIMALS = getKey();
-
 class AnimalsAPI {
     
     static async getAllAnimals() {
@@ -20,7 +18,6 @@ class AnimalsAPI {
         }
         const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});   
         return response.data; 
-
     }
 
     static async getSingleAnimal(animalName) {

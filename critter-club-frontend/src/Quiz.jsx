@@ -12,7 +12,7 @@ export function Quiz() {
     const [taxClass, setTaxClass] = useState("");
     const [locations, setLocations] = useState([]);
     const [diet, setDiet] = useState("");
-    const [photo, setPhoto] = useState("");
+    // const [photo, setPhoto] = useState("");
     
     // Where will points come into play?
     const animalName = localStorage.getItem("animal");
@@ -129,7 +129,7 @@ export function Quiz() {
         }
         else console.log("SORRY, NOT THIS TIME--class and diet!!! 😫😫😫");     
     }
-    console.log(animal);
+    // console.log(animal);
     // console.log(locations);
     // console.log(validLocations);
     
@@ -142,7 +142,7 @@ export function Quiz() {
 
     return (
         <div>
-            <h1>Take the {commonName.toUpperCase()} quiz!</h1>
+            <h1>Take the {commonName.toUpperCase()} challenge!</h1>
             <form onSubmit={handleSubmit}>
                 
                 {phylum === "Chordata" ?                
