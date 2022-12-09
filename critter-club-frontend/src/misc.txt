@@ -1,0 +1,40 @@
+/**
+ * Functions to access data by category
+ */
+    /////////////////////////////////////////////////////////////////////
+                // const [taxClasses, setTaxClasses] = useState([])
+                // useEffect(() => {
+                //     async function getClasses() {
+                //         setTaxClasses(await AnimalsAPI.getTaxClasses());
+                //     }
+                //     getClasses()
+                // }, []);
+                // console.log(taxClasses)
+    /////////////////////////////////////////////////////////////////////
+    // Chondrichthyes: cartilagenous fish
+    // Actinopterygii: ray-finned fish (bony)
+    // Sarcopterygii: lobe-finned fish (bony)
+
+    /////////////////////////////////////////////////////////////////////
+                // const [allLocations, setAllLocations] = useState([]);
+                // useEffect(() => {
+                //     async function getAllLocations() {
+                //         setAllLocations(await AnimalsAPI.getLocations());
+                //     }
+                //     getAllLocations();
+                // }, []);
+
+                // console.log(allLocations)
+    /////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////
+                // const [allHabitats, setAllHabitats] = useState([]);
+                // useEffect(() => {
+                //     async function getAllHabitats() {
+                //         setAllHabitats(await AnimalsAPI.getHabitats());
+                //     }
+                //     getAllHabitats();
+                // }, []);
+
+                // console.log(allHabitats)
+    /////////////////////////////////////////////////////////////////////

@@ -57,6 +57,18 @@ class AnimalsAPI {
         const allLocations = new Set(locationData.map(location => location[0]));
         return allLocations;  
     }
-}
 
+    static async getFunFacts() {
+        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        const factsData = response.data.map(data => data.characteristics.slogan);
+        const allFacts = new Set(factsData.map(fact => fact));
+        return allFacts;  
+    }
+
+    static async getInfo() {
+        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const info = new Set(response.data.map(data => data.characteristics.most_distinctive_feature));
+        return info;
+    }
+}
 export default AnimalsAPI;

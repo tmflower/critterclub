@@ -9,7 +9,8 @@ export function Photo ({ animalName }) {
 
     useEffect(() => {
         async function getAnimalPhoto() {
-            setPhoto(await PhotosAPI.getPhoto(animalName));
+            // setPhoto(await PhotosAPI.getPhoto(animalName));
+            setPhoto("");
         }
         getAnimalPhoto();
     }, [animalName]);
