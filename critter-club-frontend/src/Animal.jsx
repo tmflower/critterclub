@@ -81,6 +81,7 @@ export function Animal() {
                     taxClass={taxClass}
                     setTaxClass={setTaxClass}
                     prey={prey}
+                    features={features}
                 ></Quiz>
                 }
             </div>}

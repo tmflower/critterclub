@@ -10,6 +10,8 @@ const getKey = async () => {
     return API_KEY_ANIMALS;
 }
 
+// TODO: fix getAllAnimals; current "complete" list excludes a handful of animals without the letter a. To get a truly complete list, get results from each vowel and create a new Set to eliminate duplicates
+
 class AnimalsAPI {
     
     static async getAllAnimals() {
@@ -65,10 +67,24 @@ class AnimalsAPI {
         return allFacts;  
     }
 
-    static async getInfo() {
+    static async getPhylaList() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
         const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
-        const info = new Set(response.data.map(data => data.characteristics.most_distinctive_feature));
+        const phylaList = new Set(response.data.map(data => data.taxonomy.phylum));
+        return phylaList;
+    }
+
+    static async getInfo() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const info = new Set(response.data.map(data => data.taxonomy.phylum));
+        console.log(info)
         return info;
     }
 }
+
 export default AnimalsAPI;

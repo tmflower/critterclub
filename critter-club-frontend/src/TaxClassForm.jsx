@@ -6,6 +6,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, phylum}) {
         setTaxClass("Fish");
     }
 
+    if (!taxClass) setTaxClass("Other");
+    
+
     const [formData, setFormData] = useState('');
     const { vertebrateGroup } = formData;
 
@@ -19,6 +22,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, phylum}) {
         // compare user's selection to animal data to check if correct
         // TODO: add functionality for user feedback
         e.preventDefault();
+        console.log(vertebrateGroup, taxClass)
         if (vertebrateGroup === taxClass) {
             console.log("YOU ARE CORRECT---class!!! 😀😀😀");
         }
@@ -31,7 +35,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, phylum}) {
 
     return (
         <div>
-        {phylum === "Chordata" ?                
         <form onSubmit={handleSubmit}>
             <fieldset>
                 <legend>What taxonomic class does the {commonName.toLowerCase()} belong to?</legend>
@@ -90,13 +93,23 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, phylum}) {
                     </input>
                     Fish
                 </label>
+                <label>
+                    <input 
+                        type="radio"
+                        name="vertebrateGroup"
+                        value="Other"
+                        onChange={handleChange}
+                        checked={vertebrateGroup === "Other"}
+                        >
+                    </input>
+                    Other
+                </label>
                 <div>
                     <button type="submit">Check answer</button>
                     <button type="reset" onClick={handleReset}>Clear answer</button>
                 </div>
             </fieldset>
         </form>
-        : null }
         </div>
     )
 }

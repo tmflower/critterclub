@@ -15,7 +15,8 @@ export function PreyForm({commonName, prey}) {
         // compare user's selection to animal data to check if correct
         // TODO: add functionality for user feedback
         e.preventDefault();
-        const newPrey = prey.replace(/[,]/gi, "").toLowerCase().split(' ')
+        const newPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
+        console.log(newPrey, userGuess)
         if (newPrey.includes(userGuess.toLowerCase())) {
             console.log("Correct on prey!")
         }
