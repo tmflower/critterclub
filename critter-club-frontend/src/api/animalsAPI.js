@@ -14,20 +14,21 @@ const getKey = async () => {
 
 class AnimalsAPI {
     
-    static async getAllAnimals() {
-        if (API_KEY_ANIMALS === undefined) {
-            await getKey();
-        }
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});   
-        return response.data; 
-    }
+    // static async getAllAnimals() {
+    //     if (API_KEY_ANIMALS === undefined) {
+    //         await getKey();
+    //     }
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});   
+    //     return response.data; 
+    // }
 
     static async getSingleAnimal(animalName) {
         if (API_KEY_ANIMALS === undefined) {
             await getKey();
         }
-        const response = await axios.get(`${BASE_URL_ANIMALS}${animalName}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
-        return response.data[0];  
+        const response = await axios.get(`${BASE_URL_ANIMALS}${animalName}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const animal = response.data.filter(animal => animal.name.toLowerCase() === animalName.toLowerCase());
+        return animal[0];
     }    
 
     static async getRandomAnimal(randomNum) {
@@ -84,6 +85,76 @@ class AnimalsAPI {
         const info = new Set(response.data.map(data => data.taxonomy.phylum));
         console.log(info)
         return info;
+    }
+
+    static async getEAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const E = await axios.get(`${BASE_URL_ANIMALS}e`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        console.log(E)
+        return E; 
+    }
+
+    static async getIAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const I = await axios.get(`${BASE_URL_ANIMALS}i`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        console.log(I) 
+        return I; 
+    }
+
+    static async getOAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const O = await axios.get(`${BASE_URL_ANIMALS}o`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        console.log(O) 
+        return O; 
+    }
+
+    static async getUAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const U = await axios.get(`${BASE_URL_ANIMALS}u`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        console.log(U) 
+        return U; 
+    }
+
+    static async getAAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+        const A = await axios.get(`${BASE_URL_ANIMALS}a`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        return A; 
+    }
+
+    static async getAllAnimals() {
+        if (API_KEY_ANIMALS === undefined) {
+            await getKey();
+        }
+
+        const A = await axios.get(`${BASE_URL_ANIMALS}a`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        const E = await axios.get(`${BASE_URL_ANIMALS}e`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const I = await axios.get(`${BASE_URL_ANIMALS}i`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+        const O = await axios.get(`${BASE_URL_ANIMALS}o`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const U = await axios.get(`${BASE_URL_ANIMALS}u`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+
+        const allAnimalsWithDuplicates = [...A.data, ...E.data, ...I.data, ...O.data, ...U.data];
+
+        const uniqueAnimals = new Set();
+
+        const allAnimals = allAnimalsWithDuplicates.filter(animal => {
+            const isDuplicate = uniqueAnimals.has(animal.name);
+            uniqueAnimals.add(animal.name);
+
+            if (!isDuplicate) return true;
+            return false;
+        });
+
+        return allAnimals;
     }
 }
 

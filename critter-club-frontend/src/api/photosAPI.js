@@ -2,28 +2,60 @@ import axios from "axios";
 
 const BASE_URL_PHOTOS = "https://api.unsplash.com/photos";
 let API_KEY_PHOTOS;
+let MEDIA;
 
 const getKey = async () => {
     const res = await axios.get("http://localhost:3001/keys");
     API_KEY_PHOTOS = res.data.photos_api_key;
-    return API_KEY_PHOTOS;
+    return (API_KEY_PHOTOS);
+}
+
+const getMedia = async () => {
+    const res = await axios.get("http://localhost:3001/media");
+    MEDIA = res.data.media;
+    return MEDIA;
 }
 
 class PhotosAPI {
 
     static async getPhoto(animalName) {
-        // console.log("MAKING UNSPLASH REQUEST");
         if (API_KEY_PHOTOS === undefined) {
             await getKey();
         }
-        console.log("MAKING UNSPLASH REQUEST");
+        if (MEDIA === undefined) {
+            await getMedia();
+        }
+
+        const modifiedAnimalName = animalName.replaceAll(' ', '_');
+
+        const photoId = `${MEDIA[modifiedAnimalName].image}`;
+        
         const res = await axios.get
-        (`${BASE_URL_PHOTOS}/random`, 
+        (`${BASE_URL_PHOTOS}/${photoId}`,
         {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-         params: {query: animalName, content_filter: "high"}});
+        //  params: {id: `${photoId}`, orientation: "landscape", content_filter: "high", order_by: "relevant"}
+        });
         console.log("check headers for current usage:", res);
+        console.log(res.data);
         return res.data.urls.regular;
     }
+
+
+
+
+    // static async getPhoto(animalName) {
+    //     // console.log("MAKING UNSPLASH REQUEST");
+    //     if (API_KEY_PHOTOS === undefined) {
+    //         await getKey();
+    //     }
+    //     console.log("MAKING UNSPLASH REQUEST");
+    //     const res = await axios.get
+    //     (`${BASE_URL_PHOTOS}/random`, 
+    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
+    //      params: {query: animalName, content_filter: "high"}});
+    //     console.log("check headers for current usage:", res);
+    //     return res.data.urls.regular;
+    // }
 
     // static async getPhoto(animalName) {
     //     if (API_KEY_PHOTOS === undefined) {

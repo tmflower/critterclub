@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Photo } from './Photo.jsx';
 import { Quiz } from './Quiz.jsx';
+import { Video } from './Video.jsx';
 
 export function Animal() {
 
@@ -50,7 +51,7 @@ export function Animal() {
     const selectAnimal = () => {
         setAnimalSelected(true);
     }
-
+   
     return (
         <div>
             {!animal ? "Loading..." :
@@ -69,6 +70,7 @@ export function Animal() {
                     {phylum === "Chordata" ? <p>Vertebrate</p> : <p>Invertebrate</p>}
                     <ul>Found in:{locations.map((location, i) => <li key={i}>{location}</li>)}</ul>
                     <p>{funFact}</p>
+                    <Video animalName={animalName}></Video>
                     <button onClick={selectAnimal}>Earn the {commonName} card!</button>
                 </div>
                 :

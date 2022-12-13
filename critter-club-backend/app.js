@@ -3,6 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const { API_KEY_ANIMALS, API_KEY_PHOTOS } = require("./config");
+const MEDIA = require("./utils/media");
 
 const app = express();
 
@@ -15,21 +16,9 @@ app.get("/keys", (req, res) => {
         photos_api_key: API_KEY_PHOTOS})
 });
 
-app.get("/media", (req, res) => {
-    res.json({
-        "African palm civet": {
-            "image": "5hJEoKHRh8w",
-            "video": "5hJEoKHRh8w"
-        },
-        "Leopard": {
-            "image": "3TwThGdEUZA",
-            "video": "3TwThGdEUZA"
-        },
-        "Cheetah": {
-            "image": "bcJUbYd5gTo",
-            "video": "bcJUbYd5gTo"
-        },
-    })
+app.get("/media", (req, res) => { 
+    console.log(res.json({media: MEDIA}))  
+    res.json({media: MEDIA});
 })
 
 module.exports = app;
