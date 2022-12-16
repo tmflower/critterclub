@@ -5,13 +5,8 @@
     "default": {},
     "title": "Root Schema",
     "required": [
-        "id",
         "username",
-        "password",
-        "access_code",
-        "num_cards",
-        "level",
-        "parent_id"
+        "password"
     ],
     "properties": {
         "id": {

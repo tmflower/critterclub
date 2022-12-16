@@ -5,19 +5,19 @@ let API_KEY_PHOTOS;
 let MEDIA;
 
 const getKey = async () => {
-    const res = await axios.get("http://localhost:3001/keys");
+    const res = await axios.get("http://localhost:3001/util/keys");
     API_KEY_PHOTOS = res.data.photos_api_key;
     return (API_KEY_PHOTOS);
 }
 
 const getMedia = async () => {
-    const res = await axios.get("http://localhost:3001/media");
+    const res = await axios.get("http://localhost:3001/util/media");
     MEDIA = res.data.media;
     return MEDIA;
 }
 
 class PhotosAPI {
-
+    // TODO: Add attribution info & links according to Unsplash requirements
     static async getPhoto(animalName) {
         if (API_KEY_PHOTOS === undefined) {
             await getKey();
@@ -28,16 +28,18 @@ class PhotosAPI {
 
         const modifiedAnimalName = animalName.replaceAll(' ', '_');
 
-        const photoId = `${MEDIA[modifiedAnimalName].image}`;
-        
-        const res = await axios.get
-        (`${BASE_URL_PHOTOS}/${photoId}`,
-        {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-        //  params: {id: `${photoId}`, orientation: "landscape", content_filter: "high", order_by: "relevant"}
-        });
-        console.log("check headers for current usage:", res);
-        console.log(res.data);
-        return res.data.urls.regular;
+        let photoId = `${MEDIA[modifiedAnimalName].image}`;
+        if (photoId === "no_image") {
+            return "https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif"
+        }
+        else {
+            const res = await axios.get
+            (`${BASE_URL_PHOTOS}/${photoId}`,
+            {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`}});
+            console.log("check headers for current usage:", res);
+            return res.data.urls.regular;
+        }
+      
     }
 
 

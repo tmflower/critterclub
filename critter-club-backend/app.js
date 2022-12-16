@@ -2,23 +2,38 @@
 
 const express = require("express");
 const cors = require("cors");
-const { API_KEY_ANIMALS, API_KEY_PHOTOS } = require("./config");
-const MEDIA = require("./utils/media");
+
+const { NotFoundError } = require("./expressError");
+const { authenticateJWT } = require("./utils/middleware");
+const utilRoutes = require("./routes/util");
+const userRoutes = require("./routes/users");
+const morgan = require("morgan");
+
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan("tiny"));
+app.use(authenticateJWT);
 
-app.get("/keys", (req, res) => {
-    res.json({
-        animals_api_key: API_KEY_ANIMALS,
-        photos_api_key: API_KEY_PHOTOS})
-});
+app.use("/util", utilRoutes);
+app.use("/users", userRoutes);
 
-app.get("/media", (req, res) => { 
-    console.log(res.json({media: MEDIA}))  
-    res.json({media: MEDIA});
-})
+/** Handle 404 errors -- this matches everything */
+app.use(function (req, res, next) {
+    return next(new NotFoundError());
+  });
+  
+  /** Generic error handler; anything unhandled goes here. */
+  app.use(function (err, req, res, next) {
+    if (process.env.NODE_ENV !== "test") console.error(err.stack);
+    const status = err.status || 500;
+    const message = err.message;
+  
+    return res.status(status).json({
+      error: { message, status },
+    });
+  });
 
 module.exports = app;

@@ -40,3 +40,10 @@
 a {
   color: white;
 }
+
+.navbar-link {
+  margin: 10px;
+  color: black;
+  font-size: 1.5em;
+  text-decoration: none;
+}

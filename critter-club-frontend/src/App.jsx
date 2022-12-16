@@ -2,11 +2,14 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import AnimalsAPI from './api/animalsAPI';
-import { Home } from './Home';
-import { Animals } from './Animals';
-import { Animal } from './Animal';
-import { Quiz } from './Quiz';
-import { Browse } from './Browse';
+import { Home } from './routes/Home';
+import { Animals } from './routes/Animals';
+import { Animal } from './Animal/Animal';
+import { Quiz } from './Challenge/Quiz';
+import { Browse } from './routes/Browse';
+import { Navbar } from './Navbar';
+import { Signup } from './routes/Signup';
+import { Login } from './routes/Login';
 
 export function App() {
 
@@ -19,11 +22,24 @@ export function App() {
     getAllAnimals();
   }, []);
 
+  // const animalsList = ['cheetah', 'adelie_penguin', 'african_palm_civet'];
+
+  // useEffect(() => {
+  //   async function getAnimals() {
+  //     const animals = await AnimalsAPI.getAnimal(animalsList);
+  //     setAllAnimals(animals);
+  //   }
+  //   getAnimals()
+  //   }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
+      <Navbar />
+      <header className="App-header">      
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/animals" element={<Animals allAnimals={allAnimals}/>}></Route>
           <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
           <Route path="/animals/:animal" element={<Animal/>}></Route>

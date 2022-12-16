@@ -8,10 +8,10 @@
         "id",
         "username",
         "password",
-        "first_name",
-        "last_name",
+        "firstName",
+        "lastName",
         "email",
-        "access_code"
+        "accessCode"
     ],
     "properties": {
         "id": {
