@@ -34,8 +34,7 @@ const {
             delete user.password;
             return user;
           }
-        }
-    
+        }    
         throw new UnauthorizedError("Invalid username/password");
       }
 
@@ -73,10 +72,44 @@ const {
               parentId
             ],
         );
-    
-        const user = result.rows[0];
-    
-        return user;
+
+        const enteredCode = accessCode;
+
+        const res = await db.query(
+            `SELECT access_code,
+            id
+            FROM parents`
+        );
+        
+        const codes = [];
+        for (let row of res.rows) {
+            codes.push(row.access_code);
+        }
+
+        for (let row of res.rows) {
+            if (!codes.includes(+enteredCode)) {
+                db.query(
+                `DELETE
+                FROM users
+                WHERE username = $1`,
+                [username]
+            )
+                throw new BadRequestError("Wrong access code");
+            }
+
+            if (row.access_code === +enteredCode) {
+                let parent = row.id;
+                const finalRes = await db.query(
+                    `UPDATE users
+                    SET parent_id=${parent}
+                    WHERE username = $1
+                    RETURNING username, access_code AS "accessCode", num_cards AS "numCards", level, parent_id AS "parentId"`,
+                    [username]
+                )
+                const user = finalRes.rows[0];
+                return user;
+            }
+        }
     }
 
     static async get(username) {

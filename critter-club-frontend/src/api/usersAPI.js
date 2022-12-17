@@ -11,7 +11,6 @@ class usersAPI {
      * login user
      * get by username
      * 
-     * authenticate parent
      * register parent
      * 
      * create badge
@@ -35,24 +34,39 @@ class usersAPI {
           return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
           console.error("API Error:", err.response);
-        //   let message = err.response.data.error.message;
-        //   throw Array.isArray(message) ? message : [message];
+          let message = err.response.data.error.message;
+          throw Array.isArray(message) ? message : [message];
         }
       }
 
     static async registerUser(newUser) {
         const data = await this.request(`users/register`, 
         newUser, "post");
-        console.log(data);
         usersAPI.token = data.token;
     }
 
     static async getUser(username) {
         const data = await this.request(`users/${username}`);
-        console.log(data.user);
         return data;
     }
-    
+
+    static async registerParent(parent) {
+        const data = await this.request(`parents/register`, 
+        parent, "post");
+        usersAPI.token = data.token;
+    }
+
+    static async getParent(parentUsername) {
+        const data = await this.request(`parents/${parentUsername}`);
+        console.log(data);
+        return data;
+    }
+
+    static async getCode(parentUsername) {
+        const data = await this.request(`parents/${parentUsername}`);
+        console.log(data.parent.access_code);
+        return data.parent.access_code;
+    }
 }
 
 export default usersAPI;

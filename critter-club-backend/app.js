@@ -7,6 +7,7 @@ const { NotFoundError } = require("./expressError");
 const { authenticateJWT } = require("./utils/middleware");
 const utilRoutes = require("./routes/util");
 const userRoutes = require("./routes/users");
+const parentRoutes = require("./routes/parents");
 const morgan = require("morgan");
 
 
@@ -19,6 +20,7 @@ app.use(authenticateJWT);
 
 app.use("/util", utilRoutes);
 app.use("/users", userRoutes);
+app.use("/parents", parentRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {

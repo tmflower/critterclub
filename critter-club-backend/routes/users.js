@@ -10,23 +10,6 @@ const newUserSchema = require("../schemas/newUserSchema.json");
 const userSchema = require("../schemas/userSchema.json");
 const router = express.Router();
 
-router.post("/token", async function (req, res, next) {
-    try {
-      const validator = jsonschema.validate(req.body, userSchema);
-      if (!validator.valid) {
-        const errs = validator.errors.map(e => e.stack);
-        throw new BadRequestError(errs);
-      }
-  
-      const { username, password } = req.body;
-      const user = await User.authenticate(username, password);
-      const token = createToken(user);
-      return res.json({ token });
-    } catch (err) {
-      return next(err);
-    }
-  });
-
 router.post("/register", async function (req, res, next) {
     try {
       const validator = jsonschema.validate(req.body, newUserSchema);

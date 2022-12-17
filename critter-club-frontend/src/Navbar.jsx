@@ -9,6 +9,7 @@ export function Navbar() {
                 <NavLink className="navbar-link" exact="true" to="/animals/browse" end>Browse</NavLink>
                 <NavLink className="navbar-link" exact="true" to="/login" end>Login</NavLink>
                 <NavLink className="navbar-link" exact="true" to="/signup" end>Signup</NavLink>
+                <NavLink className="navbar-link" exact="true" to="/parent" end>Parent Signup</NavLink>
             </nav>
         </div>
     )

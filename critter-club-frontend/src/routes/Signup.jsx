@@ -27,7 +27,9 @@ export function Signup() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const newUser = { username, password, accessCode }    
-        console.log(newUser)
+        console.log(newUser);
+
+        
         usersAPI.registerUser(newUser);
         setFormData(initial_state);
         navigate("/", { replace: true });
@@ -59,8 +61,7 @@ export function Signup() {
                         :
                         <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}
                     </div>
-
-                     </label>
+                    </label>
                 <label htmlFor="accessCode">Access code:
                 <input 
                     type="text" 

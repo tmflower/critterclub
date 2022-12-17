@@ -5,13 +5,11 @@
     "default": {},
     "title": "Root Schema",
     "required": [
-        "id",
         "username",
         "password",
         "firstName",
         "lastName",
-        "email",
-        "accessCode"
+        "email"
     ],
     "properties": {
         "id": {

@@ -10,6 +10,8 @@ import { Browse } from './routes/Browse';
 import { Navbar } from './Navbar';
 import { Signup } from './routes/Signup';
 import { Login } from './routes/Login';
+import { Code } from './routes/Code';
+import ParentSignup from './routes/ParentSignup';
 
 export function App() {
 
@@ -21,8 +23,6 @@ export function App() {
     }
     getAllAnimals();
   }, []);
-
-  // const animalsList = ['cheetah', 'adelie_penguin', 'african_palm_civet'];
 
   // useEffect(() => {
   //   async function getAnimals() {
@@ -38,6 +38,8 @@ export function App() {
       <header className="App-header">      
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/parent" element={<ParentSignup />}></Route>
+          <Route path="/parent/:username" element={<Code />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/animals" element={<Animals allAnimals={allAnimals}/>}></Route>
