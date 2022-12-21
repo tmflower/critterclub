@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function PreyForm({commonName, prey, message}) {
+export function PreyForm({ commonName, prey, message, points, setPoints, numQuestions, setNumQuestions  }) {
 
     const [formData, setFormData] = useState('');
     const [feedback, setFeedback] = useState('');
@@ -19,12 +19,17 @@ export function PreyForm({commonName, prey, message}) {
         console.log(newPrey, userGuess)
         if (newPrey.includes(userGuess.toLowerCase())) {
             setFeedback(message.correct);
+            setPoints(points+=10);
+            setNumQuestions(numQuestions+1);
         }
         else setFeedback(message.incorrect);
     }
 
     const handleReset = (e) => {
         setFormData('');
+        let text = document.querySelector('#userGuess');
+        text.value = '';
+        setFeedback('');
     }
 
     return (
@@ -41,8 +46,12 @@ export function PreyForm({commonName, prey, message}) {
             </input>
             </label>
             <div>
+                { !feedback ? 
                 <button type="submit">Check answer</button>
+                : null }
+                { feedback === message.incorrect ?
                 <button type="reset" onClick={handleReset}>Clear answer</button>
+                : null }
             </div>
             <p>{feedback}</p>
             </fieldset>

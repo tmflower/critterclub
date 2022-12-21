@@ -27,8 +27,6 @@ export function Signup() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const newUser = { username, password, accessCode }    
-        console.log(newUser);
-
         
         usersAPI.registerUser(newUser);
         setFormData(initial_state);

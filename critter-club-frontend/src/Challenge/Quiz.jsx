@@ -5,18 +5,38 @@ import { TaxClassForm } from './TaxClassForm';
 import { ScientificNameForm } from './ScientificNameForm';
 import { PreyForm } from './PreyForm';
 
-// TODO: add logic to accummulate points
-// TODO: add functionality to submit button
-// TODO: add button to return directly to animal info page for selected animal
-
-export function Quiz({ taxClass, setTaxClass, commonName, scientificName, locations, diet, phylum, prey }) {
+export function Quiz({ 
+                    taxClass,
+                    setTaxClass, 
+                    commonName, 
+                    scientificName, 
+                    locations, 
+                    diet, 
+                    phylum, 
+                    prey, 
+                    setAnimalSelected }) {
     
     const message = {
         correct: "⭐️⭐️⭐️ You got it! ⭐️⭐️⭐️",
         incorrect: "😧😧😧 Sorry, try again. 😧😧😧"
     };
 
-    const [passed, setPassed] = useState(false);
+    const [points, setPoints] = useState(0);
+    const [numQuestions, setNumQuestions] = useState(0);
+    
+    /** TODO: update handle submit to:
+     * 1. Add points to user points
+     * 2. Add badge to user badges
+     * 3. Display congratulations message to user & redirect to dashboard */
+
+    const handleSubmit = () => {
+        if (points / numQuestions === 10) alert(`You earned ${points} points and the ${commonName} badge!`);
+        else alert("Sorry, you lose!")
+    }
+
+    const handleClick = () => {
+        setAnimalSelected(false);
+    }
 
     return (
         <div>
@@ -25,14 +45,20 @@ export function Quiz({ taxClass, setTaxClass, commonName, scientificName, locati
                 commonName={commonName} 
                 diet={diet}
                 message={message}
-                passed={passed}
-                setPassed={setPassed}
+                points={points}
+                setPoints={setPoints}
+                numQuestions={numQuestions}
+                setNumQuestions={setNumQuestions}
                 >
             </DietForm>
             <LocationsForm 
                 commonName={commonName} 
                 locations={locations}
                 message={message}
+                points={points}
+                setPoints={setPoints}
+                numQuestions={numQuestions}
+                setNumQuestions={setNumQuestions}
                 >
             </LocationsForm>
             {phylum === "Chordata" ?  
@@ -42,6 +68,10 @@ export function Quiz({ taxClass, setTaxClass, commonName, scientificName, locati
                 setTaxClass={setTaxClass} 
                 phylum={phylum}
                 message={message}
+                points={points}
+                setPoints={setPoints}
+                numQuestions={numQuestions}
+                setNumQuestions={setNumQuestions}
                 >
             </TaxClassForm> 
             : null}            
@@ -50,16 +80,28 @@ export function Quiz({ taxClass, setTaxClass, commonName, scientificName, locati
                 commonName={commonName} 
                 prey={prey}
                 message={message}
+                points={points}
+                setPoints={setPoints}
+                numQuestions={numQuestions}
+                setNumQuestions={setNumQuestions}
                 >
             </PreyForm> 
             : null }
+            {scientificName ?
             <ScientificNameForm 
                 commonName={commonName} 
                 scientificName={scientificName}
                 message={message}
+                points={points}
+                setPoints={setPoints}
+                numQuestions={numQuestions}
+                setNumQuestions={setNumQuestions}
                 >
-            </ScientificNameForm>                
-            <button type="submit">Submit Your Answers</button>
+            </ScientificNameForm>  
+            : null }   
+            <button type="button" onClick={handleClick}>Return to animal</button>
+            { numQuestions >= 3 ?           
+            <button type="submit" onClick={handleSubmit}>Submit Your Answers</button> : null }
         </div>
     )
 }

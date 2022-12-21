@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function TaxClassForm({commonName, taxClass, setTaxClass, message}) {
+export function TaxClassForm({commonName, taxClass, setTaxClass, message, points, setPoints, numQuestions, setNumQuestions  }) {
     
     if (taxClass === "Sarcopterygii" || taxClass === "Actinopterygii" || taxClass === "Chondrichthyes") {
         setTaxClass("Fish");
@@ -24,12 +24,17 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message}) {
         e.preventDefault();
         if (vertebrateGroup === taxClass) {
             setFeedback(message.correct);
+            setPoints(points+=10);
+            setNumQuestions(numQuestions+1);
         }
         else setFeedback(message.incorrect); 
     }
 
     const handleReset = (e) => {
         setFormData('');
+        let selection = document.querySelector('#userGuess');
+        selection.value = '';
+        setFeedback('');
     }
 
     return (
@@ -104,8 +109,12 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message}) {
                     Other
                 </label>
                 <div>
+                    { !feedback ? 
                     <button type="submit">Check answer</button>
+                    : null }
+                    { feedback === message.incorrect ?
                     <button type="reset" onClick={handleReset}>Clear answer</button>
+                    : null }
                 </div>
                 <p>{feedback}</p>
             </fieldset>

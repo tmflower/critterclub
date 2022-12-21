@@ -52,6 +52,7 @@ class AnimalsAPI {
             return false;
         });
 
+        // narrow the list of animals to include down to those on animalsList, for which media exists
         allAnimals = allAnimals.filter(animal => animalsList.includes(animal.name));
         return allAnimals;
     }

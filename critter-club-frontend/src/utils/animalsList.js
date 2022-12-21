@@ -1,6 +1,6 @@
 const animalsList = [
-    "Adelie_Penguin",
-    "Agama_Lizard", 
+    "Adelie Penguin",
+    "Agama Lizard", 
     "Albatross", 
     "Alligator",
     "Alpaca", 

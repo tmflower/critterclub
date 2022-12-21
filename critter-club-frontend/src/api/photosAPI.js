@@ -25,21 +25,19 @@ class PhotosAPI {
         if (MEDIA === undefined) {
             await getMedia();
         }
+        let photoId = `${MEDIA[animalName].image}`;
 
-        const modifiedAnimalName = animalName.replaceAll(' ', '_');
-
-        let photoId = `${MEDIA[modifiedAnimalName].image}`;
         if (photoId === "no_image") {
             return "https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif"
         }
+
         else {
             const res = await axios.get
             (`${BASE_URL_PHOTOS}/${photoId}`,
             {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`}});
             console.log("check headers for current usage:", res);
-            return res.data.urls.regular;
+            return res.data.urls.small;
         }
-      
     }
 
 

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-export function ScientificNameForm({commonName, scientificName, message}) {
-
-    const [formData, setFormData] = useState('');
+export function ScientificNameForm({ commonName, scientificName, message, points, setPoints, numQuestions, setNumQuestions  }) {
+    
+    const initialState = {userGuess: ''}
+    const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
     const { userGuess } = formData;
 
@@ -15,23 +16,30 @@ export function ScientificNameForm({commonName, scientificName, message}) {
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
         e.preventDefault();
-        if (userGuess === scientificName) {
+        if (userGuess.toLowerCase() === scientificName.toLowerCase()) {
             setFeedback(message.correct);
+            setPoints(points+=10);
+            setNumQuestions(numQuestions+1);
         }
-        else setFeedback(message.incorrect);
+        else {
+            setFeedback(message.incorrect);
+        }
     }
 
     const handleReset = (e) => {
-        setFormData('');
+        setFormData(initialState);
+        let text = document.querySelector('#userGuess');
+        text.value = '';
+        setFeedback('');
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <fieldset>
             <legend>What is the {commonName.toLowerCase()}'s scientific name?</legend>
-            <label htmlFor='Scientific name'>Scientific name
-            
+            <label htmlFor='Scientific name'>Scientific name            
             <input 
+                id="userGuess"
                 type="text"
                 name="userGuess"
                 onChange={handleChange}
@@ -39,8 +47,12 @@ export function ScientificNameForm({commonName, scientificName, message}) {
             </input>
             </label>
             <div>
+                { !feedback ? 
                 <button type="submit">Check answer</button>
-                <button type="reset" onClick={handleReset}>Clear answer</button>
+                : null }
+                { feedback === message.incorrect ?
+                <button type="reset" onClick={handleReset}>Try again</button>
+                : null }
             </div>
             <p>{feedback}</p>
             </fieldset>

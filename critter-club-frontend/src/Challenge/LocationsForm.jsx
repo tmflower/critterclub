@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function LocationsForm({commonName, locations, message}) {
+export function LocationsForm({commonName, locations, message, points, setPoints, numQuestions, setNumQuestions  }) {
 
     // set each location choice to unchecked by default
     const initialState = { 
@@ -54,7 +54,6 @@ export function LocationsForm({commonName, locations, message}) {
    ];
 
    const handleSubmit = (e) => {
-    // TODO: add functionality for user feedback
     e.preventDefault();
     // create an array of values from user input
     let userLocationChoices = [];
@@ -77,24 +76,39 @@ export function LocationsForm({commonName, locations, message}) {
     console.log("locations:", locations)
     let pointer1 = 0;
     let pointer2 = 0;
-    while (pointer1 < userLocationChoices.length) {            
-        if (userLocationChoices[pointer1] !== locations[pointer2]) {
-            setFeedback(message.incorrect);
-            break;
+
+    if (userLocationChoices.length === 1 &&
+        locations.length === 1 &&
+        userLocationChoices[0] === locations[0]) {
+            setFeedback(message.correct); 
+            setPoints(points+=10);
+            setNumQuestions(numQuestions+1);
         }
-        else if (userLocationChoices[pointer1] === locations[pointer2]) {
-            pointer1++;
-            pointer2++;
-            if (pointer1 === userLocationChoices.length -1 && 
-                pointer2 === locations.length -1 && 
-                userLocationChoices[pointer1] === locations[pointer2]) {
-                setFeedback(message.correct); 
+    else {
+
+        while (pointer1 < userLocationChoices.length) {            
+            if (userLocationChoices[pointer1] !== locations[pointer2]) {
+                setFeedback(message.incorrect);
+                break;
             }
-        }
+                else {
+                    pointer1++;
+                    pointer2++;
+                        if (pointer1 === userLocationChoices.length -1 && 
+                            pointer2 === locations.length -1 && 
+                            userLocationChoices[pointer1] === locations[pointer2]) {
+                                setFeedback(message.correct); 
+                                setPoints(points+=10);
+                                setNumQuestions(numQuestions+1);
+                        }
+                }
+            }
         }        
     }
+
     const handleReset = (e) => {
         setFormData(initialState);
+        setFeedback('');
     }
 
     return (
@@ -205,8 +219,12 @@ export function LocationsForm({commonName, locations, message}) {
                             Oceania
                         </label>
                         <div>
+                            { !feedback ? 
                             <button type="submit">Check answer</button>
+                            : null }
+                            { feedback === message.incorrect ?
                             <button type="reset" onClick={handleReset}>Clear answer</button>
+                            : null }
                         </div>
                         <p>{feedback}</p>                        
                     </fieldset>                   

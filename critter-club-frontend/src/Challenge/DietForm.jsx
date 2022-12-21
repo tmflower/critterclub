@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function DietForm({commonName, diet, message, passed, setPassed}) {
+export function DietForm({commonName, diet, message, points, setPoints, numQuestions, setNumQuestions }) {
 
     const [formData, setFormData] = useState('');
     const [feedback, setFeedback] = useState('');
@@ -17,15 +17,17 @@ export function DietForm({commonName, diet, message, passed, setPassed}) {
         e.preventDefault();
         if (animalDiet === diet) {
             setFeedback(message.correct);
-            setPassed(true);
+            setPoints(points+=10);
+            setNumQuestions(numQuestions+1);
         }
         else setFeedback(message.incorrect);
     }
 
     const handleReset = (e) => {
         setFormData('');
+        let selection = document.querySelector('#userGuess');
+        selection.value = '';
         setFeedback('');
-        setPassed(false);
     }
 
     return (
@@ -63,8 +65,12 @@ export function DietForm({commonName, diet, message, passed, setPassed}) {
             Omnivore
             </label>
             <div>
+                { !feedback ? 
                 <button type="submit">Check answer</button>
+                : null }
+                { feedback === message.incorrect ?
                 <button type="reset" onClick={handleReset}>Clear answer</button>
+                : null }
             </div>
             <p>{feedback}</p>
             </fieldset>

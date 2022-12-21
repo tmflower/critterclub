@@ -25,14 +25,30 @@ router.post("/register", async function (req, res, next) {
     }
   });
 
-router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
-    try {
-        const user = await User.get(req.params.username);
-        return res.json({ user })
+router.post("/authenticate", async function (req, res, next) {
+  try {
+    const validator = jsonschema.validate(req.body, userSchema);
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
     }
-    catch(err) {
-        return next(err);
-    }
+    const user = await User.authenticate(req.body.username, req.body.password);
+    const token = createToken(user);
+    return res.json({ token });
+  }
+  catch(err) {
+    return next(err);
+  }
 });
+
+// router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
+//     try {
+//         const user = await User.get(req.params.username);
+//         return res.json({ user })
+//     }
+//     catch(err) {
+//         return next(err);
+//     }
+// });
 
 module.exports = router;

@@ -19,13 +19,20 @@ export function Browse({allAnimals}) {
     
     return (
         <div>
-            <h1>Browse All Animals</h1>
+            {!allAnimals.length ? (
             <div>
-                {animalsByAlphabet.length > 0 ? <button onClick={reset}>Clear List</button> : null}
-            </div>            
-            {alphabet.map((letter) => (<button onClick={handleClick} value={letter} key={letter}>{letter}</button>))}
-            {animalsByAlphabet.map((animal, i) => (<NavLink to={`/animals/${animal.name}`} key={i}><p key={i}>{animal.name}</p></NavLink>))}
+                <p>Please wait while we collect all the animals!</p>
+                <img src="https://media.giphy.com/media/a9wFQSc0oRQGI/giphy.gif" alt="herding cats"></img>
+            </div>) 
+            :
+            <div>
+                <h1>Browse All Animals</h1>
+                <div>
+                    {animalsByAlphabet.length > 0 ? <button onClick={reset}>Clear List</button> : null}
+                </div>            
+                {alphabet.map((letter) => (<button onClick={handleClick} value={letter} key={letter}>{letter}</button>))}
+                {animalsByAlphabet.map((animal, i) => (<NavLink to={`/animals/${animal.name}`} key={i}><p key={i}>{animal.name}</p></NavLink>))}
+            </div>}
         </div>
-
     )
 }

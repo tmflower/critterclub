@@ -45,10 +45,16 @@ class usersAPI {
         usersAPI.token = data.token;
     }
 
-    static async getUser(username) {
-        const data = await this.request(`users/${username}`);
-        return data;
+    static async authenticateUser(username, password) {
+        const data = await this.request(`users/authenticate`,
+        username, password, "post");
+        usersAPI.token = data.token;
     }
+
+    // static async getUser(username) {
+    //     const data = await this.request(`users/${username}`);
+    //     return data;
+    // }
 
     static async registerParent(parent) {
         const data = await this.request(`parents/register`, 
