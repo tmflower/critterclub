@@ -40,38 +40,67 @@ class usersAPI {
       }
 
     static async registerUser(newUser) {
-        const data = await this.request(`users/register`, 
+        const registerData = await this.request(`auth/register`, 
         newUser, "post");
-        usersAPI.token = data.token;
+        console.log(registerData);
+        return registerData.token;
     }
 
-    static async authenticateUser(username, password) {
-        const data = await this.request(`users/authenticate`,
-        username, password, "post");
-        usersAPI.token = data.token;
+    static async loginUser(userData) {
+        const loginData = await this.request(`auth/login`,
+        userData, "post");
+        console.log(loginData)
+        return loginData.token;
     }
 
-    // static async getUser(username) {
-    //     const data = await this.request(`users/${username}`);
-    //     return data;
-    // }
+    static async getUser(username) {
+        const userData = await this.request(`users/${username}`);
+        return userData;
+    }
 
     static async registerParent(parent) {
-        const data = await this.request(`parents/register`, 
+        const regParentData = await this.request(`parents/register`, 
         parent, "post");
-        usersAPI.token = data.token;
+        return regParentData.token;
     }
 
     static async getParent(parentUsername) {
-        const data = await this.request(`parents/${parentUsername}`);
-        console.log(data);
-        return data;
+        const parentData = await this.request(`parents/${parentUsername}`);
+        console.log(parentData);
+        return parentData;
     }
 
     static async getCode(parentUsername) {
-        const data = await this.request(`parents/${parentUsername}`);
-        console.log(data.parent.access_code);
-        return data.parent.access_code;
+        const codeData = await this.request(`parents/${parentUsername}`);
+        return codeData.parent.access_code;
+    }
+
+    static async getAnimal(id) {
+        const animalData = await this.request(`animals/${id}`);
+        console.log(animalData);
+        return animalData;
+    }
+
+    static async updatePoints(userData) {
+        console.log("USERDATA:", userData)
+        const pointsData = await this.request(`users/points`, userData, "patch");
+        console.log("UPDATE POINTS DATA:", pointsData);
+        return pointsData;
+    }
+
+    static async getAllAnimals() {
+        const animals = await this.request(`animals/`);
+        console.log("ANIMALS:", animals);
+        return animals;
+    }
+
+    // updates the users_animals table so that user badges will automatically update
+
+    static async addBadge(userData) {
+        console.log("BADGEUSERDATA:", userData)
+        const badgesData = await this.request(`users/badges`, userData, "post");
+        console.log("UPDATE BADGES DATA:", badgesData);
+        return badgesData;
     }
 }
 

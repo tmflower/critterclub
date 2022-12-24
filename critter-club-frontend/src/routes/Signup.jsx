@@ -27,8 +27,8 @@ export function Signup() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const newUser = { username, password, accessCode }    
-        
         usersAPI.registerUser(newUser);
+        window.localStorage.setItem('username', username);
         setFormData(initial_state);
         navigate("/", { replace: true });
     }

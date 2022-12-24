@@ -8,6 +8,8 @@ const { authenticateJWT } = require("./utils/middleware");
 const utilRoutes = require("./routes/util");
 const userRoutes = require("./routes/users");
 const parentRoutes = require("./routes/parents");
+const animalRoutes = require("./routes/animals");
+const authRoutes = require("./routes/auth");
 const morgan = require("morgan");
 
 
@@ -21,6 +23,8 @@ app.use(authenticateJWT);
 app.use("/util", utilRoutes);
 app.use("/users", userRoutes);
 app.use("/parents", parentRoutes);
+app.use("/animals", animalRoutes);
+app.use("/auth", authRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {

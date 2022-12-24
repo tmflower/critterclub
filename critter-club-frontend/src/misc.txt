@@ -38,3 +38,14 @@
 
                 // console.log(allHabitats)
     /////////////////////////////////////////////////////////////////////
+
+Next steps:
+-change DB:
+   -num_cards will now be 'points'; num_cards is handled by length of userBadges;
+   -level does not need to be stored in DB; can be determined by points(can consider whether to keep it there for any reason)
+   -verify if points are calculating accurately when > 30
+   -delete unneeded columns from animals(unless want to add to badges)
+   -create seed data for animals table
+   -collect icons for image folder
+   -add video codes
+   -revise text on all pages (especially animal info)

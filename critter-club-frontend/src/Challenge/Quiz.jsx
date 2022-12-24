@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DietForm } from './DietForm';
 import { LocationsForm } from './LocationsForm';
 import { TaxClassForm } from './TaxClassForm';
 import { ScientificNameForm } from './ScientificNameForm';
 import { PreyForm } from './PreyForm';
+import usersAPI from '../api/usersAPI';
+import { useContext } from 'react';
+import UserContext from '../userContext';
+import { useNavigate, Link } from 'react-router-dom';
 
 export function Quiz({ 
                     taxClass,
@@ -16,6 +20,11 @@ export function Quiz({
                     prey, 
                     setAnimalSelected }) {
     
+    const currentUser = useContext(UserContext);
+    const username = currentUser.user.username;
+    const userId = currentUser.user.id;
+    const navigate = useNavigate();
+
     const message = {
         correct: "⭐️⭐️⭐️ You got it! ⭐️⭐️⭐️",
         incorrect: "😧😧😧 Sorry, try again. 😧😧😧"
@@ -23,17 +32,50 @@ export function Quiz({
 
     const [points, setPoints] = useState(0);
     const [numQuestions, setNumQuestions] = useState(0);
-    
-    /** TODO: update handle submit to:
-     * 1. Add points to user points
-     * 2. Add badge to user badges
-     * 3. Display congratulations message to user & redirect to dashboard */
+    const [animalId, setAnimalId] = useState();
+    const [animals, setAnimals] = useState([]);
 
-    const handleSubmit = () => {
-        if (points / numQuestions === 10) alert(`You earned ${points} points and the ${commonName} badge!`);
-        else alert("Sorry, you lose!")
+    useEffect(() => {
+        async function getAnimals() {
+            const res = await usersAPI.getAllAnimals();
+            console.log(res);
+            setAnimals(res.animals);
+        }
+        getAnimals();
+    }, [commonName]);
+console.log(animals);
+
+    useEffect(() => {
+        async function getAnimalId() {
+            if(animals.length) {
+                const animal = animals.filter(animal => commonName.toLowerCase() === animal.common_name);
+                console.log(animal)
+                setAnimalId(animal[0].id);
+            }
+        } 
+        getAnimalId();
+    },[animals, commonName])
+
+
+console.log(animalId)
+
+    async function handleSubmit() {
+        if (points / numQuestions === 10) {
+            alert(`Congratulations, ${username}! You earned ${points} points and the ${commonName} badge!`);
+            await usersAPI.updatePoints({ username, points });
+            await usersAPI.addBadge({ animalId, userId });
+            navigate("/dashboard", {replace: true});
+            refreshPage();
+        } 
+        else {
+            alert("Sorry, you lose!");
+            navigate("/dashboard", {replace: true});
+        }
     }
 
+    function refreshPage(){ 
+        window.location.reload(); 
+      }
     const handleClick = () => {
         setAnimalSelected(false);
     }
@@ -102,6 +144,7 @@ export function Quiz({
             <button type="button" onClick={handleClick}>Return to animal</button>
             { numQuestions >= 3 ?           
             <button type="submit" onClick={handleSubmit}>Submit Your Answers</button> : null }
+            <Link to="/dashboard"></Link>
         </div>
     )
 }

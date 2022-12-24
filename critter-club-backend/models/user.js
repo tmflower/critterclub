@@ -114,17 +114,73 @@ const {
 
     static async get(username) {
         const userRes = await db.query(
-            `SELECT username
+            `SELECT username,
+             id,
+             num_cards as "numCards",
+             level
              FROM users
              WHERE username = $1`,
-          [username],
+          [username]
       );
   
-      const user = userRes.rows[0];
-  
-      if (!user) throw new Error(`No user: ${username}`);
-  
-      return user;
+        let user = userRes.rows[0];
+
+        const id = user.id;
+
+        const badgesRes = await db.query(
+            `SELECT animal_id
+            FROM users_animals
+            WHERE user_id = $1`,
+            [id]
+            );
+
+        const badges = badgesRes.rows;
+        
+        const userBadges =[];
+        for(let badge of badges){
+            console.log(badge)
+            userBadges.push(badge.animal_id);
+        }
+          
+        if (!user) throw new Error(`No user: ${username}`);
+    
+        console.log({user, userBadges});
+
+        user = {...user, userBadges};
+        console.log(user);
+
+        return user;
+    }
+
+    static async updatePoints(username, newPoints) {
+        const pointsRes = await db.query(
+            `UPDATE users
+            SET num_cards=${newPoints} + num_cards
+            WHERE username = $1
+            RETURNING num_cards as "numCards"`,
+            [username]
+        );
+        const user = pointsRes.rows[0];
+        console.log(user);
+        return user;
+    }
+
+    static async addBadge(animalId, userId) {
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ANIMAL ID:", animalId);
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ USER ID:", userId);
+        const badgeRes = db.query(
+            `INSERT INTO users_animals
+            (animal_id,
+            user_id)
+            VALUES
+            ($1, $2)
+            RETURNING animal_id as "animalId", user_id as "userId"`,
+            [animalId,
+            userId]
+        );
+        const newBadge = badgeRes.rows;
+        console.log(newBadge);
+        return newBadge;
     }
   }
 

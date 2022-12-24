@@ -10,7 +10,7 @@ const { UnauthorizedError } = require("../expressError");
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
- * on res.locals (this will include the username and isAdmin field.)
+ * on res.locals (this will include the username)
  *
  * It's not an error if no token was provided or if the token is not valid.
  */
@@ -34,7 +34,7 @@ function authenticateJWT(req, res, next) {
  */
 
 function ensureLoggedIn(req, res, next) {
-  try {
+  try { console.log("res.locals.user***********************************", res.locals.user)
     if (!res.locals.user) throw new UnauthorizedError();
     return next();
   } catch (err) {
@@ -49,7 +49,7 @@ function ensureLoggedIn(req, res, next) {
  */
 
 function ensureCorrectUser(req, res, next) {
-  try {
+  try { console.log("res.locals.user***********************************", res.locals.user)
     const user = res.locals.user;
     if (!(user && (user.username === req.params.username))) {
       throw new UnauthorizedError();

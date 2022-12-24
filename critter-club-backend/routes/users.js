@@ -1,54 +1,41 @@
 "use strict";
 
-const jsonschema = require("jsonschema");
 const express = require("express");
 const { ensureLoggedIn, ensureCorrectUser } = require("../utils/middleware");
-const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
-const { createToken } = require("../utils/tokens");
-const newUserSchema = require("../schemas/newUserSchema.json");
-const userSchema = require("../schemas/userSchema.json");
 const router = express.Router();
 
-router.post("/register", async function (req, res, next) {
+router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
     try {
-      const validator = jsonschema.validate(req.body, newUserSchema);
-      if (!validator.valid) {
-        const errs = validator.errors.map(e => e.stack);
-        throw new BadRequestError(errs);
-      }
-      const newUser = await User.register(req.body);
-      const token = createToken(newUser);
-      return res.status(201).json({ token });
-    } catch (err) {
-      return next(err);
+        const user = await User.get(req.params.username);
+        console.log("*********************************USER:", user)
+        return res.json({ user })
     }
-  });
+    catch(err) {
+        return next(err);
+    }
+});
 
-router.post("/authenticate", async function (req, res, next) {
+router.patch("/points", async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, userSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
-    const user = await User.authenticate(req.body.username, req.body.password);
-    const token = createToken(user);
-    return res.json({ token });
+      const user = await User.updatePoints(req.body.username, req.body.points);
+      console.log("***********************************REQ.BODY", req.body)
+      return res.json({ user })
+  }
+  catch(err) {
+      return next(err);
+  }
+});
+
+router.post("/badges", async function (req, res, next) {
+  try {
+      const badge = await User.addBadge(req.body.animalId, req.body.userId);
+      console.log("***********************************REQ.BODY", req.body.animalId, req.body.userId);
+      return res.json({ badge })
   }
   catch(err) {
     return next(err);
   }
 });
-
-// router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
-//     try {
-//         const user = await User.get(req.params.username);
-//         return res.json({ user })
-//     }
-//     catch(err) {
-//         return next(err);
-//     }
-// });
 
 module.exports = router;

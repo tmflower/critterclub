@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import usersAPI from '../api/usersAPI';
 
-export function Login() {
+export function Login({ login }) {
+       
     const navigate = useNavigate();
 
     const initial_state = {
@@ -23,17 +23,21 @@ export function Login() {
         setFormData(formData => ({ ...formData, [name]: value}));
     }
 
-    const handleSubmit = (evt) => {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        const user = { username, password }    
-        
-        usersAPI.authenticateUser(user);
-        setFormData(initial_state);
-        alert(`Welcome back, ${ user.username }!`)
-        navigate("/animals", { replace: true });
+        try {
+            const user = { username, password }; 
+            await login(user);     
+            setFormData(initial_state);
+            alert(`Welcome back, ${ username }!`);
+            navigate("/dashboard", { replace: true });
+        }
+        catch(err) {
+            alert(err);
+        }
     }
 
-    return (
+    return (        
         <div>
             <h1>Login to collect your next badge!</h1>
             <form>
