@@ -20,7 +20,7 @@ export function Quiz({
                     prey, 
                     setAnimalSelected }) {
     
-    const currentUser = useContext(UserContext);
+    const currentUser = useContext(UserContext); 
     const username = currentUser.user.username;
     const userId = currentUser.user.id;
     const navigate = useNavigate();
@@ -47,8 +47,8 @@ console.log(animals);
 
     useEffect(() => {
         async function getAnimalId() {
-            if(animals.length) {
-                const animal = animals.filter(animal => commonName.toLowerCase() === animal.common_name);
+            if(animals.length) { console.log(commonName)
+                const animal = animals.filter(animal => commonName === animal.common_name);
                 console.log(animal)
                 setAnimalId(animal[0].id);
             }

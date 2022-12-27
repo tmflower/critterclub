@@ -42,20 +42,12 @@
                 1234
             ]
         },
-        "num_cards": {
+        "points": {
             "type": "integer",
             "default": 0,
-            "title": "The num_cards Schema",
+            "title": "The points Schema",
             "examples": [
                 23
-            ]
-        },
-        "level": {
-            "type": "string",
-            "default": "",
-            "title": "The level Schema",
-            "examples": [
-                "genius"
             ]
         },
         "parent_id": {
@@ -72,8 +64,7 @@
         "username": "userExample",
         "password": "userPassword",
         "access_code": 1234,
-        "num_cards": 23,
-        "level": "genius",
+        "points": 23,
         "parent_id": 1
     }]
 }

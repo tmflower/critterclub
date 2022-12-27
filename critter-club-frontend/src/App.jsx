@@ -22,6 +22,7 @@ export function App() {
   const [allAnimals, setAllAnimals] = useState([]);
   const [username, setUsername] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [collectedBadges, setCollectedBadges] = useState([]);
 
   const [token, setToken] = useState(() => {
     let value;
@@ -31,11 +32,13 @@ export function App() {
 
   useEffect(() => {
     async function getAllAnimals() {
-        setAllAnimals(await AnimalsAPI.getAllAnimals());
+        const animals = await AnimalsAPI.getAllAnimals();
+        const sortedAnimals = animals.sort((a, b) => a.name.localeCompare(b.name));
+        setAllAnimals(sortedAnimals);
     }
     getAllAnimals();
   }, []);
-
+console.log(allAnimals)
   useEffect(() => {
     async function getUserData() {
       if(token) {
@@ -54,12 +57,35 @@ export function App() {
     setUsername(userData.username);   
   }
 
-async function logout() {
-  setToken('');
-  setUsername('');
-  setCurrentUser(null);
-  alert('see ya later alligator!');
-}
+  async function logout() {
+    setToken('');
+    setUsername('');
+    setCurrentUser(null);
+    alert('see ya later alligator!');
+  }
+
+  // useEffect(() => {
+  //   async function markCollectedBadges() { 
+  //     if (currentUser) {
+  //       const collected = currentUser.user.userBadges;
+  //       for (let animal of allAnimals) {
+  //         const id = allAnimals.indexOf(animal) + 1;
+  //         console.log(id)
+  //         if (collected.includes(id)) {
+  //           console.log(`Animal ${id} collected!`);
+  //           setCollectedBadges(badges => [...collectedBadges, animal.name]);
+  //         }
+  //       }
+  //     }        
+  //   } markCollectedBadges();
+  // }, [allAnimals, currentUser]);
+
+
+  // if (currentUser) {
+  //   markCollectedBadges();
+  // }
+
+  // console.log(collectedBadges);
 
   return (
     <div className="App">
@@ -73,7 +99,7 @@ async function logout() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login login={login} />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/animals/browse" element={<Browse allAnimals={allAnimals} />}></Route>
+          <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
           <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
           <Route path="/animals/:animal" element={<Animal />}></Route>
           <Route path="/quiz" element={<Quiz />}></Route>

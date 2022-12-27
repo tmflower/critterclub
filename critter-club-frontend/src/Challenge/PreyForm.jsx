@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export function PreyForm({ commonName, prey, message, points, setPoints, numQuestions, setNumQuestions  }) {
 
-    const [formData, setFormData] = useState('');
+    const ref = useRef();
+    const initialState = {userGuess: ''}
+    const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
     const { userGuess } = formData;
 
@@ -15,9 +17,9 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
         e.preventDefault();
-        const newPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
-        console.log(newPrey, userGuess)
-        if (newPrey.includes(userGuess.toLowerCase())) {
+        const modifiedPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
+        console.log(modifiedPrey, userGuess)
+        if (modifiedPrey.includes(userGuess.toLowerCase())) {
             setFeedback(message.correct);
             setPoints(points+=10);
             setNumQuestions(numQuestions+1);
@@ -26,9 +28,7 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
     }
 
     const handleReset = (e) => {
-        setFormData('');
-        let text = document.querySelector('#userGuess');
-        text.value = '';
+        ref.current.value = '';
         setFeedback('');
     }
 
@@ -41,6 +41,8 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
             <input 
                 type="text"
                 name="userGuess"
+                defaultValue="" 
+                ref={ref} 
                 onChange={handleChange}
                 >
             </input>
@@ -50,7 +52,7 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
                 <button type="submit">Check answer</button>
                 : null }
                 { feedback === message.incorrect ?
-                <button type="reset" onClick={handleReset}>Clear answer</button>
+                <button type="reset" onClick={handleReset}>Try again</button>
                 : null }
             </div>
             <p>{feedback}</p>

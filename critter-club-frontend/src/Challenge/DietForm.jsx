@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 export function DietForm({commonName, diet, message, points, setPoints, numQuestions, setNumQuestions }) {
 
-    const [formData, setFormData] = useState('');
+    const initialState = {animalDiet: ''};
+    const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
     const { animalDiet } = formData;
 
@@ -14,7 +15,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
 
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
-        e.preventDefault();
+        e.preventDefault(); console.log(formData)
         if (animalDiet === diet) {
             setFeedback(message.correct);
             setPoints(points+=10);
@@ -24,9 +25,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
     }
 
     const handleReset = (e) => {
-        setFormData('');
-        let selection = document.querySelector('#userGuess');
-        selection.value = '';
+        setFormData(initialState);
         setFeedback('');
     }
 
@@ -40,6 +39,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 name="animalDiet"
                 value="Carnivore"
                 onChange={handleChange}
+                checked={animalDiet === "Carnivore"}
                 >
             </input>
             Carnivore
@@ -50,6 +50,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 name="animalDiet"
                 value="Herbivore"
                 onChange={handleChange}
+                checked={animalDiet === "Herbivore"}
                 >
             </input>
             Herbivore
@@ -60,6 +61,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 name="animalDiet"
                 value="Omnivore"
                 onChange={handleChange}
+                checked={animalDiet === "Omnivore"}
                 >
             </input>
             Omnivore
@@ -69,7 +71,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 <button type="submit">Check answer</button>
                 : null }
                 { feedback === message.incorrect ?
-                <button type="reset" onClick={handleReset}>Clear answer</button>
+                <button type="reset" onClick={handleReset}>Try again</button>
                 : null }
             </div>
             <p>{feedback}</p>

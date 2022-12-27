@@ -96,6 +96,11 @@ class usersAPI {
 
     // updates the users_animals table so that user badges will automatically update
 
+    // static async getUserBadges() {
+    //     const badgesData = await this.request(`users/badges`);
+    //     return badgesData;
+    // }
+    
     static async addBadge(userData) {
         console.log("BADGEUSERDATA:", userData)
         const badgesData = await this.request(`users/badges`, userData, "post");

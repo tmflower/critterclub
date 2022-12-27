@@ -6,6 +6,7 @@ CREATE DATABASE critterclub;
 \connect critterclub
 
 \i critter-club-schema.sql
+\i seed.sql
 
 \echo 'Delete and recreate critterclub_test db?'
 \prompt 'Return for yes or control-C to cancel > ' foo

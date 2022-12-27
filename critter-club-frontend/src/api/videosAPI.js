@@ -6,8 +6,7 @@ class VideosAPI {
     static async getVideo(animalName) {
         const res = await axios.get(BASE_URL_VIDEOS);
         MEDIA = res.data.media;
-        const modifiedAnimalName = animalName.replaceAll(' ', '_');
-        const videoId = `${MEDIA[modifiedAnimalName].video}`;
+        const videoId = `${MEDIA[animalName].video}`;
         return videoId;
     }
 }

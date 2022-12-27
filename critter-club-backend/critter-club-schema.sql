@@ -14,19 +14,15 @@ CREATE TABLE users (
     username VARCHAR(15) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     access_code INTEGER,
-    num_cards INTEGER NOT NULL DEFAULT 0,
-    level TEXT NOT NULL DEFAULT 'Observer',
+    points INTEGER DEFAULT 0,
+    level TEXT DEFAULT 'Observer',
     parent_id INTEGER REFERENCES parents ON DELETE CASCADE
 );
 
 CREATE TABLE animals (
     id serial PRIMARY KEY,
     common_name TEXT,
-    latin_name TEXT, 
-    photo TEXT,
-    animal_group TEXT,
-    locations TEXT[],
-    random_fact TEXT
+    photo TEXT
 );
 
 CREATE TABLE users_animals (

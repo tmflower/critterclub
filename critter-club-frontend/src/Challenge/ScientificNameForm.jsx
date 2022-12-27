@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export function ScientificNameForm({ commonName, scientificName, message, points, setPoints, numQuestions, setNumQuestions  }) {
     
@@ -6,6 +6,7 @@ export function ScientificNameForm({ commonName, scientificName, message, points
     const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
     const { userGuess } = formData;
+    const ref = useRef();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,9 +28,7 @@ export function ScientificNameForm({ commonName, scientificName, message, points
     }
 
     const handleReset = (e) => {
-        setFormData(initialState);
-        let text = document.querySelector('#userGuess');
-        text.value = '';
+        ref.current.value = "";
         setFeedback('');
     }
 
@@ -40,7 +39,9 @@ export function ScientificNameForm({ commonName, scientificName, message, points
             <label htmlFor='Scientific name'>Scientific name            
             <input 
                 id="userGuess"
-                type="text"
+                type="text" 
+                defaultValue="" 
+                ref={ref} 
                 name="userGuess"
                 onChange={handleChange}
                 >

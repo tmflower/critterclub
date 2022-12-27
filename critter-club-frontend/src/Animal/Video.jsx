@@ -14,8 +14,8 @@ export function Video({ animalName }) {
     return (
         <div>
             <iframe
-                width="853"
-                height="480"
+                width="560"
+                height="340"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -46,6 +46,12 @@ Next steps:
    -verify if points are calculating accurately when > 30
    -delete unneeded columns from animals(unless want to add to badges)
    -create seed data for animals table
-   -collect icons for image folder
    -add video codes
-   -revise text on all pages (especially animal info)
+DONE!
+
+Next: 
+-how to indicate badges already earned so they can't do same one again...we already have #s in current user, but these are for the users_animals, tried at App level but really only need this in Animal component, so try again there. Can try same method of matching up index #s using index of with id #s from table. Or come up with a better apprach!
+-collect icons for image folder
+-revise text on all pages (especially animal info)
+-code commenting
+-error handling

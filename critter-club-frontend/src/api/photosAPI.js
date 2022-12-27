@@ -27,7 +27,7 @@ class PhotosAPI {
         }
         let photoId = `${MEDIA[animalName].image}`;
 
-        if (photoId === "no_image") {
+        if (photoId === "") {
             return "https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif"
         }
 

@@ -17,8 +17,7 @@ const {
               `SELECT username,
                       password,
                       access_code AS "accessCode",
-                      num_cards AS "numCards",
-                      level,
+                      points,
                       parent_id AS "parentId"
                FROM users
                WHERE username = $1`,
@@ -58,17 +57,15 @@ const {
                (username,
                 password,
                 access_code,
-                num_cards,
-                level,
+                points,
                 parent_id)
-               VALUES ($1, $2, $3, $4, $5, $6)
-               RETURNING username, access_code AS "accessCode", num_cards AS "numCards", level, parent_id AS "parentId"`,
+               VALUES ($1, $2, $3, $4, $5)
+               RETURNING username, access_code AS "accessCode", points, parent_id AS "parentId"`,
             [
               username,
               hashedPassword,
               accessCode,
               0,
-              "Observer",
               parentId
             ],
         );
@@ -103,7 +100,7 @@ const {
                     `UPDATE users
                     SET parent_id=${parent}
                     WHERE username = $1
-                    RETURNING username, access_code AS "accessCode", num_cards AS "numCards", level, parent_id AS "parentId"`,
+                    RETURNING username, access_code AS "accessCode", points, parent_id AS "parentId"`,
                     [username]
                 )
                 const user = finalRes.rows[0];
@@ -116,8 +113,7 @@ const {
         const userRes = await db.query(
             `SELECT username,
              id,
-             num_cards as "numCards",
-             level
+             points
              FROM users
              WHERE username = $1`,
           [username]
@@ -155,9 +151,9 @@ const {
     static async updatePoints(username, newPoints) {
         const pointsRes = await db.query(
             `UPDATE users
-            SET num_cards=${newPoints} + num_cards
+            SET points=${newPoints} + points
             WHERE username = $1
-            RETURNING num_cards as "numCards"`,
+            RETURNING points`,
             [username]
         );
         const user = pointsRes.rows[0];

@@ -223,7 +223,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                             <button type="submit">Check answer</button>
                             : null }
                             { feedback === message.incorrect ?
-                            <button type="reset" onClick={handleReset}>Clear answer</button>
+                            <button type="reset" onClick={handleReset}>Try again</button>
                             : null }
                         </div>
                         <p>{feedback}</p>                        
