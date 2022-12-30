@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
-export function LocationsForm({commonName, locations, message, points, setPoints, numQuestions, setNumQuestions  }) {
+
+/** LocationsForm renders a question with checkbox answers */
+
+export function LocationsForm({commonName, locations, message, points, setPoints, numQuestions, setNumQuestions, validLocations  }) {
 
     // set each location choice to unchecked by default
     const initialState = { 
@@ -19,6 +22,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
     const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
 
+    // Deconstruct formData properties
     const {         
         Africa, 
         Antarctica, 
@@ -32,6 +36,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
         Oceania
     } = formData;
 
+    // Set formData to user's input
     const handleChange = (e) => {
         const { name, checked } = e.target;
 		setFormData((formData) => 
@@ -40,19 +45,22 @@ export function LocationsForm({commonName, locations, message, points, setPoints
 
     // narrow the list of valid locations to compare to user's choices
     // this prevents problems resulting from missing or messy location data from the api
-    const validLocations = [ 
-        "Africa",
-        "Antarctica",
-        "Asia",
-        "Europe",
-        "NorthAmerica",
-        "Eurasia",
-        "Ocean",
-        "CentralAmerica",
-        "SouthAmerica",
-        "Oceania"
-   ];
+//     const validLocations = [ 
+//         "Africa",
+//         "Antarctica",
+//         "Asia",
+//         "Europe",
+//         "NorthAmerica",
+//         "Eurasia",
+//         "Ocean",
+//         "CentralAmerica",
+//         "SouthAmerica",
+//         "Oceania"
+//    ];
 
+   // compare user's selection to animal data to check if correct; provide corresponding feedback message
+    // update user's points
+    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
    const handleSubmit = (e) => {
     e.preventDefault();
     // create an array of values from user input
@@ -105,7 +113,8 @@ export function LocationsForm({commonName, locations, message, points, setPoints
             }
         }        
     }
-
+    
+    // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
         setFormData(initialState);
         setFeedback('');

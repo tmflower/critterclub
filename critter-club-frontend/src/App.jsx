@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect,  } from 'react';
 import AnimalsAPI from './api/animalsAPI';
 import { Home } from './routes/Home';
@@ -19,11 +19,13 @@ import jwt from 'jsonwebtoken';
 
 export function App() {
 
+  const navigate = useNavigate();
   const [allAnimals, setAllAnimals] = useState([]);
   const [username, setUsername] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
-  const [collectedBadges, setCollectedBadges] = useState([]);
 
+  // if there is a token in localStorage, save it in state;
+  // token is saved to localStorage upon successful signup and login
   const [token, setToken] = useState(() => {
     let value;
     value = JSON.parse(window.localStorage.getItem('token') || null);
@@ -32,60 +34,67 @@ export function App() {
 
   useEffect(() => {
     async function getAllAnimals() {
+        // retrieve curated list from public api; pass allAnimals to Browse and Search
         const animals = await AnimalsAPI.getAllAnimals();
+        // we sort the animals alphabetically to ensure that their index numbers will align with id numbers in animals relation; needed for tracking each user's collected animal badges
         const sortedAnimals = animals.sort((a, b) => a.name.localeCompare(b.name));
         setAllAnimals(sortedAnimals);
     }
     getAllAnimals();
   }, []);
-console.log(allAnimals)
+
+console.log(allAnimals);
+
   useEffect(() => {
     async function getUserData() {
-      if(token) {
+      // if signup/login is successful, we save the token in localStorage, decode it to access the user data, and add it to the User model for this user;
+      // we set the currentUser in state for access across the app via UserContext
+      if(token) { console.log("THERE IS A TOKEN!!!")
         window.localStorage.setItem('token', `"${token}"`);
         const user = jwt.decode(token);
         usersAPI.token = token;
+        console.log("***************USER", user);
         setUsername(user.username);
+        console.log("***************USERNAME", username);
         setCurrentUser(await usersAPI.getUser(username));
       }
     }
     getUserData();
   }, [token, username]);
 
+  async function signup(userData) {
+    // responses for successful and unsuccessful signup
+    try {
+      setToken(await usersAPI.registerUser(userData));
+      setUsername(userData.username);     
+      alert(`Welcome to Critter Club, ${ userData.username }!`);
+      navigate("/dashboard", { replace: true });
+    }
+    catch (err) {
+      alert("Please enter the access code from your parent.")
+    }
+  }
+
   async function login(userData) {
-    setToken(await usersAPI.loginUser(userData));
-    setUsername(userData.username);   
+    // responses for successful and unsuccessful login
+    try {
+      setToken(await usersAPI.loginUser(userData));
+      setUsername(userData.username);   
+      alert(`Welcome back, ${ userData.username }!`);
+      navigate("/dashboard", { replace: true });
+    }
+    catch(err) {
+      alert("Please enter a valid username and password");
+    }
   }
 
   async function logout() {
+    // clear user data upon logout
     setToken('');
     setUsername('');
     setCurrentUser(null);
-    alert('see ya later alligator!');
+    alert('See ya later, alligator!');
   }
-
-  // useEffect(() => {
-  //   async function markCollectedBadges() { 
-  //     if (currentUser) {
-  //       const collected = currentUser.user.userBadges;
-  //       for (let animal of allAnimals) {
-  //         const id = allAnimals.indexOf(animal) + 1;
-  //         console.log(id)
-  //         if (collected.includes(id)) {
-  //           console.log(`Animal ${id} collected!`);
-  //           setCollectedBadges(badges => [...collectedBadges, animal.name]);
-  //         }
-  //       }
-  //     }        
-  //   } markCollectedBadges();
-  // }, [allAnimals, currentUser]);
-
-
-  // if (currentUser) {
-  //   markCollectedBadges();
-  // }
-
-  // console.log(collectedBadges);
 
   return (
     <div className="App">
@@ -96,8 +105,9 @@ console.log(allAnimals)
           <Route path="/" element={<Home />} ></Route>
           <Route path="/parent" element={<ParentSignup />}></Route>
           <Route path="/parent/:username" element={<Code />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/signup" element={<Signup signup={signup}/>}></Route>
           <Route path="/login" element={<Login login={login} />}></Route>
+          <Route path="/logout" element={<Home />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
           <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>

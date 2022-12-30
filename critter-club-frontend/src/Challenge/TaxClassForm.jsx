@@ -1,24 +1,33 @@
 import { useState } from 'react';
 
+/** TaxClassForm renders a question with radio button answers */
+
 export function TaxClassForm({commonName, taxClass, setTaxClass, message, points, setPoints, numQuestions, setNumQuestions  }) {
     
-    if (taxClass === "Sarcopterygii" || taxClass === "Actinopterygii" || taxClass === "Chondrichthyes") {
-        setTaxClass("Fish");
+    if (taxClass === "sarcopterygii" || taxClass === "actinopterygii" || taxClass === "chondrichthyes") {
+        setTaxClass("fish");
     }
 
-    if (!taxClass) setTaxClass("Other");
+    if (!taxClass) setTaxClass("other");
     
+    // Display form with no default answers and no initial message
     const initialState = {taxClass: ''};
     const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
+
+    // Deconstruct formData properties
     const { vertebrateGroup } = formData;
 
+    // Set formData to user's input
     const handleChange = (e) => {
         const { name, value } = e.target;
 		setFormData((formData) => 
             ({ ...formData, [name]: value }));
     }
 
+    // compare user's selection to animal data to check if correct; provide corresponding feedback message
+    // update user's points
+    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
         e.preventDefault(); console.log(formData)
@@ -30,6 +39,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
         else setFeedback(message.incorrect); 
     }
 
+    // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
         setFormData(initialState);
         setFeedback('');
@@ -44,9 +54,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Amphibia"
+                        value="amphibia"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Amphibia"}
+                        checked={vertebrateGroup === "amphibia"}
                         >
                     </input>
                     Amphibians
@@ -55,9 +65,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Aves"
+                        value="aves"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Aves"}
+                        checked={vertebrateGroup === "aves"}
                         >
                     </input>
                     Birds
@@ -66,9 +76,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Mammalia"
+                        value="mammalia"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Mammalia"}
+                        checked={vertebrateGroup === "mammalia"}
                         >
                     </input>
                     Mammals
@@ -77,9 +87,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Reptilia"
+                        value="reptilia"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Reptilia"}
+                        checked={vertebrateGroup === "reptilia"}
                         >
                     </input>
                     Reptiles
@@ -88,9 +98,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Fish"
+                        value="fish"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Fish"}
+                        checked={vertebrateGroup === "fish"}
                         >
                     </input>
                     Fish
@@ -99,9 +109,9 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                     <input 
                         type="radio"
                         name="vertebrateGroup"
-                        value="Other"
+                        value="other"
                         onChange={handleChange}
-                        checked={vertebrateGroup === "Other"}
+                        checked={vertebrateGroup === "other"}
                         >
                     </input>
                     Other

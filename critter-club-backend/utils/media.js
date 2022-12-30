@@ -1,6 +1,6 @@
 const MEDIA = {
     "Adelie Penguin": {"image": "9k9tNQTwMEA","video": "YKqXGNNPNaQ" },
-    "Agama Lizard": {"image": "qs2chAlF4Vw","video": "i6YSzmHyDmc" },
+    "Agama Lizard": {"image": "qs2chAlF4Vw","video": "bWKfQFz0LZo" },
     "Albatross": {"image": "2-V81Lpns50","video": "vZDwTEpOc-4" },
     "Alligator": {"image": "POKb4uUOizU","video": "0wRdFr1t7iI" },
     "Alpaca": {"image": "yt39XjxwGUE","video": "X0bE86akgmw" },

@@ -1,15 +1,25 @@
 import axios from "axios";
 
+/**
+ * Photos class provides methods for requesting data from Unsplash api;
+ * Unsplash's built-in search method provides unreliable results, so we request images by id to ensure reliable, child-friendly results;
+ * Id's are stored in MEDIA api
+ * 
+ */
+
+
 const BASE_URL_PHOTOS = "https://api.unsplash.com/photos";
 let API_KEY_PHOTOS;
 let MEDIA;
 
+// Retrieve the required key to access the public api
 const getKey = async () => {
     const res = await axios.get("http://localhost:3001/util/keys");
     API_KEY_PHOTOS = res.data.photos_api_key;
     return (API_KEY_PHOTOS);
 }
 
+// Provide access to stored photo id numbers
 const getMedia = async () => {
     const res = await axios.get("http://localhost:3001/util/media");
     MEDIA = res.data.media;
@@ -17,7 +27,11 @@ const getMedia = async () => {
 }
 
 class PhotosAPI {
-    // TODO: Add attribution info & links according to Unsplash requirements
+
+    // Returns a photo from Unsplash, given the image id number
+    // If no image id number exists, return a placeholder photo
+
+    // TODO: Add attribution info per Unsplash api requirements
     static async getPhoto(animalName) {
         if (API_KEY_PHOTOS === undefined) {
             await getKey();
@@ -40,36 +54,6 @@ class PhotosAPI {
         }
     }
 
-
-
-
-    // static async getPhoto(animalName) {
-    //     // console.log("MAKING UNSPLASH REQUEST");
-    //     if (API_KEY_PHOTOS === undefined) {
-    //         await getKey();
-    //     }
-    //     console.log("MAKING UNSPLASH REQUEST");
-    //     const res = await axios.get
-    //     (`${BASE_URL_PHOTOS}/random`, 
-    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-    //      params: {query: animalName, content_filter: "high"}});
-    //     console.log("check headers for current usage:", res);
-    //     return res.data.urls.regular;
-    // }
-
-    // static async getPhoto(animalName) {
-    //     if (API_KEY_PHOTOS === undefined) {
-    //         await getKey();
-    //     }
-    //     const res = await axios.get
-    //     (`https://api.unsplash.com/search/photos`, 
-    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-    //      params: {query: `${animalName}`, orientation: "landscape", content_filter: "high", order_by: "relevant"}});
-    //     console.log("check headers for current usage:", res);
-    //     console.log(res.data.results[0]);
-    //     return res.data.results[0];
-    // }
-
     // static async getPhoto(photoId) {
     //     if (API_KEY_PHOTOS === undefined) {
     //         await getKey();
@@ -83,32 +67,6 @@ class PhotosAPI {
     //     return res.data.urls.regular;
     // }
 
-    // static async getAllNaturePhotos() {
-    //     if (API_KEY_PHOTOS === undefined) {
-    //         await getKey();
-    //     }
-    //     const res = await axios.get
-    //     (`https://api.unsplash.com/topics/nature/photos`, 
-    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`}});
-    //     console.log("check headers for current usage:", res);
-    //     console.log(res.data);
-    // }
-
-    // static async getPhoto(animalName) {
-    //     if (API_KEY_PHOTOS === undefined) {
-    //         await getKey();
-    //     }
-    //     const res = await axios.get
-    //     (`https://api.unsplash.com/topics/nature/search/photos`, 
-    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-    //      params: {query: `${animalName}`, orientation: "landscape", content_filter: "high", order_by: "relevant"}});
-    //     console.log("check headers for current usage:", res);
-    //     console.log(res.data.results[0]);
-    //     return res.data.results[0];       
-    // }
 }
-// PhotosAPI.getAllNaturePhotos();
-
-// "https://api.unsplash.com/topics/nature/photos"
 
 export default PhotosAPI;

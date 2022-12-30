@@ -1,19 +1,29 @@
 import { useState, useRef } from 'react';
 
+/** ScientificNameForm renders a question with a text input */
+
 export function ScientificNameForm({ commonName, scientificName, message, points, setPoints, numQuestions, setNumQuestions  }) {
     
+    // Display form with no default answers and no initial message
     const initialState = {userGuess: ''}
     const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
-    const { userGuess } = formData;
     const ref = useRef();
 
+    // Deconstruct formData properties
+    const { userGuess } = formData;
+    
+
+    // Set formData to user's input
     const handleChange = (e) => {
         const { name, value } = e.target;
 		setFormData((formData) => 
             ({ ...formData, [name]: value }));
     }
 
+    // compare user's selection to animal data to check if correct; provide corresponding feedback message
+    // update user's points
+    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
         e.preventDefault();
@@ -27,6 +37,7 @@ export function ScientificNameForm({ commonName, scientificName, message, points
         }
     }
 
+    // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
         ref.current.value = "";
         setFeedback('');

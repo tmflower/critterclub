@@ -1,10 +1,19 @@
 import axios from "axios";
 import animalsList from "../utils/animalsList";
 
-const completeList = "a";
+// const completeList = "a";
+
+/**
+ * Animals class provides methods for requesting data from public animals api;
+ * This api offers only one endpoint! Shown in BASE_URL_ANIMALS below;
+ * There is no built-in endpoint for requesting all animals, or even more than one at a time
+ * 
+ */
+
 const BASE_URL_ANIMALS = "https://api.api-ninjas.com/v1/animals?name=";
 let API_KEY_ANIMALS;
 
+// Retrieve the required key to access the public api
 const getKey = async () => {
     const res = await axios.get("http://localhost:3001/util/keys");
     API_KEY_ANIMALS = res.data.animals_api_key;
@@ -13,8 +22,8 @@ const getKey = async () => {
 
 class AnimalsAPI {
     
-    // This api has only one endpoint, but may return multiple animals in an array (i.e. leopard seal, snow leopard, and leopard will return when the name leopard is the search query)
-    // To ensure we get the correct animal, filter results to match the exact name of the selected animal
+    // When calling this method, the api may return multiple animals in an array (i.e. leopard seal, snow leopard, and leopard will return when the name leopard is the search query)
+    // To ensure we get the correct animal, we filter results to match the exact name of the selected animal
     static async getSingleAnimal(animalName) {
         if (API_KEY_ANIMALS === undefined) {
             await getKey();
@@ -25,7 +34,8 @@ class AnimalsAPI {
     }    
 
     // This api has no endpoint for all animals; the only endpoint is at BASE_URL_ANIMALS
-    // Use the endpoint with this modification to get all animals for searching and browsing
+    // To get all animals for searching and browsing, collect a list of all animals containing each vowel, then filter to remove duplicates
+    // Limit results to those animals on the animalsList, for which we have photos and videos
 
     static async getAllAnimals() {
         if (API_KEY_ANIMALS === undefined) {
@@ -57,69 +67,56 @@ class AnimalsAPI {
         return allAnimals;
     }
 
-    // static async getAllAnimals() {
+    /** The methods below are not actively used in the app, but can be useful for accessing data, finding irregularities, debugging, etc. 
+     * NOTE: 'completeList' is not actually complete, but includes all animals with the letter 'a', which numbers around 1000
+    */
+
+
+    // static async getRandomAnimal(randomNum) {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+    //     return response.data[randomNum];   
+    // } 
+
+    // static async getHabitats() {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});  
+    //     const allHabitats = new Set(response.data.map(data => data.characteristics.habitat))
+    //     return allHabitats.replace(/[^a-z]/g, '');  
+    // }
+
+    // static async getDiets() {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+    //     const allDiets = new Set(response.data.map(data => data.characteristics.diet))
+    //     return allDiets;   
+    // }
+
+    // static async getTaxClasses() {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+    //     const taxClasses = new Set(response.data.map(data => data.taxonomy.class));
+    //     return taxClasses;   
+    // }
+
+    // static async getLocations() {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+    //     const locationData = response.data.map(data => data.locations);
+    //     const allLocations = new Set(locationData.map(location => location[0]));
+    //     return allLocations;  
+    // }
+
+    // static async getFunFacts() {
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
+    //     const factsData = response.data.map(data => data.characteristics.slogan);
+    //     const allFacts = new Set(factsData.map(fact => fact));
+    //     return allFacts;  
+    // }
+
+    // static async getPhylaList() {
     //     if (API_KEY_ANIMALS === undefined) {
     //         await getKey();
     //     }
-    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});   
-    //     return response.data; 
+    //     const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+    //     const phylaList = new Set(response.data.map(data => data.taxonomy.phylum));
+    //     return phylaList;
     // }
-
-    static async getRandomAnimal(randomNum) {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
-        return response.data[randomNum];   
-    } 
-
-    static async getHabitats() {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});  
-        const allHabitats = new Set(response.data.map(data => data.characteristics.habitat))
-        return allHabitats.replace(/[^a-z]/g, '');  
-    }
-
-    static async getDiets() {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
-        const allDiets = new Set(response.data.map(data => data.characteristics.diet))
-        return allDiets;   
-    }
-
-    static async getTaxClasses() {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
-        const taxClasses = new Set(response.data.map(data => data.taxonomy.class));
-        return taxClasses;   
-    }
-
-    static async getLocations() {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
-        const locationData = response.data.map(data => data.locations);
-        const allLocations = new Set(locationData.map(location => location[0]));
-        return allLocations;  
-    }
-
-    static async getFunFacts() {
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}}); 
-        const factsData = response.data.map(data => data.characteristics.slogan);
-        const allFacts = new Set(factsData.map(fact => fact));
-        return allFacts;  
-    }
-
-    static async getPhylaList() {
-        if (API_KEY_ANIMALS === undefined) {
-            await getKey();
-        }
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
-        const phylaList = new Set(response.data.map(data => data.taxonomy.phylum));
-        return phylaList;
-    }
-
-    static async getInfo() {
-        if (API_KEY_ANIMALS === undefined) {
-            await getKey();
-        }
-        const response = await axios.get(`${BASE_URL_ANIMALS}${completeList}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
-        const info = new Set(response.data.map(data => data.taxonomy.phylum));
-        console.log(info)
-        return info;
-    }
 }
 
 export default AnimalsAPI;

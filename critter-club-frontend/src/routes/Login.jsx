@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+/** Login renders a form with inputs for username and password
+ * Enables returning user to access their account */
 
 export function Login({ login }) {
-       
-    const navigate = useNavigate();
-
+     
+    // set initial form fields to blank
     const initial_state = {
         username: '',
         password: '',
     }
     
-    // controls masking and unmasking of password field
+    // control masking and unmasking of password field
     const [passwordShowing, setPasswordShowing] = useState(false);
     const toggle = () => {setPasswordShowing(!passwordShowing)}
 
@@ -22,24 +23,18 @@ export function Login({ login }) {
         const { name, value } = evt.target;
         setFormData(formData => ({ ...formData, [name]: value}));
     }
-
+    
+    // when user submits form, call login function passed from App.js
     async function handleSubmit(evt) {
         evt.preventDefault();
-        try {
-            const user = { username, password }; 
-            await login(user);     
-            setFormData(initial_state);
-            alert(`Welcome back, ${ username }!`);
-            navigate("/dashboard", { replace: true });
-        }
-        catch(err) {
-            alert(err);
-        }
+        const user = { username, password }; 
+        await login(user);     
+        setFormData(initial_state);
     }
 
     return (        
         <div>
-            <h1>Login to collect your next badge!</h1>
+            <h1>Login to collect your next badge and level up!</h1>
             <form>
                 <label htmlFor="username">Username:
                 <input 

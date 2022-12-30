@@ -4,9 +4,19 @@ const express = require("express");
 const Animal = require("../models/animal.js");
 const router = express.Router();
 
-router.get("/:id", async function (req, res, next) {
+// router.get("/:id", async function (req, res, next) {
+//     try {
+//         const animal = await Animal.get(req.params.id);
+//         return res.json({ animal });
+//     }
+//     catch (err) {
+//         return next(err);
+//     }
+// });
+
+router.get("/:animalName", async function (req, res, next) {
     try {
-        const animal = await Animal.get(req.params.id);
+        const animal = await Animal.get(req.params.animalName);
         return res.json({ animal });
     }
     catch (err) {

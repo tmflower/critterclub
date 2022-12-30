@@ -7,6 +7,7 @@ import usersAPI from "../api/usersAPI";
 
 const ParentSignup = () => {
 
+    // set initial input values to blank
     const initial_state = {
         username: '',
         password: '',
@@ -44,7 +45,12 @@ const ParentSignup = () => {
         <div className="signup-page">
             {!formWasSubmitted ?
             <div>
-                <h2>Register for a parent account</h2>
+                <h1>Welcome, Parents!</h1>
+                <p>Looking for a safe and fun place for your child to learn about all kinds of animals? Look no further than Critter Club!</p>
+                <p>Critter Club provides kid-friendly facts, pictures, and videos about more than 100 animals from around the world. Your child can collect cute badges by answering questions about the animals. They'll also earn points and climb the ranks of Critter Club from the Observer level all the way to Zoologist.</p>
+                <p>You'll need to provide your child with an access code in order for them to create their own account. Register below to receive your access code.</p>
+                <p></p>
+                <h4>Register for a parent account</h4>
                 <form className="signup-form">
                     <label htmlFor="username">Username:
                     <input 

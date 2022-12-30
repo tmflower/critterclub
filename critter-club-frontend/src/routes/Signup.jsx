@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import usersAPI from '../api/usersAPI';
+import { NavLink } from 'react-router-dom';
+ 
+/** Signup renders a form with inputs for username, password, and access code from parent
+ * Enables a user to sign up for a new account  */
 
-export function Signup() {
-    const navigate = useNavigate();
+export function Signup({ signup }) {
 
+    // set initial form fields to blank
     const initial_state = {
         username: '',
         password: '',
         accessCode: ''
     }
     
-    // controls masking and unmasking of password field
+    // control masking and unmasking of password field
     const [passwordShowing, setPasswordShowing] = useState(false);
     const toggle = () => {setPasswordShowing(!passwordShowing)}
 
@@ -24,20 +26,21 @@ export function Signup() {
         setFormData(formData => ({ ...formData, [name]: value}));
     }
 
-    const handleSubmit = (evt) => {
+    // when user submits form, call signup function passed from App.js
+    async function handleSubmit (evt) {
         evt.preventDefault();
-        const newUser = { username, password, accessCode }    
-        usersAPI.registerUser(newUser);
-        window.localStorage.setItem('username', username);
+        const newUser = { username, password, accessCode };
+        await signup(newUser);  
         setFormData(initial_state);
-        navigate("/", { replace: true });
     }
 
     return (
         <div>
             <h1>Join the Critter Club!</h1>
+            <p>You'll need the access code from your parent's account to sign up.</p>
+            <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.</p>
             <form>
-                <label htmlFor="username">Username:
+                <label htmlFor="username">Username<small> (don't use your real name!)</small>:
                 <input 
                     type="text" 
                     name="username" 

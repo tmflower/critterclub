@@ -130,12 +130,28 @@ const {
             [id]
             );
 
+        // const badges = badgesRes.rows;
+        
+        // const userBadges =[];
+        // for(let badge of badges){
+        //     console.log(badge)
+        //     userBadges.push(badge.animal_id);
+        // }
+
         const badges = badgesRes.rows;
         
-        const userBadges =[];
+        let userBadges =[];
         for(let badge of badges){
-            console.log(badge)
-            userBadges.push(badge.animal_id);
+            console.log("BADGE OF USER BADGES:", badge);
+            const name = badge.animal_id
+            const animalName = await db.query(
+                `SELECT common_name
+                FROM animals
+                WHERE id=$1`,
+            [name]
+            );
+            console.log("ANIMAL NAME:", animalName.rows[0])
+            userBadges.push(animalName.rows[0].common_name);
         }
           
         if (!user) throw new Error(`No user: ${username}`);
@@ -175,7 +191,7 @@ const {
             userId]
         );
         const newBadge = badgeRes.rows;
-        console.log(newBadge);
+        console.log("NEW BADGE:", newBadge);
         return newBadge;
     }
   }
