@@ -16,6 +16,8 @@ import ParentSignup from './routes/ParentSignup';
 import usersAPI from './api/usersAPI';
 import UserContext from './userContext';
 import jwt from 'jsonwebtoken';
+import { Box, Alert } from '@mui/material';
+import { theme } from './theme/theme';
 
 export function App() {
 
@@ -23,6 +25,7 @@ export function App() {
   const [allAnimals, setAllAnimals] = useState([]);
   const [username, setUsername] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [justLoggedOut, setJustLoggedOut] = useState(false);
 
   // if there is a token in localStorage, save it in state;
   // token is saved to localStorage upon successful signup and login
@@ -79,8 +82,8 @@ console.log(allAnimals);
     // responses for successful and unsuccessful login
     try {
       setToken(await usersAPI.loginUser(userData));
-      setUsername(userData.username);   
-      alert(`Welcome back, ${ userData.username }!`);
+      setUsername(userData.username);  
+      // alert(`Welcome back, ${ userData.username }!`);
       navigate("/dashboard", { replace: true });
     }
     catch(err) {
@@ -93,28 +96,40 @@ console.log(allAnimals);
     setToken('');
     setUsername('');
     setCurrentUser(null);
-    alert('See ya later, alligator!');
+    setJustLoggedOut(true);
+    navigate("/", { replace: true });
+    // alert('See ya later, alligator!');
   }
 
   return (
     <div className="App">
-    <UserContext.Provider value={currentUser}>    
+      <UserContext.Provider value={currentUser}> 
       <Navbar logout={logout}/>
-      <header className="App-header">      
-        <Routes>
-          <Route path="/" element={<Home />} ></Route>
-          <Route path="/parent" element={<ParentSignup />}></Route>
-          <Route path="/parent/:username" element={<Code />}></Route>
-          <Route path="/signup" element={<Signup signup={signup}/>}></Route>
-          <Route path="/login" element={<Login login={login} />}></Route>
-          <Route path="/logout" element={<Home />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
-          <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
-          <Route path="/animals/:animal" element={<Animal />}></Route>
-          <Route path="/quiz" element={<Quiz />}></Route>
-        </Routes>
-      </header>
+      <Box
+        sx={{
+          color: 'black',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: theme.typography.primary,
+          padding: '3rem'
+        }}>
+          <Routes>
+            <Route path="/" element={<Home justLoggedOut={justLoggedOut}/>} ></Route>
+            <Route path="/parent" element={<ParentSignup />}></Route>
+            <Route path="/parent/:username" element={<Code />}></Route>
+            <Route path="/signup" element={<Signup signup={signup}/>}></Route>
+            <Route path="/login" element={<Login login={login} />}></Route>
+            <Route path="/logout" element={<Home />}></Route>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
+            <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
+            <Route path="/animals/:animal" element={<Animal />}></Route>
+            <Route path="/quiz" element={<Quiz />}></Route>
+          </Routes>       
+      </Box>
       </UserContext.Provider>
     </div>
   );

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import UserContext from "../userContext";
 
 /** Search renders a page that allows user to search for animals by typing in their name or part of their name
  * A list of animal names will display dynamically as the user types
@@ -10,6 +11,9 @@ import { NavLink } from "react-router-dom";
  */
 
 export function Search({ allAnimals }) {
+
+    // Variable to check if user is logged in
+    const currentUser = useContext(UserContext);
 
     // Initialize variable for user input and set to blank
     const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +32,13 @@ export function Search({ allAnimals }) {
     const matchingAnimals = allAnimals.filter((animal) => animal.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
+        <>
+        {!currentUser ? 
+            <div>
+            <h3>Sign up for a free account to earn badges and level up:</h3>
+            <NavLink to="/signup"><button>Join the Critter Club!</button></NavLink>    
+        </div>
+        :
         <div>
             {!allAnimals.length ? (
             <div>
@@ -51,6 +62,7 @@ export function Search({ allAnimals }) {
                 }
             </div> }       
             <div/>
-        </div>
+        </div>}
+        </>
     )
 }

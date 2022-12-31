@@ -55,6 +55,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="amphibia"
+                        id="Amphibians"
                         onChange={handleChange}
                         checked={vertebrateGroup === "amphibia"}
                         >
@@ -66,6 +67,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="aves"
+                        id="Birds"
                         onChange={handleChange}
                         checked={vertebrateGroup === "aves"}
                         >
@@ -77,6 +79,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="mammalia"
+                        id="Mammals"
                         onChange={handleChange}
                         checked={vertebrateGroup === "mammalia"}
                         >
@@ -88,6 +91,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="reptilia"
+                        id="Reptiles"
                         onChange={handleChange}
                         checked={vertebrateGroup === "reptilia"}
                         >
@@ -99,6 +103,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="fish"
+                        id="Fish"
                         onChange={handleChange}
                         checked={vertebrateGroup === "fish"}
                         >
@@ -110,6 +115,7 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         type="radio"
                         name="vertebrateGroup"
                         value="other"
+                        id="Other"
                         onChange={handleChange}
                         checked={vertebrateGroup === "other"}
                         >

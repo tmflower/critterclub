@@ -51,6 +51,7 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
             <input 
                 type="text"
                 name="userGuess"
+                id="Prey"
                 defaultValue="" 
                 ref={ref} 
                 onChange={handleChange}

@@ -48,6 +48,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 type="radio"
                 name="animalDiet"
                 value="Carnivore"
+                id="Carnivore"
                 onChange={handleChange}
                 checked={animalDiet === "Carnivore"}
                 >
@@ -59,6 +60,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 type="radio"
                 name="animalDiet"
                 value="Herbivore"
+                id="Herbivore"
                 onChange={handleChange}
                 checked={animalDiet === "Herbivore"}
                 >
@@ -70,6 +72,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
                 type="radio"
                 name="animalDiet"
                 value="Omnivore"
+                id="Omnivore"
                 onChange={handleChange}
                 checked={animalDiet === "Omnivore"}
                 >

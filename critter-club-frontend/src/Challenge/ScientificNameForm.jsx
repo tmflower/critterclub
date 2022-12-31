@@ -49,7 +49,7 @@ export function ScientificNameForm({ commonName, scientificName, message, points
             <legend>What is the {commonName.toLowerCase()}'s scientific name?</legend>
             <label htmlFor='Scientific name'>Scientific name            
             <input 
-                id="userGuess"
+                id="Scientific name"
                 type="text" 
                 defaultValue="" 
                 ref={ref} 

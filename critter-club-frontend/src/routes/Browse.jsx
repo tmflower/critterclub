@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import UserContext from "../userContext";
 
 /** Browse renders a page that allows user to peruse the list of animals by clicking on a letter
  * Each letter returns a list of animals whose names begin with that letter
@@ -10,6 +11,9 @@ import { NavLink } from 'react-router-dom';
 
 export function Browse({allAnimals}) {
     
+    // Variable to check if user is logged in
+    const currentUser = useContext(UserContext);
+
     // Variable to identify selected letter;
     const [letter, setLetter] = useState('');
 
@@ -30,6 +34,13 @@ export function Browse({allAnimals}) {
     }
     
     return (
+        <>
+        {!currentUser ? 
+            <div>
+            <h3>Sign up for a free account to earn badges and level up:</h3>
+            <NavLink to="/signup"><button>Join the Critter Club!</button></NavLink>    
+        </div>
+        :
         <div>
             {!allAnimals.length ? (
             <div>
@@ -45,6 +56,7 @@ export function Browse({allAnimals}) {
                 {alphabet.map((letter) => (<button onClick={handleClick} value={letter} key={letter}>{letter}</button>))}
                 {animalsByAlphabet.map((animal, i) => (<NavLink to={`/animals/${animal.name}`} key={i}><p key={i}>{animal.name}</p></NavLink>))}
             </div>}
-        </div>
+        </div>}
+        </>
     )
 }

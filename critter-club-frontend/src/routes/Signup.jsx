@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Paper, FormControl, TextField, Button, Stack, Box } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
  
-/** Signup renders a form with inputs for username, password, and access code from parent
+/** Signup renders a form with Inputs for username, password, and access code from parent
  * Enables a user to sign up for a new account  */
 
 export function Signup({ signup }) {
@@ -35,44 +37,76 @@ export function Signup({ signup }) {
     }
 
     return (
-        <div>
+        <Paper
+        elevation={8}
+        sx={{ padding: 3 }}>
             <h1>Join the Critter Club!</h1>
             <p>You'll need the access code from your parent's account to sign up.</p>
             <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.</p>
             <form>
-                <label htmlFor="username">Username<small> (don't use your real name!)</small>:
-                <input 
+                
+                <FormControl sx={{ width: '25ch', m: 2 }}>
+                <Stack spacing={2}>
+                
+                {/* <InputLabel htmlFor="username">Username<small> (don't use your real name!)</small>:
+                <Input 
                     type="text" 
                     name="username" 
                     value={username} 
                     id="username" 
                     onChange={handleChange}>
-                </input></label>
-                <label htmlFor="password">Password:
-                <input 
-                    type={passwordShowing ? "text" : "password"} 
-                    name="password" 
-                    value={password} 
-                    id="password" 
+                </Input>
+                </InputLabel> */}
+                
+                {/* <InputLabel htmlFor="username">Username<small> (don't use your real name!)</small>: */}
+                <TextField 
+                    type="text" 
+                    name="username" 
+                    value={username} 
+                    id="username" 
+                    label="Username:"
                     onChange={handleChange}>
-                    </input>
-                    <div>
+                {/* </InputLabel> */}
+                </TextField>
+                
+                {/* <InputLabel htmlFor="password">Password: */}
+
+                <Box>
+                    <TextField 
+                        type={passwordShowing ? "text" : "password"} 
+                        name="password" 
+                        value={password} 
+                        id="password" 
+                        label="Password:"
+                        onChange={handleChange}>
+                    </TextField>
+
                         {!passwordShowing ?
                         <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
                         :
                         <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}
-                    </div>
-                    </label>
-                <label htmlFor="accessCode">Access code:
-                <input 
+                </Box>
+
+
+                {/* </InputLabel> */}
+
+                {/* <InputLabel htmlFor="accessCode">Access code: */}
+                <TextField                
                     type="text" 
                     name="accessCode" 
                     value={accessCode} 
-                    id="accessCode" 
+                    id="accessCode"
+                    label="Access code:" 
                     onChange={handleChange}>
-                    </input></label>
-                <button className="signup-button" onClick={handleSubmit}>Submit</button>               
+                </TextField>
+                {/* </InputLabel> */}
+
+                <Button className="signup-button" onClick={handleSubmit}>Submit</Button> 
+                </Stack> 
+                </FormControl> 
+                           
             </form>
-        </div>
+            
+        </Paper>
     )
 }

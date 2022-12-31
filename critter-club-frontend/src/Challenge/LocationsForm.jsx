@@ -170,7 +170,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         <label htmlFor='North America'>
                             <input
                                 type="checkbox"
-                                id="NorthAmerica"
+                                id="North America"
                                 name="NorthAmerica"
                                 checked={NorthAmerica}
                                 onChange={handleChange}
@@ -200,7 +200,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         <label htmlFor='Central America'>
                             <input
                                 type="checkbox"
-                                id="CentralAmerica"
+                                id="Central America"
                                 name="CentralAmerica"
                                 checked={CentralAmerica}
                                 onChange={handleChange}
@@ -210,7 +210,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         <label htmlFor='South America'>
                             <input
                                 type="checkbox"
-                                id="SouthAmerica"
+                                id="South America"
                                 name="SouthAmerica"
                                 checked={SouthAmerica}
                                 onChange={handleChange}

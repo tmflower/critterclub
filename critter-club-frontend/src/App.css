@@ -1,41 +1,31 @@
-.App {
+/* CSS HEX */
+/* --honeydew: #e8f7eeff;
+--ash-gray: #b8c4bbff;
+--dark-brown: #6c4d25ff;
+--green-blue-crayola: #1e91d6ff;
+--sap-green: #447604ff; */
+
+/* CSS HSL */
+/* --honeydew: hsla(144, 48%, 94%, 1);
+--ash-gray: hsla(135, 9%, 75%, 1);
+--dark-brown: hsla(34, 49%, 28%, 1);
+--green-blue-crayola: hsla(203, 75%, 48%, 1);
+--sap-green: hsla(86, 93%, 24%, 1); */
+
+/* .App {
   text-align: center;
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
 .App-header {
-  background-color: #282c34;
+  background-color: #1d71a5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #e8f7eeff;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 a {
   color: white;
@@ -46,4 +36,37 @@ a {
   color: black;
   font-size: 1.5em;
   text-decoration: none;
+} */
+
+.link {
+  text-decoration: none;
+  }
+
+.navbar-link {
+  text-decoration: none;
+  margin-right: 1rem;
+  color: #e8f7eeff;
+}
+
+.navbar-link-mobile {
+  font-family: Lexend Deca;
+  text-decoration: none;
+  margin: .75rem;
+  text-align: center;
+}
+
+.navbar-link:hover {
+  font-size: larger;
+}
+
+.navbar-link-button {
+  font-family: Lexend Deca;
+  color: #e8f7eeff;
+  text-decoration: none;
+  text-align: center;
+}
+
+.material-symbols-outlined {
+  padding-top: 1rem;
+  padding-left: 1rem;
 }
