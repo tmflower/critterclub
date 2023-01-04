@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Paper, FormControl, TextField, Button, Stack, Box } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
+import { Paper, FormControl, TextField, Button, Stack, Box, Alert } from '@mui/material';
  
 /** Signup renders a form with Inputs for username, password, and access code from parent
  * Enables a user to sign up for a new account  */
 
-export function Signup({ signup }) {
+export function Signup({ signup, alert }) {
 
     // set initial form fields to blank
     const initial_state = {
@@ -31,15 +30,24 @@ export function Signup({ signup }) {
     // when user submits form, call signup function passed from App.js
     async function handleSubmit (evt) {
         evt.preventDefault();
-        const newUser = { username, password, accessCode };
+        const newUser = { username, password, accessCode };        
         await signup(newUser);  
+        localStorage.setItem("username", username);
         setFormData(initial_state);
+        
     }
+
+    // variable and function to control display of alerts
+    const [alertShowing, setAlertShowing] = useState(true);
+    const closeAlert = () => setAlertShowing(false);
 
     return (
         <Paper
         elevation={8}
         sx={{ padding: 3 }}>
+            {alertShowing &&
+            alert.message.length ? 
+            <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null}
             <h1>Join the Critter Club!</h1>
             <p>You'll need the access code from your parent's account to sign up.</p>
             <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.</p>
@@ -64,7 +72,7 @@ export function Signup({ signup }) {
                     name="username" 
                     value={username} 
                     id="username" 
-                    label="Username:"
+                    label="Username"
                     onChange={handleChange}>
                 {/* </InputLabel> */}
                 </TextField>
@@ -77,7 +85,7 @@ export function Signup({ signup }) {
                         name="password" 
                         value={password} 
                         id="password" 
-                        label="Password:"
+                        label="Password"
                         onChange={handleChange}>
                     </TextField>
 
@@ -96,12 +104,12 @@ export function Signup({ signup }) {
                     name="accessCode" 
                     value={accessCode} 
                     id="accessCode"
-                    label="Access code:" 
+                    label="Access code" 
                     onChange={handleChange}>
                 </TextField>
                 {/* </InputLabel> */}
 
-                <Button className="signup-button" onClick={handleSubmit}>Submit</Button> 
+                <Button id="signup-button" onClick={handleSubmit}>Submit</Button> 
                 </Stack> 
                 </FormControl> 
                            

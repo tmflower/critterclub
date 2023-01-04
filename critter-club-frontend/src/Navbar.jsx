@@ -29,7 +29,7 @@ export function Navbar({ logout }) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="sticky">
+          <AppBar position="fixed">
             {/* <Container > */}
             <Toolbar>
                 <Hidden smUp>
@@ -67,7 +67,7 @@ export function Navbar({ logout }) {
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/" end>Home</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/signup" end>Signup</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/parent" end>Parent Page</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-button" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
+                            <NavLink onClick={onCloseHandler} className="navbar-link" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
                         </>}
                     </Dialog>
                 </Hidden>
@@ -98,7 +98,7 @@ export function Navbar({ logout }) {
                 {currentUser ? 
                     <Button variant="contained" sx={{ fontFamily: theme.typography.secondary }} onClick={logout}>Logout</Button>
                     :
-                    <NavLink className="navbar-link-button" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
+                    <NavLink className="navbar-link" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
                 }
                     
               </Hidden>             

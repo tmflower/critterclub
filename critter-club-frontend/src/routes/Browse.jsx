@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import UserContext from "../userContext";
+import { Paper, Button } from "@mui/material";
 
 /** Browse renders a page that allows user to peruse the list of animals by clicking on a letter
  * Each letter returns a list of animals whose names begin with that letter
@@ -34,11 +35,13 @@ export function Browse({allAnimals}) {
     }
     
     return (
-        <>
+        <Paper
+        elevation={8}
+        sx={{ padding: 20 }}>
         {!currentUser ? 
-            <div>
+        <div>
             <h3>Sign up for a free account to earn badges and level up:</h3>
-            <NavLink to="/signup"><button>Join the Critter Club!</button></NavLink>    
+            <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
         </div>
         :
         <div>
@@ -51,12 +54,12 @@ export function Browse({allAnimals}) {
             <div>
                 <h1>Browse All Animals</h1>
                 <div>
-                    {animalsByAlphabet.length > 0 ? <button onClick={reset}>Clear List</button> : null}
+                    {animalsByAlphabet.length > 0 ? <Button id="clear-list-button" onClick={reset}>Clear List</Button> : null}
                 </div>            
-                {alphabet.map((letter) => (<button onClick={handleClick} value={letter} key={letter}>{letter}</button>))}
+                {alphabet.map((letter) => (<Button onClick={handleClick} value={letter} key={letter}>{letter}</Button>))}
                 {animalsByAlphabet.map((animal, i) => (<NavLink to={`/animals/${animal.name}`} key={i}><p key={i}>{animal.name}</p></NavLink>))}
             </div>}
         </div>}
-        </>
+        </Paper>
     )
 }

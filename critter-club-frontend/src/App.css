@@ -1,42 +1,22 @@
-/* CSS HEX */
+/** Theme colors: */
+
 /* --honeydew: #e8f7eeff;
 --ash-gray: #b8c4bbff;
 --dark-brown: #6c4d25ff;
 --green-blue-crayola: #1e91d6ff;
 --sap-green: #447604ff; */
 
-/* CSS HSL */
+
 /* --honeydew: hsla(144, 48%, 94%, 1);
 --ash-gray: hsla(135, 9%, 75%, 1);
 --dark-brown: hsla(34, 49%, 28%, 1);
 --green-blue-crayola: hsla(203, 75%, 48%, 1);
 --sap-green: hsla(86, 93%, 24%, 1); */
 
-/* .App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #1d71a5;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #e8f7eeff;
-}
-
-a {
-  color: white;
-}
-
-.navbar-link {
-  margin: 10px;
-  color: black;
-  font-size: 1.5em;
-  text-decoration: none;
-} */
+/** 
+-selected elements require styling by class or id to override React and/or MUI defaults
+-selected elements require resizing for different screen sizes
+*/
 
 .link {
   text-decoration: none;
@@ -53,20 +33,84 @@ a {
   text-decoration: none;
   margin: .75rem;
   text-align: center;
+  color: #1e91d6ff;
 }
 
 .navbar-link:hover {
   font-size: larger;
 }
 
-.navbar-link-button {
-  font-family: Lexend Deca;
-  color: #e8f7eeff;
-  text-decoration: none;
-  text-align: center;
-}
-
 .material-symbols-outlined {
   padding-top: 1rem;
   padding-left: 1rem;
 }
+
+.emoji {
+ font-size: 2.5rem;
+ text-align: center;
+ margin: 0;
+}
+
+#clear-list-button {
+  background-color: #1e91d6ff;
+}
+
+#clear-list-button:hover {
+  background-color: hsla(203, 75%, 48%, .2);
+  color: #1e91d6ff;
+  border: 1px solid #1e91d6ff;
+}
+
+@media (min-width: 375px){
+    .video {
+      width: 350px;
+      height: 206px;
+      border: 0px;
+      border-radius: 10px;
+    }
+
+    .photo {
+      width: 200px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    .img-home {
+      max-width: 8rem;
+    }
+  }
+  
+  @media (min-width: 768px){
+    .video {
+      width: 500px;
+      height: 294px;
+    }
+    .photo {
+      width: 300px;
+    }
+
+    .img-home {
+      max-width: 10rem;
+    }
+  }
+  
+  @media (min-width: 1024px){
+    .video {
+      width: 650px;
+      height: 382px;
+    }
+    .photo {
+      width: 400px;
+    }
+  }
+  
+  @media (min-width: 1200px){
+    .video {
+      width: 800px;
+      height: 471px;
+    }
+    .photo {
+      width: 500px;
+    }
+  }
+

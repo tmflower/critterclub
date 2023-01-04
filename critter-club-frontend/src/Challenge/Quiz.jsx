@@ -84,11 +84,6 @@ console.log(animalId)
             await usersAPI.addBadge({ animalId, userId });
             navigate("/dashboard", {replace: true});
             refreshPage();
-        // } 
-        // else {
-        //     alert("Sorry, you lose!");
-        //     navigate("/dashboard", {replace: true});
-        // }
     }
 
     // This function ensures that user will see updated stats on dashboard;
@@ -104,6 +99,10 @@ console.log(animalId)
     return (
         <div>
             <h1>Take the {commonName.toUpperCase()} challenge!</h1>
+            <p>Earn 10 points for each correct answer.</p>
+            <p>After answering 3 questions correctly, you can submit your answers to collect your badge, OR:</p>
+            <p>Answer any additional questions to earn more points and level up!</p>
+            <p>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</p>
             <DietForm 
                 commonName={commonName} 
                 diet={diet}

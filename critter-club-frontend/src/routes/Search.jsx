@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserContext from "../userContext";
+import { Paper, Button } from "@mui/material";
 
 /** Search renders a page that allows user to search for animals by typing in their name or part of their name
  * A list of animal names will display dynamically as the user types
@@ -32,7 +33,9 @@ export function Search({ allAnimals }) {
     const matchingAnimals = allAnimals.filter((animal) => animal.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
-        <>
+        <Paper
+            elevation={8}
+            sx={{ padding: 20 }}>
         {!currentUser ? 
             <div>
             <h3>Sign up for a free account to earn badges and level up:</h3>
@@ -63,6 +66,6 @@ export function Search({ allAnimals }) {
             </div> }       
             <div/>
         </div>}
-        </>
+        </Paper>
     )
 }

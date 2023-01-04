@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PhotosAPI from '../api/photosAPI.js';
+import { Box } from '@mui/material';
 
 export function Photo ({ animalName }) {
     
@@ -13,8 +14,8 @@ export function Photo ({ animalName }) {
     }, [animalName]);
 
     return (
-        <>
-            <img src={photo} alt={animalName}></img>
-        </>
+        <Box sx={{ width: "auto"}}>
+            <img src={photo} alt={animalName} width="200px" className="photo"></img>
+        </Box>
     )
 }

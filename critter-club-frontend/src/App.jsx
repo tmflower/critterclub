@@ -16,7 +16,7 @@ import ParentSignup from './routes/ParentSignup';
 import usersAPI from './api/usersAPI';
 import UserContext from './userContext';
 import jwt from 'jsonwebtoken';
-import { Box, Alert } from '@mui/material';
+import { Box } from '@mui/material';
 import { theme } from './theme/theme';
 
 export function App() {
@@ -26,6 +26,7 @@ export function App() {
   const [username, setUsername] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [justLoggedOut, setJustLoggedOut] = useState(false);
+  const [alert, setAlert] = useState({message: "", severity: ""});
 
   // if there is a token in localStorage, save it in state;
   // token is saved to localStorage upon successful signup and login
@@ -69,12 +70,13 @@ console.log(allAnimals);
     // responses for successful and unsuccessful signup
     try {
       setToken(await usersAPI.registerUser(userData));
-      setUsername(userData.username);     
-      alert(`Welcome to Critter Club, ${ userData.username }!`);
+      setUsername(userData.username); 
+      setAlert({severity: "success", message: `Welcome to Critter Club, ${userData.username}!`});   
       navigate("/dashboard", { replace: true });
     }
-    catch (err) {
-      alert("Please enter the access code from your parent.")
+    catch (err) {   
+      console.log(err);
+      setAlert({severity: "warning", message: err});
     }
   }
 
@@ -83,11 +85,11 @@ console.log(allAnimals);
     try {
       setToken(await usersAPI.loginUser(userData));
       setUsername(userData.username);  
-      // alert(`Welcome back, ${ userData.username }!`);
+      setAlert({severity: "success", message: `Welcome back, ${userData.username}!`});        
       navigate("/dashboard", { replace: true });
     }
     catch(err) {
-      alert("Please enter a valid username and password");
+      setAlert({severity: "warning", message: "Please enter a valid username and password"});
     }
   }
 
@@ -98,13 +100,12 @@ console.log(allAnimals);
     setCurrentUser(null);
     setJustLoggedOut(true);
     navigate("/", { replace: true });
-    // alert('See ya later, alligator!');
   }
 
   return (
     <div className="App">
-      <UserContext.Provider value={currentUser}> 
-      <Navbar logout={logout}/>
+      <UserContext.Provider value={currentUser}>
+      <Navbar logout={logout}/>      
       <Box
         sx={{
           color: 'black',
@@ -120,10 +121,10 @@ console.log(allAnimals);
             <Route path="/" element={<Home justLoggedOut={justLoggedOut}/>} ></Route>
             <Route path="/parent" element={<ParentSignup />}></Route>
             <Route path="/parent/:username" element={<Code />}></Route>
-            <Route path="/signup" element={<Signup signup={signup}/>}></Route>
-            <Route path="/login" element={<Login login={login} />}></Route>
+            <Route path="/signup" element={<Signup signup={signup} alert={alert}/>}></Route>
+            <Route path="/login" element={<Login login={login} alert={alert}/>}></Route>
             <Route path="/logout" element={<Home />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/dashboard" element={<Dashboard alert={alert}/>}></Route>
             <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
             <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
             <Route path="/animals/:animal" element={<Animal />}></Route>

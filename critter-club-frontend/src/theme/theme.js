@@ -4,7 +4,7 @@ export const theme = createTheme({
     
         palette: {
           primary: {
-            main: '#1d71a5',
+            main: '#1e91d6ff',
           },
           secondary: {
             main: '#457604',
@@ -29,8 +29,13 @@ export const theme = createTheme({
                         margin: '1rem',
                         color: '#e8f7eeff;',
                         backgroundColor: '#457604',
-                        
-                    }                    
+                        fontFamily: 'Lexend Deca, Arial',
+                        '&:hover': {
+                            backgroundColor: '#e8f7eeff;',
+                            color: '#457604',
+                            border: '1px solid #447604ff'
+                        }
+                    }                
                 }
             },
 

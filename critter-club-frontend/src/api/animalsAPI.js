@@ -28,7 +28,7 @@ class AnimalsAPI {
         if (API_KEY_ANIMALS === undefined) {
             await getKey();
         }
-        const response = await axios.get(`${BASE_URL_ANIMALS}${animalName}`, {headers: {"X-Api-Key": API_KEY_ANIMALS}});
+        const response = await axios.get(`${BASE_URL_ANIMALS}${animalName}`, {headers: {"X-Api-Key": API_KEY_ANIMALS }});
         const animal = response.data.filter(animal => animal.name.toLowerCase() === animalName.toLowerCase());
         return animal[0];
     }    
