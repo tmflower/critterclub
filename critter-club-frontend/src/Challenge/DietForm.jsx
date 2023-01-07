@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import { Paper, FormLabel, RadioGroup, Radio, Typography, Button } from '@mui/material';
+import { theme } from '../theme/theme';
 
 /** DietForm renders a question with radio button answers */
 
@@ -40,56 +41,64 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
     }
 
     return (
+        <Paper
+        elevation={8}
+        sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
+            {/* <FormControl> */}
             <fieldset>
-            <legend>Which term best describe's the {commonName.toLowerCase()}'s diet?</legend>
+            <RadioGroup>
+                <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
+                    <legend>Which term best describes the {commonName.toLowerCase()}'s diet?</legend>
+                </FormLabel>
+            
             <label htmlFor='Carnivore'>
-            <input 
-                type="radio"
+            <Radio 
+                // type="radio"
                 name="animalDiet"
                 value="Carnivore"
                 id="Carnivore"
                 onChange={handleChange}
                 checked={animalDiet === "Carnivore"}
-                >
-            </input>
+            />
             Carnivore
             </label>
             <label htmlFor='Herbivore'>
-            <input 
-                type="radio"
+            <Radio 
+                // type="radio"
                 name="animalDiet"
                 value="Herbivore"
                 id="Herbivore"
                 onChange={handleChange}
                 checked={animalDiet === "Herbivore"}
-                >
-            </input>
+            />
             Herbivore
             </label>
             <label htmlFor="Omnivore">
-            <input 
-                type="radio"
+            <Radio
+                // type="radio"
                 name="animalDiet"
                 value="Omnivore"
                 id="Omnivore"
                 onChange={handleChange}
                 checked={animalDiet === "Omnivore"}
-                >
-            </input>
+            />
             Omnivore
             </label>
             <div>
                 { !feedback ? 
-                <button type="submit">Check answer</button>
+                <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <button type="reset" onClick={handleReset}>Try again</button>
+                <Button type="reset" onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
-            <p>{feedback}</p>
+            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+            </RadioGroup>
             </fieldset>
+            {/* </FormControl> */}
         </form>
+        </Paper>
     )
 
 }

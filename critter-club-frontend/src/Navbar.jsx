@@ -8,7 +8,6 @@ import {
     Typography,
     Toolbar,
     Button,
-    Container,
     Hidden,
     Dialog
  } from "@mui/material";
@@ -56,19 +55,21 @@ export function Navbar({ logout }) {
                             </Toolbar>
                         </AppBar>
                         {currentUser ? 
-                        <>
+                        <Box
+                            sx={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/dashboard" end>Dashboard</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/animals/browse" end>Browse</NavLink>
                             <NavLink onClick={onCloseHandler}className="navbar-link-mobile"exact="true" to="/animals/search">Search</NavLink>
-                            <Button variant="contained" sx={{ fontFamily: theme.typography.secondary }} onClick={logout}>Logout</Button>
-                        </>
+                            <Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', width: '20%' }} onClick={logout}>Logout</Button>
+                        </Box>
                         :
-                        <>
+                        <Box
+                            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/" end>Home</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/signup" end>Signup</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/parent" end>Parent Page</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
-                        </>}
+                        </Box>}
                     </Dialog>
                 </Hidden>
 

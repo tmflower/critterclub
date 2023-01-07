@@ -9,6 +9,10 @@ import { useContext } from 'react';
 import UserContext from '../userContext';
 import { useNavigate, Link } from 'react-router-dom';
 import validLocations from '../Animal/Animal';
+import { Button, Modal, Box, Paper, IconButton, Typography, Stack } from '@mui/material';
+import Close from "@mui/icons-material/Close";
+import { theme } from "../theme/theme";
+import gifs from '../utils/gifs';
 
 
 /** Quiz renders a set of questions about the selected animal;
@@ -65,7 +69,7 @@ export function Quiz({
             }
         } 
         getAnimalId();
-    },[animals, commonName])
+    },[animals, commonName]);
 
 console.log(animalId)
 
@@ -78,12 +82,18 @@ console.log(animalId)
      * 
      */
     async function handleSubmit() {
-        // if (points / numQuestions === 10) {
-            alert(`Congratulations, ${username}! You earned ${points} points and the ${commonName} badge!`);
             await usersAPI.updatePoints({ username, points });
             await usersAPI.addBadge({ animalId, userId });
-            navigate("/dashboard", {replace: true});
-            refreshPage();
+            handleOpen();
+        }
+
+    // Handle opening and closing of modal to with congratulations message when user earns badge;
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+    navigate("/dashboard", {replace: true});       
+    refreshPage();
+    
     }
 
     // This function ensures that user will see updated stats on dashboard;
@@ -96,13 +106,38 @@ console.log(animalId)
         setAnimalSelected(false);
     }
 
+    const randomNum = Math.floor(Math.random() * gifs.length);
+    const gif = gifs[randomNum];
+    console.log(gif)
+    
     return (
-        <div>
-            <h1>Take the {commonName.toUpperCase()} challenge!</h1>
-            <p>Earn 10 points for each correct answer.</p>
-            <p>After answering 3 questions correctly, you can submit your answers to collect your badge, OR:</p>
-            <p>Answer any additional questions to earn more points and level up!</p>
-            <p>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</p>
+        <Box sx={{ mt: 5 }}>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10rem' }}>
+                <Paper className="popup" sx={{ padding: '2rem '}}>
+                    <IconButton onClick={handleClose}>
+                        <Close sx={{ color: theme.typography.primary }}/>
+                    </IconButton>
+                    <Stack>
+                        <img id="modal-img"src={gif} alt="celebration"/>
+                        <Typography id="modal-modal-title" variant="h3" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>Congratulations, {username}!</Typography>
+                        <Typography id="modal-modal-description" variant="h5" sx={{ mt: 2, fontFamily: theme.typography.primary, textAlign: 'center' }}>You earned {points} points and the {commonName} badge!</Typography>
+                    </Stack>
+
+                </Paper>
+                </Box>
+            </Modal>
+            <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!</Typography>
+            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Earn 10 points for each correct answer.</Typography>
+            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>After answering 3 questions correctly, you can submit your answers to collect your badge, OR:</Typography>
+            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Answer any additional questions to earn more points and level up!</Typography>
+            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
+
             <DietForm 
                 commonName={commonName} 
                 diet={diet}
@@ -113,6 +148,8 @@ console.log(animalId)
                 setNumQuestions={setNumQuestions}
                 >
             </DietForm>
+
+
             <LocationsForm 
                 commonName={commonName} 
                 locations={locations}
@@ -162,10 +199,10 @@ console.log(animalId)
                 >
             </ScientificNameForm>  
             : null }   
-            <button type="button" onClick={handleClick}>Return to animal</button>
+            <Button type="button" onClick={handleClick} id="alt-button">Return to animal</Button>
             { numQuestions >= 3 ?           
-            <button type="submit" onClick={handleSubmit}>Submit Your Answers</button> : null }
+            <Button type="submit" onClick={handleSubmit} id="alt-button">Submit Your Answers</Button> : null }
             <Link to="/dashboard"></Link>
-        </div>
+        </Box>
     )
 }

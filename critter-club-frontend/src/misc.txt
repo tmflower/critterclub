@@ -48,10 +48,17 @@ Next steps:
    -create seed data for animals table
    -add video codes
    -how to indicate badges already earned so they can't do same one again
+   -collect icons for image folder
+   -revise text on all pages (especially animal info)
+   -code commenting
+   -error handling
+   -add array of gifs for congrats message
 DONE!
 
-Next: 
--collect icons for image folder
--revise text on all pages (especially animal info)
--code commenting
--error handling
+Next:    
+   -(maybe) add image from badge to animal page, challenge view, and/or lists as tiny icons
+   -add length/character requirements to passwords in schema
+   -figure out how to provide correct user feedback for missing or wrong access code
+   -write tests for all
+   -remove console logs/outdated comments/etc.
+   -add readme documentation

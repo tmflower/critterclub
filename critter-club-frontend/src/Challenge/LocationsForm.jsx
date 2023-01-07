@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import { Paper, FormLabel, Checkbox, Typography, Button, FormGroup } from '@mui/material';
+import { theme } from '../theme/theme';
 
 /** LocationsForm renders a question with checkbox answers */
 
@@ -121,124 +122,133 @@ export function LocationsForm({commonName, locations, message, points, setPoints
     }
 
     return (
+        <Paper
+        elevation={8}
+        sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
                 {validLocations.includes(locations[0]) ? 
                 <div>
                     <fieldset>
+                    <FormGroup>
+                    <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
                         <legend>In which location or locations can the {commonName.toLowerCase()} be found?
                         </legend>
+                    </FormLabel>
                         <label htmlFor='Africa'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Africa"
                                 name="Africa"
                                 checked={Africa}
                                 onChange={handleChange}
-                            ></input>
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                            />
                             Africa
                         </label>
                         <label htmlFor='Antarctica'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Antarctica"
                                 name="Antarctica"
                                 checked={Antarctica}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Antarctica
                         </label>
                         <label htmlFor='Asia'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Asia"
                                 name="Asia"
                                 checked={Asia}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Asia
                         </label>
                         <label htmlFor='Europe'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Europe"
                                 name="Europe"
                                 checked={Europe}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Europe
                         </label>
                         <label htmlFor='North America'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="North America"
                                 name="NorthAmerica"
                                 checked={NorthAmerica}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             North America
                         </label>
                         <label htmlFor='Eurasia'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Eurasia"
                                 name="Eurasia"
                                 checked={Eurasia}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Eurasia
                         </label>
                         <label htmlFor='Ocean'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Ocean"
                                 name="Ocean"
                                 checked={Ocean}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Ocean
                         </label>
                         <label htmlFor='Central America'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Central America"
                                 name="CentralAmerica"
                                 checked={CentralAmerica}
                                 onChange={handleChange}
-                            ></input>
+                            ></Checkbox>
                             Central America
                         </label>
                         <label htmlFor='South America'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="South America"
                                 name="SouthAmerica"
                                 checked={SouthAmerica}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             South America
                         </label>
                         <label htmlFor='Oceania'>
-                            <input
-                                type="checkbox"
+                            <Checkbox
+                                // type="checkbox"
                                 id="Oceania"
                                 name="Oceania"
                                 checked={Oceania}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             Oceania
                         </label>
                         <div>
                             { !feedback ? 
-                            <button type="submit">Check answer</button>
+                            <Button type="submit">Check answers</Button>
                             : null }
                             { feedback === message.incorrect ?
-                            <button type="reset" onClick={handleReset}>Try again</button>
+                            <Button type="reset" onClick={handleReset}>Clear answers</Button>
                             : null }
                         </div>
-                        <p>{feedback}</p>                        
+                        <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>  
+                    </FormGroup>                      
                     </fieldset>                   
                 </div>                 
                 : null}
         </form>
+        </Paper>
     )
 }

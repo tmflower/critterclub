@@ -2,9 +2,9 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Alert, Paper, Box, Grid, Typography } from "@mui/material";
 import { theme } from "../theme/theme";
-import uakari from "../assets/uakari.jpeg";
-import seadragon from "../assets/seadragon.png";
-import lion from "../assets/lion.png";
+import uakari from "../assets/images/uakari.jpeg";
+import seadragon from "../assets/images/seadragon.png";
+import lion from "../assets/images/lion.png";
 
 export function Home({ justLoggedOut }) {
     const [alertShowing, setAlertShowing] = useState(true);
@@ -20,7 +20,8 @@ export function Home({ justLoggedOut }) {
                 direction="row"
                 alignItems="center"
                 justifyContent="center"
-                textAlign="center">
+                textAlign="center"
+                maxWidth="1400px">
                 <Grid item xs={12}>
                     <Typography variant="h2" fontFamily={theme.typography.primary} color={theme.palette.secondary.main}>Welcome to Critter Club!</Typography>
                 </Grid>
@@ -30,7 +31,7 @@ export function Home({ justLoggedOut }) {
                         elevation={8}
                         sx={{ padding: 8, borderRadius: '50%', margin: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>                        
                         <img src={uakari} className="img-home" alt="uakari"/>
-                        <p>Ever heard of an uakari?</p>
+                        <Typography variant="h5" fontFamily={theme.typography.primary}>Ever heard of an uakari?</Typography>
                     </Paper>                
                 </Grid>
 
@@ -38,7 +39,7 @@ export function Home({ justLoggedOut }) {
                     <Paper
                         elevation={8}
                         sx={{ padding: 8, borderRadius: '50%', margin: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>                                                
-                        <p>Is a sea dragon a real thing?</p>
+                        <Typography variant="h5" fontFamily={theme.typography.primary}>What does a sea dragon eat?</Typography>
                         <img src={seadragon} className="img-home" alt="seadragon"/>
                     </Paper>                   
                 </Grid>
@@ -48,11 +49,11 @@ export function Home({ justLoggedOut }) {
                         elevation={8}
                         sx={{ padding: 8, borderRadius: '50%', margin: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <img src={lion} className="img-home" alt="lion"/>
-                        <p>Do wild lions only live in Africa?</p>                        
+                        <Typography variant="h5" fontFamily={theme.typography.primary}>Do wild lions only live in Africa?</Typography>                        
                     </Paper>                     
                 </Grid>
 
-                    <Typography variant="h4" fontFamily={theme.typography.primary} sx={{ m: 1 }}>Find out the answers to these questions and SO many more when you join Critter Club!</Typography>
+                    <Typography variant="h4" fontFamily={theme.typography.primary} color={theme.palette.primary.main} sx={{ m: 1 }}>Find out the answers to these questions and SO many more when you join Critter Club!</Typography>
 
                     <Grid item xs={12} sm={8} md={6} lg={4}>
                         <Paper

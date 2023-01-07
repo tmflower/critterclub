@@ -50,13 +50,13 @@ export function Login({ login, alert }) {
                 <Stack spacing={2}>
                 {/* <label htmlFor="username">Username: */}
                 <TextField 
-                    type="text" 
+                    // type="text" 
                     name="username" 
                     value={username} 
                     id="username" 
                     label="Username"
-                    onChange={handleChange}>
-                </TextField>
+                    onChange={handleChange}
+                />
                 {/* </label> */}
                 {/* <label htmlFor="password">Password: */}
                 <Box>

@@ -20,7 +20,6 @@ import {
  } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import { theme } from "../theme/theme";
-import zebra from "../assets/zebra.png";
 
 const levels = {
     0: 'Observer',
@@ -247,24 +246,24 @@ console.log("USER ANIMALS:", userAnimals);
 return (
     <Box sx={{ mt: 5 }}>
         { !currentUser ?   
-        <div>
-            <img src={zebra} alt="red panda" width="300"/>
-            <h3>Sign up for a free account to earn badges and level up:</h3>
-            <NavLink to="/signup" className="link"><Button >Join the Critter Club!</Button></NavLink>    
-        </div> 
+            <Paper
+                elevation={8} sx={{ padding: 20 }}>
+                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
+                <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
+            </Paper>
         :
         <Box>  
         {alertShowing &&
             alert.message.length ? 
             <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null}
-        <h1>Hello, {currentUser.user.username}!</h1>
-        <p>You're a Critter Club {level}! Click below to see how many points you need to level up.</p>
+        <Typography variant="h2" sx={{ fontFamily: theme.typography.primary }}>Hello, {currentUser.user.username}!</Typography>
+        <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>You're a Critter Club <em style={{ color: '#1e91d6ff' }}>{level}</em> ! Click below to see how many points you need to level up.</Typography>
         
-        {noBadges ? <p>You don't have any badges yet. Let's get started!</p> 
+        {noBadges ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary }}>You don't have any badges yet. Let's get started!</Typography> 
         :
-        <p>You've collected {currentUser.user.userBadges.length} {badge} so far and you have {currentUser.user.points} points!</p>} 
-        <Button onClick={handleOpen}>Critter Club Levels</Button>
-        <h3>Explore the Critter Club animal collection to earn more badges and level up:</h3>
+        <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>You've collected {currentUser.user.userBadges.length} {badge} so far and you have {currentUser.user.points} points!</Typography>} 
+        <Button id="alt-button" onClick={handleOpen}>Critter Club Levels</Button>
+        <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Explore the Critter Club animal collection to earn more badges and level up:</Typography>
         <Box sx={{ mb: 3 }}>
             <NavLink to="/animals/browse" className="link"><Button >Browse All Animals</Button></NavLink>
             <NavLink to="/animals/search" className="link"><Button >Search for an Animal</Button></NavLink>
@@ -273,60 +272,58 @@ return (
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10rem' }}>
-            <Paper sx={{ padding: '2rem '}}>
-                <IconButton onClick={handleClose}>
-                    <Close sx={{ color: theme.typography.primary }}/>
-                </IconButton>
-                <Typography id="modal-modal-title" variant="h3" component="h2" sx={{ fontFamily: theme.typography.primary }}>
-                Critter Club Levels
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2, fontSize: '2rem', fontFamily: theme.typography.primary }}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Level</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Points</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Observer</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>0 - 99</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Explorer</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>100 - 499</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Adventurer</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>500 - 999</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Naturalist</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>1000 - 2499</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Ecologist</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>2500 - 4999</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Zoologist</TableCell>
-                            <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>5000 +</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                </Typography>
-            </Paper>
-
-        </Box>
+            aria-describedby="modal-modal-description">
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10rem' }}>
+                <Paper sx={{ padding: '2rem '}}>
+                    <IconButton onClick={handleClose}>
+                        <Close sx={{ color: theme.typography.primary }}/>
+                    </IconButton>
+                    <Typography id="modal-modal-title" variant="h3" component="h2" sx={{ fontFamily: theme.typography.primary }}>
+                    Critter Club Levels
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2, fontSize: '2rem', fontFamily: theme.typography.primary }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Level</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Points</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Observer</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>0 - 99</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Explorer</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>100 - 499</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Adventurer</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>500 - 999</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Naturalist</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>1000 - 2499</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Ecologist</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>2500 - 4999</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Zoologist</TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>5000 +</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                    </Typography>
+                </Paper>
+            </Box>
         </Modal>
         </Box>}
         {currentUser ? 
         <Box>
-            {userAnimals.length ? <h4>Your Badges:</h4> : null}
+            {userAnimals.length ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, mb: 5 }}>Your Badges:</Typography> : null}
             <Grid container spacing={{ xs: 2, md: 3 }} columnSpacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {userAnimals.map((a, i) => <Badge key={i} animalName={a.animalName} url={a.animal.photo}/>)}
             </Grid>

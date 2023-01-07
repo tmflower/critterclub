@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { Paper, FormLabel, Typography, Button } from '@mui/material';
+import { theme } from '../theme/theme';
 
 /** PreyForm renders a question with a text input */
 
@@ -38,36 +40,46 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
     
     // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
+        console.log(ref);
         ref.current.value = '';
+        setFormData(initialState)
         setFeedback('');
     }
 
     return (
+        <Paper
+        elevation={8}
+        sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
-            <legend>What is one of the {commonName.toLowerCase()}'s prey animals?</legend>
+
+            <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
+                <legend>What is one thing the {commonName.toLowerCase()} eats?</legend>
+            </FormLabel>
             <label htmlFor='Prey'>Prey
             
-            <input 
+            <input
                 type="text"
                 name="userGuess"
                 id="Prey"
                 defaultValue="" 
+                className="input-nonMUI"
                 ref={ref} 
                 onChange={handleChange}
-                >
-            </input>
+            />               
             </label>
             <div>
                 { !feedback ? 
-                <button type="submit">Check answer</button>
+                <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <button type="reset" onClick={handleReset}>Try again</button>
+                <Button type="reset" onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
-            <p>{feedback}</p>
+            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+
             </fieldset>
         </form>
+        </Paper>
     )
 }

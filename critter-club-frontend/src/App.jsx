@@ -98,6 +98,9 @@ console.log(allAnimals);
     setToken('');
     setUsername('');
     setCurrentUser(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
     setJustLoggedOut(true);
     navigate("/", { replace: true });
   }

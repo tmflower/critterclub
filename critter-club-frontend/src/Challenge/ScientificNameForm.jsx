@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { Paper, FormLabel, Typography, Button } from '@mui/material';
+import { theme } from '../theme/theme';
 
 /** ScientificNameForm renders a question with a text input */
 
@@ -39,35 +41,42 @@ export function ScientificNameForm({ commonName, scientificName, message, points
 
     // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
+        console.log(ref)
         ref.current.value = "";
         setFeedback('');
     }
 
     return (
+        <Paper
+        elevation={8}
+        sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
-            <legend>What is the {commonName.toLowerCase()}'s scientific name?</legend>
+            <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
+                <legend>What is the {commonName.toLowerCase()}'s scientific name?</legend>
+            </FormLabel>
             <label htmlFor='Scientific name'>Scientific name            
-            <input 
-                id="Scientific name"
+            <input                 
                 type="text" 
-                defaultValue="" 
-                ref={ref} 
                 name="userGuess"
-                onChange={handleChange}
-                >
-            </input>
+                id="Scientific name"
+                defaultValue="" 
+                className="input-nonMUI"
+                ref={ref}                 
+                onChange={handleChange}                
+            />
             </label>
             <div>
                 { !feedback ? 
-                <button type="submit">Check answer</button>
+                <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <button type="reset" onClick={handleReset}>Try again</button>
+                <Button type="reset" onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
-            <p>{feedback}</p>
+            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
             </fieldset>
         </form>
+        </Paper>
     )
 }
