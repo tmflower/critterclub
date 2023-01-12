@@ -35,7 +35,7 @@ export const theme = createTheme({
                         backgroundColor: '#457604',
                         fontFamily: 'Lexend Deca, Arial',
                         '&:hover': {
-                            backgroundColor: '#e8f7eeff;',
+                            backgroundColor: '#e8f7eeff',
                             color: '#457604',
                             border: '1px solid #447604ff'
                         }
@@ -44,13 +44,25 @@ export const theme = createTheme({
             },
             AltButton: {
                 margin: '1rem',
-                color: '#e8f7eeff;',
+                color: '#e8f7eeff',
                 backgroundColor: '#1e91d6ff',
                 fontFamily: 'Lexend Deca, Arial',
                 '&:hover': {
-                    backgroundColor: '#e8f7eeff;',
+                    backgroundColor: '#e8f7eeff',
                     color: '#1e91d6ff',
                     border: '1px solid #1e91d6ff'
+                
+                }               
+            },
+            GiantButton: {
+                margin: '1rem',
+                color: '#e8f7eeff',
+                backgroundColor: '#1e91d6ff',
+                fontFamily: 'Lexend Deca, Arial',
+                '&:hover': {
+                    backgroundColor: 'hsla(203, 75%, 48%, .2)',
+                    // color: '#1e91d6ff',
+                    // border: '1px solid #1e91d6ff'
                 
                 }               
             },

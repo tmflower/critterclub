@@ -7,6 +7,7 @@ const { BCRYPT_WORK_FACTOR } = require("../config");
 const {
     BadRequestError,
     UnauthorizedError,
+    NotFoundError
   } = require("../expressError");
 
   class User {
@@ -34,7 +35,7 @@ const {
             return user;
           }
         }    
-        throw new UnauthorizedError("Invalid username/password");
+        throw new UnauthorizedError("Please enter a valid username and password");
       }
 
     static async register(
@@ -91,7 +92,7 @@ const {
                 WHERE username = $1`,
                 [username]
             )
-                throw new BadRequestError("Wrong access code");
+                throw new BadRequestError("Please enter the access code from your parent.");
             }
 
             if (row.access_code === +enteredCode) {
@@ -129,14 +130,6 @@ const {
             WHERE user_id = $1`,
             [id]
             );
-
-        // const badges = badgesRes.rows;
-        
-        // const userBadges =[];
-        // for(let badge of badges){
-        //     console.log(badge)
-        //     userBadges.push(badge.animal_id);
-        // }
 
         const badges = badgesRes.rows;
         
@@ -193,6 +186,18 @@ const {
         const newBadge = badgeRes.rows;
         console.log("NEW BADGE:", newBadge);
         return newBadge;
+    }
+
+    static async deleteBadges(userId) {
+        // const badgesRes = 
+        db.query(
+            `DELETE FROM users_animals
+            WHERE user_id = $1
+            RETURNING user_id as "userId"`,
+            [userId]
+        );
+        // const userBadges = badgesRes.rows;
+        // if (!userBadges) throw new NotFoundError("No badges for this user")
     }
   }
 

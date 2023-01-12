@@ -3,10 +3,9 @@ import axios from "axios";
 /**
  * Photos class provides methods for requesting data from Unsplash api;
  * Unsplash's built-in search method provides unreliable results, so we request images by id to ensure reliable, child-friendly results;
- * Id's are stored in MEDIA api
+ * Id's are stored in backend MEDIA object
  * 
  */
-
 
 const BASE_URL_PHOTOS = "https://api.unsplash.com/photos";
 let API_KEY_PHOTOS;
@@ -31,7 +30,6 @@ class PhotosAPI {
     // Returns a photo from Unsplash, given the image id number
     // If no image id number exists, return a placeholder photo
 
-    // TODO: Add attribution info per Unsplash api requirements
     static async getPhoto(animalName) {
         if (API_KEY_PHOTOS === undefined) {
             await getKey();
@@ -41,32 +39,14 @@ class PhotosAPI {
         }
         let photoId = `${MEDIA[animalName].image}`;
 
-        if (photoId === "") {
-            return "https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif"
-        }
-
-        else {
+        if (photoId.length) {
             const res = await axios.get
             (`${BASE_URL_PHOTOS}/${photoId}`,
             {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`}});
-            console.log("check headers for current usage:", res);
-            return res.data.urls.small;
+            console.log("check headers for current usage/limit:", res);
+            return res.data
         }
     }
-
-    // static async getPhoto(photoId) {
-    //     if (API_KEY_PHOTOS === undefined) {
-    //         await getKey();
-    //     }
-    //     const res = await axios.get
-    //     (`${BASE_URL_PHOTOS}/${photoId}`,
-    //     {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`},
-    //      params: {id: `${photoId}`, orientation: "landscape", content_filter: "high", order_by: "relevant"}});
-    //     console.log("check headers for current usage:", res);
-    //     console.log(res.data);
-    //     return res.data.urls.regular;
-    // }
-
 }
 
 export default PhotosAPI;

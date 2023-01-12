@@ -1,5 +1,5 @@
 import axios from "axios";
-import animalsList from "../utils/animalsList";
+import animalsList from "../assets/animalsList";
 
 // const completeList = "a";
 

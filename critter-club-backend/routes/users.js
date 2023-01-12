@@ -38,4 +38,14 @@ router.post("/badges", async function (req, res, next) {
   }
 });
 
+router.delete("/badges/:userId", async function (req, res, next) {
+  try {
+    await User.deleteBadges(req.params.userId);
+    return res.json({ deleted: req.params.userId })
+  }
+  catch(err) {
+    return next(err);
+  }
+})
+
 module.exports = router;

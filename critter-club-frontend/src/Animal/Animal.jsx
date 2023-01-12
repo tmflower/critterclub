@@ -6,9 +6,10 @@ import { Photo } from './Photo.jsx';
 import { Quiz } from '../Challenge/Quiz.jsx';
 import { Video } from './Video.jsx';
 import UserContext from "../userContext";
-import animalsList from '../utils/animalsList.js';
-import { Box, Grid, Paper, List, ListItem, Button, Typography, Stack } from '@mui/material';
+import animalsList from '../assets/animalsList.js';
+import { Box, Grid, Paper, Button, Typography, Stack } from '@mui/material';
 import { theme } from '../theme/theme.js';
+import { Fact } from './Fact.jsx'
 
 /** Animal renders a page with a photo, video and facts about a selected animal;
  * It also renders Quiz, which is only viewable when user clicks on button;
@@ -31,7 +32,9 @@ export function Animal() {
     
     const currentUser = useContext(UserContext);
     const params = useParams();
-    const animalName = params.animal;
+    const animalName = params.animalName;
+    console.log(params)
+    console.log(animalName)
 
     const [animal, setAnimal] = useState(null);
     const [commonName, setCommonName] = useState("");
@@ -57,11 +60,12 @@ export function Animal() {
     // Display message to user if no such animal exists within the app;
     useEffect(() => {
         if (animalsList.includes(animalName)) {
-            async function getAnimal() {
+            async function getAnimalInfo() {
                 setIsLoading(true);
                 setAnimal(await AnimalsAPI.getSingleAnimal(animalName));
             }
-            getAnimal();
+            getAnimalInfo();
+            
         }
         else setAnimalExists(false);
     }, [animalName]);
@@ -160,45 +164,45 @@ export function Animal() {
 
     // Get photo url in order to display animal icon for the badge
     useEffect(() => {
-        // if (animal) {
             async function getAnimalIcon() {
                 setAnimalIcon(await usersAPI.getAnimal(animalName));
             }
-            getAnimalIcon();
-        // }       
+            getAnimalIcon();      
     }, [animalName, animal]);
 
+    const scientificNameText = `The ${commonName}'s scientific name is ${scientificName}.`
+    const taxonomicGroupText = `The ${commonName} belongs to a group of animals called ${taxClass}, more commonly known as ${simpleGroupName}.`
+    const dietText = `${diet}s, including the ${commonName}, eat mostly ${foods}.`
+    const locationsText = `Where in the world you'll find the ${commonName}:`
+    const featuresText = `A notable ${commonName} feature: ${features}`
+    const preyText = `Its diet includes yummy things like: ${prey}!`
+    const habitatText = `The ${commonName} makes its home in ${habitat}.`
+    const funFactText = `Fun fact about the ${commonName}: ${funFact}`
+
     return (            
-        <Box > 
+        <Box> 
             { !currentUser ?   
             <Paper
                 elevation={8} sx={{ padding: 20 }}>
                 <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
                 <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
             </Paper>
-        :
-        <>                            
+            :
+            <>                            
             {isLoading ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Collecting your animal information!</Typography> :
                 <div>{!animalExists ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sorry, we don't have information about that animal yet!</Typography> : 
                     <div>{!animalSelected ?                             
                         <Box> 
                             <Grid 
                                 container 
-                                sx={{ mt: 3 }}
+                                sx={{ mt: 8 }}
                                 direction="row"
                                 alignItems="center"
                                 justifyContent="center"
                                 textAlign="center"
                                 >                  
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} lg={6}>
                                         <Typography variant="h2" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Meet the {commonName}!</Typography>
-                                    </Grid> 
-                                                            
-                                    <Grid item xs={12} sm={6}>
-                                        <Photo animalName={animalName}/>
-                                    </Grid>
-                                    
-                                    <Grid item xs={12} sm={6}>
                                         
                                         <Stack
                                             alignItems="center">
@@ -208,8 +212,8 @@ export function Animal() {
                                         <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}> <NavLink to="/animals/browse">Check out more animals</NavLink></Typography>
                                         </>
                                         :
-                                        <Button onClick={selectAnimal}>Collect the {commonName} badge!</Button>} 
-                                            {animalIcon ?                                                                                            
+                                        <Button onClick={selectAnimal}>Earn the {commonName} badge</Button>} 
+                                            {animalIcon ?                                           
                                             <Paper 
                                                 elevation={18} 
                                                 sx={{ 
@@ -228,130 +232,105 @@ export function Animal() {
                                             </Paper> : null}                                       
                                         </Stack>
                                     </Grid>
+                                    <Grid item xs={12} lg={6}>
+                                        <Photo animalName={animalName}/>
+                                    </Grid>
                             </Grid>            
 
-                            <Grid container>
-                                
-                                {scientificName ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🧠</p>
-                                        <p>The {commonName}'s scientific name is <em>{scientificName}</em>.</p>
-                                    </Paper>
+                            <Grid container textAlign="center"> 
+                                <Grid item xs={12} sx={{ mt: 3 }}>
+                                    <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Click on each topic to learn about the {commonName}</Typography>
+                                </Grid>
+
+
+                            {scientificName ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact 
+                                        emoji="🧠"
+                                        title="Scientific Name"
+                                        text={scientificNameText}/>
                                 </Grid> 
                                 : null}
 
-                                {funFact ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>😎</p>
-                                        <p>{commonName} fun fact: {funFact}</p>
-                                    </Paper>
+                            {taxClass ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="🧬"
+                                        title="Taxonomic Group"
+                                        text={taxonomicGroupText}
+                                        >
+                                    </Fact>
+                                </Grid> 
+                                : null}
+
+                            {diet ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="🍔"
+                                        title="Diet Category"
+                                        text={dietText}
+                                    >
+                                    </Fact>
                                 </Grid> 
                                 : null} 
 
-                                {habitat ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🏠</p>
-                                        <p>The {commonName} makes its home in {habitat}.</p>
-                                    </Paper>
-                                </Grid> 
-                                : null}
-
-                                {taxClass ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🧬</p>
-                                        <p>The {commonName} belongs to a group of animals called {taxClass}, more commonly known as {simpleGroupName}.</p>
-                                    </Paper>
-                                </Grid> 
-                                : null}
-
-                                {diet ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🍔</p>
-                                        <p>{diet}s like the {commonName} eat {foods}.</p>
-                                    </Paper>
-                                </Grid> 
-                                : null}  
-
-                                {prey ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>😋</p>
-                                        <span>Its diet includes yummy things like: {prey}!</span>
-                                    </Paper>
+                            {prey ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="😋"
+                                        title="Favorite Foods"
+                                        text={preyText}
+                                    >  
+                                    </Fact>                                        
                                 </Grid> 
                                 : null} 
 
-                                {features ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🧐</p>
-                                        <p>A notable {commonName} feature: {features}</p>
-                                    </Paper>
-                                </Grid> 
-                                : null} 
-
-                                {locations && showLocations ? 
-                                <Grid item xs={12} sm={6} lg={4}>
-                                    <Paper
-                                        elevation={6}
-                                        sx={{ 
-                                            padding: 3, 
-                                            margin: 3, 
-                                            color: theme.typography.secondary.color, 
-                                            backgroundColor: theme.palette.primary.main }}>
-                                        <p className='emoji'>🌍</p>
-                                        <List>Where in the world you'll find the {commonName}:{locations.map((location, i) => <ListItem key={i}>{location}</ListItem>)}</List>
-                                    </Paper>
+                            {locations && showLocations ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="🌍"
+                                        title="Locations"
+                                        text={locationsText}
+                                        listItems={locations}
+                                    >
+                                    </Fact>                                                                  
                                 </Grid> 
                                 : null}
+
+                            {features ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="🧐"
+                                        title="Features"
+                                        text={featuresText}
+                                    >
+                                    </Fact>
+                                </Grid> 
+                                : null} 
+                            
+                            {habitat ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="🏠"
+                                        title="Habitat"
+                                        text={habitatText}
+                                    >
+                                    </Fact>
+                                </Grid> 
+                                : null}
+
+
+                            {funFact ? 
+                                <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+                                    <Fact
+                                        emoji="😎"
+                                        title="Fun Fact"
+                                        text={funFactText}>
+                                    </Fact>
+                                </Grid> 
+                                : null} 
                             </Grid>
+
                             <Grid 
                                 container 
                                 sx={{ mt: 3 }}
@@ -376,6 +355,7 @@ export function Animal() {
                             features={features}
                             setAnimalSelected={setAnimalSelected}
                             validLocations={validLocations}
+                            icon={animalIcon.animal.photo}
                         ></Quiz>
                         }
                 </div>}
@@ -386,9 +366,6 @@ export function Animal() {
 }
 
 export default validLocations;
-
-
-
 
 // return (            
 //     <Box > 

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Alert, Paper, Box, Grid, Typography } from "@mui/material";
 import { theme } from "../theme/theme";
-import uakari from "../assets/images/uakari.jpeg";
-import seadragon from "../assets/images/seadragon.png";
-import lion from "../assets/images/lion.png";
+import uakari from "../assets/images/animal-icons/uakari.jpeg";
+import seadragon from "../assets/images/animal-icons/seadragon.png";
+import lion from "../assets/images/animal-icons/lion.png";
 
 export function Home({ justLoggedOut }) {
     const [alertShowing, setAlertShowing] = useState(true);

@@ -3,23 +3,7 @@
 const db = require("../db");
 
 class Animal {
-
-    // static async get(id) {
-    //     const animalRes = await db.query(
-    //         `SELECT common_name,
-    //         photo
-    //         FROM animals
-    //         WHERE
-    //         id = $1`,
-    //     [id]
-    //     );
-    //     const animal = animalRes.rows[0];
-
-    //     if (!animal) throw new Error(`No animal: ${id}`);
-
-    //     return animal;
-    // }
-
+    
     static async get(animalName) {
         const animalRes = await db.query(
             `SELECT id,
@@ -28,6 +12,22 @@ class Animal {
             WHERE
             common_name = $1`,
         [animalName]
+        );
+        const animal = animalRes.rows[0];
+
+        if (!animal) throw new Error(`No animal: ${animalName}`);
+
+        return animal;
+    }
+
+    static async getById(id) {
+        const animalRes = await db.query(
+            `SELECT common_name,
+            photo
+            FROM animals
+            WHERE
+            id = $1`,
+        [id]
         );
         const animal = animalRes.rows[0];
 

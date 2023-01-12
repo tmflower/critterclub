@@ -240,7 +240,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                             <Button type="submit">Check answers</Button>
                             : null }
                             { feedback === message.incorrect ?
-                            <Button type="reset" onClick={handleReset}>Clear answers</Button>
+                            <Button id="alt-button" type="reset" onClick={handleReset}>Clear answers</Button>
                             : null }
                         </div>
                         <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>  

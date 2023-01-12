@@ -49,7 +49,6 @@ export function Browse({allAnimals}) {
     console.log(animalIcons)
     console.log(animalIcons.map((animalIcon) => animalIcon.common_name))
     console.log(animalIcons.filter((animalIcon) => (animalIcon.common_name === "Elephant")));
-
     console.log(animalIcons.map((animalIcon) => animalIcon.photo).filter((animalIcon) => animalIcon.common_name === "Elephant"))
 
     return (

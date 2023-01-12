@@ -53,12 +53,17 @@ Next steps:
    -code commenting
    -error handling
    -add array of gifs for congrats message
+   -(maybe) add image from badge to animal page, challenge view, and/or lists as tiny icons
+   -Unsplash requirements
+   -move files from utils to assets; delete utils directory 
+   -figure out how to provide correct user feedback for missing or wrong access code
 DONE!
 
-Next:    
-   -(maybe) add image from badge to animal page, challenge view, and/or lists as tiny icons
+Next: 
+  
    -add length/character requirements to passwords in schema
-   -figure out how to provide correct user feedback for missing or wrong access code
+   -remove level from user schema (now being handled in dashboard only)
+   -add a delete operation ('start over')
    -write tests for all
    -remove console logs/outdated comments/etc.
    -add readme documentation

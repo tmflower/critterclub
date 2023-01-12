@@ -14,8 +14,8 @@
 --sap-green: hsla(86, 93%, 24%, 1); */
 
 /** 
--selected elements require styling by class or id to override React and/or MUI defaults
--selected elements require resizing for different screen sizes
+-styling for selected elements by class or id to override React and/or MUI defaults
+-resizing selected elements for different screen sizes
 */
 
 .link {
@@ -55,6 +55,33 @@
   margin-left: 1rem;
 }
 
+.blue-text {
+  color: #1e91d6ff;
+}
+
+.options-btn {
+  max-width: 160px;
+}
+
+#reset-btn {
+  background-color: red;
+
+}
+
+#navbar-simlink {
+  text-transform: none;
+  background-color: transparent;
+  border: none;
+  color: #e8f7eeff;
+  font-size: 1.2rem;
+  margin: 0px 0px 4px 0px;
+  padding-left: 1px;
+}
+
+#navbar-simlink:hover {
+  font-size: larger;
+}
+
 #alphabet-button {
   font-size: 2rem;
 }
@@ -69,7 +96,25 @@
   border: 1px solid #1e91d6ff;
 }
 
+#mock-btn {
+  background-color: #1e91d6ff;
+  color: #e8f7eeff;
+  border-radius: 3px;
+  padding: 3px 6px;
+}
+
+#giant-btn {
+  background-color: hsla(203, 75%, 48%, .2);  
+  border: none;
+  text-transform: none;
+}
+
+#giant-btn:hover {
+  background-color: hsla(203, 75%, 48%, .5);
+}
+
 @media (min-width: 375px){
+
     .video {
       width: 350px;
       height: 206px;
@@ -79,7 +124,6 @@
 
     .photo {
       width: 100%;
-      max-width: 800px;
       border-radius: 10px;
     }
 
@@ -108,7 +152,7 @@
       height: 294px;
     }
     .photo {
-      /* width: 400px; */
+      width: 500px;
     }
 
     .img-home {
@@ -135,7 +179,7 @@
       height: 382px;
     }
     .photo {
-      /* width: 400px; */
+      width: 600px;
     }
     .popup {
       width: 500px;
@@ -157,8 +201,7 @@
       height: 471px;
     }
     .photo {
-      /* width: 500px; */
+      width: 700px;
     }
-
   }
 

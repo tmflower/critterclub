@@ -121,7 +121,7 @@ const MEDIA = {
     "Stork": {"image": "biJCd2N-1ms","video": "lOyPeUJbUXU" },
     "Tapir": {"image": "ZgJVo64oBUM","video": "M7FnvV1zCGk" },
     "Tiger": {"image": "Fbdr6gXJBVY","video": "8OmRW4em_vA" },
-    "Tiger Shark": {"image": "GBDkr3k96DE","video": "YIiCo15ol7g" },
+    "Tiger Shark": {"image": "GBDkr3k96DE","video": "X2zJcv_Fbuk" },
     "Tree Frog": {"image": "JLMEZxBcXCU","video": "9Zq4gD6MelM" },
     "Tropicbird": {"image": "","video": "0WR-bKcrvMQ" },
     "Uakari": {"image": "","video": "r_mB-23z4To" },

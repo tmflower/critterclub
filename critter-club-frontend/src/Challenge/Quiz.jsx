@@ -12,13 +12,14 @@ import validLocations from '../Animal/Animal';
 import { Button, Modal, Box, Paper, IconButton, Typography, Stack } from '@mui/material';
 import Close from "@mui/icons-material/Close";
 import { theme } from "../theme/theme";
-import gifs from '../utils/gifs';
+import gifs from '../assets/gifs';
 
 
 /** Quiz renders a set of questions about the selected animal;
  * User can check each answer individually and submit when 3 or more are correct;
  * User receives points and badge and is redirected to dashboard;
  */
+const minNumQuestionsRequired = 2;
 
 export function Quiz({
                     taxClass,
@@ -29,7 +30,8 @@ export function Quiz({
                     diet, 
                     phylum, 
                     prey, 
-                    setAnimalSelected }) {
+                    setAnimalSelected,
+                    icon }) {
 
     const currentUser = useContext(UserContext); 
     const username = currentUser.user.username;
@@ -71,8 +73,6 @@ export function Quiz({
         getAnimalId();
     },[animals, commonName]);
 
-console.log(animalId)
-
     /** When user submits all answers, if at least 3 are correct:
      * - Redirect user to dashboard
      * - Update user's points
@@ -92,14 +92,13 @@ console.log(animalId)
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
     navigate("/dashboard", {replace: true});       
-    refreshPage();
-    
+    refreshPage();    
     }
 
     // This function ensures that user will see updated stats on dashboard;
     function refreshPage(){ 
         window.location.reload(); 
-      }
+    }
 
     // This function allows user to return from quiz view to animal info view;  
     const handleClick = () => {
@@ -108,7 +107,6 @@ console.log(animalId)
 
     const randomNum = Math.floor(Math.random() * gifs.length);
     const gif = gifs[randomNum];
-    console.log(gif)
     
     return (
         <Box sx={{ mt: 5 }}>
@@ -132,11 +130,19 @@ console.log(animalId)
                 </Paper>
                 </Box>
             </Modal>
-            <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!</Typography>
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Earn 10 points for each correct answer.</Typography>
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>After answering 3 questions correctly, you can submit your answers to collect your badge, OR:</Typography>
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Answer any additional questions to earn more points and level up!</Typography>
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!</Typography>
+                <img src={icon} alt={commonName} width="400px"/>
+                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>Earn 10 points for each correct answer. Check each answer as you go. If you get it wrong, you can check the animal info and try again.</Typography>
+                <img src={icon} alt={commonName} width="80px"/>
+                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>When at least 2 answers are correct, the <span id="mock-btn">Submit Answers</span> button will appear at the bottom of the page.</Typography>
+                <img src={icon} alt={commonName} width="80px"/>
+                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>For more points and faster leveling up, answer any additional questions before you submit your answers.</Typography>
+                <img src={icon} alt={commonName} width="80px"/>
+                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
+            </Box>
+
 
             <DietForm 
                 commonName={commonName} 
@@ -199,8 +205,8 @@ console.log(animalId)
                 >
             </ScientificNameForm>  
             : null }   
-            <Button type="button" onClick={handleClick} id="alt-button">Return to animal</Button>
-            { numQuestions >= 3 ?           
+            <Button type="button" onClick={handleClick} id="alt-button">Return to animal info</Button>
+            { numQuestions >= minNumQuestionsRequired ?           
             <Button type="submit" onClick={handleSubmit} id="alt-button">Submit Your Answers</Button> : null }
             <Link to="/dashboard"></Link>
         </Box>

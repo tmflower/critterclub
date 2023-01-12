@@ -71,7 +71,7 @@ export function ScientificNameForm({ commonName, scientificName, message, points
                 <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <Button type="reset" onClick={handleReset}>Clear answer</Button>
+                <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
             <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>

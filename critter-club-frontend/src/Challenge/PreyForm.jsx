@@ -24,18 +24,37 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
 
     // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
-    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
+    // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
+
+        // checking is inclusive; any term that exists in the prey array will be accepted as correct
+
         e.preventDefault();
+        console.log(prey);
         const modifiedPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
         console.log(modifiedPrey, userGuess)
-        if (modifiedPrey.includes(userGuess.toLowerCase())) {
-            setFeedback(message.correct);
-            setPoints(points+=10);
-            setNumQuestions(numQuestions+1);
+        const modifiedUserGuess = userGuess.replace(/[,.]/gi, "").toLowerCase().split(' ');
+        console.log(modifiedUserGuess);
+        for (let guess of modifiedUserGuess) {
+            if (modifiedPrey.includes(guess)) {
+                setFeedback(message.correct);
+                setPoints(points+=10);
+                setNumQuestions(numQuestions+1);
+            }
+            else setFeedback(message.incorrect);
         }
-        else setFeedback(message.incorrect);
+
+        // e.preventDefault();
+        // console.log(prey);
+        // const modifiedPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
+        // console.log(modifiedPrey, userGuess)
+        // if (modifiedPrey.includes(userGuess.toLowerCase())) {
+        //     setFeedback(message.correct);
+        //     setPoints(points+=10);
+        //     setNumQuestions(numQuestions+1);
+        // }
+        // else setFeedback(message.incorrect);
     }
     
     // clear form responses & message when user clicks "Try again" button
@@ -73,7 +92,7 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
                 <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <Button type="reset" onClick={handleReset}>Clear answer</Button>
+                <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
             <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>

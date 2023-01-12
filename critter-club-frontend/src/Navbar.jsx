@@ -16,7 +16,7 @@ import Close from '@mui/icons-material/Close';
 import { theme } from './theme/theme';
 
 
-export function Navbar({ logout }) {
+export function Navbar({ logout, getRandomAnimal }) {
     
     const currentUser = useContext(UserContext);
     const [open, setOpen] = useState(false);
@@ -24,12 +24,13 @@ export function Navbar({ logout }) {
     const onOpenHandler = () => setOpen(true);
     const onCloseHandler = () => setOpen(false);
 
+    const randomAnimal = getRandomAnimal;
+
     console.log(currentUser)
 
     return (
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="fixed">
-            {/* <Container > */}
             <Toolbar>
                 <Hidden smUp>
                     <IconButton
@@ -87,7 +88,8 @@ export function Navbar({ logout }) {
                         <NavLink className="navbar-link" exact="true" to="/dashboard" end>Dashboard</NavLink>
                         <NavLink className="navbar-link" exact="true" to="/animals/browse" end>Browse</NavLink>
                         <NavLink className="navbar-link" exact="true" to="/animals/search" end>Search</NavLink>
-                        
+                        {/* <NavLink className="navbar-link" exact="true" to={`animals/${randomAnimal.name}`} end>Random</NavLink> */}
+                        <Button className="navbar-link" id="navbar-simlink" onClick={getRandomAnimal}>Random</Button>
                     </>
                     :
                     <>
@@ -104,7 +106,6 @@ export function Navbar({ logout }) {
                     
               </Hidden>             
             </Toolbar>
-            {/* </Container> */}
           </AppBar>
         </Box>
       );

@@ -19,14 +19,28 @@ import jwt from 'jsonwebtoken';
 import { Box } from '@mui/material';
 import { theme } from './theme/theme';
 
+
+const totalAnimals = 144;
+
 export function App() {
 
   const navigate = useNavigate();
   const [allAnimals, setAllAnimals] = useState([]);
   const [username, setUsername] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
   const [justLoggedOut, setJustLoggedOut] = useState(false);
   const [alert, setAlert] = useState({message: "", severity: ""});
+
+  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(() => {
+  //   let loggedInUsername;
+  //   loggedInUsername = JSON.parse(window.localStorage.getItem('username') || null);
+  //   if (username) {
+  //     const user = usersAPI.getUser(loggedInUsername);
+  //     return user;
+  //   }
+  //   return null;
+  // })
+
 
   // if there is a token in localStorage, save it in state;
   // token is saved to localStorage upon successful signup and login
@@ -105,10 +119,17 @@ console.log(allAnimals);
     navigate("/", { replace: true });
   }
 
+  async function getRandomAnimal() {
+    // display a randomly selected animal
+    const randomNum = Math.floor(Math.random() * totalAnimals);        
+    const animalInfo = await usersAPI.getAnimalById(randomNum);
+    navigate(`/animals/${animalInfo.animal.common_name}`, { replace: true });
+    }
+
   return (
     <div className="App">
       <UserContext.Provider value={currentUser}>
-      <Navbar logout={logout}/>      
+      <Navbar logout={logout}  getRandomAnimal={getRandomAnimal}/>      
       <Box
         sx={{
           color: 'black',
@@ -127,10 +148,10 @@ console.log(allAnimals);
             <Route path="/signup" element={<Signup signup={signup} alert={alert}/>}></Route>
             <Route path="/login" element={<Login login={login} alert={alert}/>}></Route>
             <Route path="/logout" element={<Home />}></Route>
-            <Route path="/dashboard" element={<Dashboard alert={alert}/>}></Route>
+            <Route path="/dashboard" element={<Dashboard alert={alert} getRandomAnimal={getRandomAnimal}  />}></Route>
             <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
             <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
-            <Route path="/animals/:animal" element={<Animal />}></Route>
+            <Route path="/animals/:animalName" element={<Animal />}></Route>
             <Route path="/quiz" element={<Quiz />}></Route>
           </Routes>       
       </Box>

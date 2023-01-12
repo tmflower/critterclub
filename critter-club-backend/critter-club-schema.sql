@@ -15,7 +15,6 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     access_code INTEGER,
     points INTEGER DEFAULT 0,
-    level TEXT DEFAULT 'Observer',
     parent_id INTEGER REFERENCES parents ON DELETE CASCADE
 );
 

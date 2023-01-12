@@ -115,11 +115,19 @@ class usersAPI {
         return animals;
     }
 
-    // static async getAnimal(id) {
-    //     const animalData = await this.request(`animals/${id}`);
-    //     console.log(animalData);
-    //     return animalData;
-    // }
+    // Retrieve single animal by ID
+    // We use this to allow user to select a random animal
+    static async getAnimalById(id) {
+        const animalData = await this.request(`animals/animal/${id}`);
+        console.log(animalData);
+        return animalData;
+    }
+
+    // Delete all of user's badges
+    static async deleteBadges(userId) {
+        const resp = await this.request(`users/badges/${userId}`, userId, "delete");
+        return resp;
+    }
 }
 
 export default usersAPI;
