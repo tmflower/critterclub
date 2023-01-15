@@ -33,21 +33,22 @@ export function Signup({ signup, alert }) {
         const newUser = { username, password, accessCode };        
         await signup(newUser);  
         localStorage.setItem("username", username);
-        setFormData(initial_state);
-        
+        setFormData(initial_state);       
     }
 
     // variable and function to control display of alerts
-    const [alertShowing, setAlertShowing] = useState(true);
-    const closeAlert = () => setAlertShowing(false);
+    // const [alertShowing, setAlertShowing] = useState(true);
+    // const closeAlert = () => setAlertShowing(!alertShowing);
 
     return (
         <Paper
         elevation={8}
         sx={{ padding: 3 }}>
-            {alertShowing &&
-            alert.message.length ? 
-            <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null}
+            {/* {alertShowing && */}
+            {alert.message.length ? 
+            <Alert variant="filled" severity={alert.severity}>{alert.message}</Alert> : null}
+
+            {/* <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null} */}
             <h1>Join the Critter Club!</h1>
             <p>You'll need the access code from your parent's account to sign up.</p>
             <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.</p>

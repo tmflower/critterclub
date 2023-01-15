@@ -6,7 +6,7 @@ CREATE TABLE parents (
     last_name TEXT NOT NULL,
     email TEXT NOT NULL
         CHECK (position('@' IN email) > 1),
-    access_code INTEGER
+    access_code INTEGER    
 );
 
 CREATE TABLE users (

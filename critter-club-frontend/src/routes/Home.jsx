@@ -13,7 +13,7 @@ export function Home({ justLoggedOut }) {
     return (
         <Box sx={{ mt: 5 }}>
             {justLoggedOut && alertShowing ? 
-            <Alert severity="success" onClose={() => {closeAlert()}}>See ya later, alligator!</Alert>
+            <Alert variant="filled" severity="success" onClose={() => {closeAlert()}}>See ya later, alligator!</Alert>
             :
             <Grid 
                 container
@@ -49,7 +49,7 @@ export function Home({ justLoggedOut }) {
                         elevation={8}
                         sx={{ padding: 8, borderRadius: '50%', margin: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <img src={lion} className="img-home" alt="lion"/>
-                        <Typography variant="h5" fontFamily={theme.typography.primary}>Do wild lions only live in Africa?</Typography>                        
+                        <Typography variant="h5" fontFamily={theme.typography.primary}>Are all lions from Africa?</Typography>                        
                     </Paper>                     
                 </Grid>
 

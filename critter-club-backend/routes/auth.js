@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/register", async function (req, res, next) {
     try {
       const validator = jsonschema.validate(req.body, newUserSchema);
-      if (!validator.valid) {
+      if (!validator.valid) { 
         const errs = validator.errors.map(e => e.stack);
         throw new BadRequestError(errs);
       }
@@ -20,6 +20,9 @@ router.post("/register", async function (req, res, next) {
       const token = createToken(newUser);
       return res.status(201).json({ token });
     } catch (err) {
+      if (err.message.includes("invalid input syntax for type integer")) {
+        return next(new BadRequestError("Please enter the correct access code from your parent."))
+      }
       return next(err);
     }
   });

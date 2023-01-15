@@ -158,7 +158,7 @@ return (
         <Box>  
         {alertShowing &&
             alert.message.length ? 
-            <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> 
+            <Alert variant="filled" severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> 
             : null}
         <Grid 
             container

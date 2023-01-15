@@ -19,6 +19,8 @@
         },
         "username": {
             "type": "string",
+            "minLength": 4,
+            "maxLength": 15,
             "default": "",
             "title": "The username Schema",
             "examples": [
@@ -27,6 +29,8 @@
         },
         "password": {
             "type": "string",
+            "minLength": 6,
+            "maxLength": 15,
             "default": "",
             "title": "The password Schema",
             "examples": [
@@ -61,7 +65,7 @@
     "examples": [{
         "id": 1,
         "username": "userExample",
-        "password": "userPassword",
+        "password": "123#$abc",
         "access_code": 1234,
         "points": 23,
         "parent_id": 1

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import usersAPI from "../api/usersAPI";
-import { Paper, FormControl, TextField, Button, Stack, Box } from '@mui/material';
+import { Paper, FormControl, TextField, Button, Stack, Box, Alert } from '@mui/material';
 
 // displays a form that allows parent to register and get access code
 // child will need parent access code to set up a user account
 
-const ParentSignup = () => {
+const ParentSignup = ({ alert, setAlert }) => {
 
     // set initial TextField values to blank
     const initial_state = {
@@ -33,19 +33,58 @@ const ParentSignup = () => {
     const [formWasSubmitted, setFormWasSubmitted] = useState(false);
     const [parentUsername, setParentUsername] = useState("");
 
-    const handleSubmit = (evt) => {
+    // variable and function to control display of alerts
+    // const [alertShowing, setAlertShowing] = useState(true);
+    // const closeAlert = () => setAlertShowing(false);
+
+    const [token, setToken] = useState('');
+    
+    async function signup(parent) {
+        // responses for successful and unsuccessful signup
+        try {
+          setToken(await usersAPI.registerParent(parent));
+        }
+        catch (err) {
+          setAlert({severity: "warning", message: err});
+        }
+      }
+    
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        const parent = { username, password, firstName, lastName, email }    
-        usersAPI.registerParent(parent);
-        setParentUsername(username);
-        setFormWasSubmitted(true);
-        setFormData(initial_state);
+        const parent = { username, password, firstName, lastName, email }      
+        await signup(parent);
+        if (token) {
+            setParentUsername(username); 
+            setAlert({severity: "success", message: `You have registered, ${username}!`});
+            setFormData(initial_state);   
+            setFormWasSubmitted(true);            
+        }  
     }
+
+    // async function handleSubmit(evt) {        
+    //     evt.preventDefault();
+    //     try {            
+    //         const parent = { username, password, firstName, lastName, email }   
+    //         await signup(parent);   
+    //         await usersAPI.registerParent(parent);
+    //         setParentUsername(username);
+    //         setFormWasSubmitted(true);
+    //     }
+    //     catch(err) {
+    //         console.log("caught the err!!!")
+    //         setAlert({severity: "warning", message: err});
+    //     }
+    //     setFormData(initial_state);
+    // }
 
     return (
         <Paper
             elevation={8}
             sx={{ padding: 3 }}>
+            
+            {alert.message.length ? 
+                <Alert variant="filled" severity={alert.severity}>{alert.message}</Alert> : null}
+                {/* <Alert variant="filled" severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null} */}
             {!formWasSubmitted ?
             <div>
                 <h1>Welcome, Parents!</h1>
@@ -57,7 +96,6 @@ const ParentSignup = () => {
                 <form className="signup-form">
                     <FormControl sx={{ width: '25ch', m: 2 }}>
                     <Stack spacing={2}>
-                    {/* <label htmlFor="username">Username: */}
                     <TextField 
                         type="text" 
                         name="username" 
@@ -66,8 +104,6 @@ const ParentSignup = () => {
                         label="Username"
                         onChange={handleChange}>
                     </TextField>
-                    {/* </label> */}
-                    {/* <label htmlFor="password">Password: */}
                     <Box>
                         <TextField 
                             type={passwordShowing ? "text" : "password"} 
@@ -81,10 +117,7 @@ const ParentSignup = () => {
                             <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
                             :
                             <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}                        
-                        {/* </label> */}
                     </Box>
-
-                    {/* <label htmlFor="firstName">First name: */}
                     <TextField 
                         type="text" 
                         name="firstName" 
@@ -93,8 +126,6 @@ const ParentSignup = () => {
                         label="First name"
                         onChange={handleChange}>
                     </TextField>
-                    {/* </label> */}
-                    {/* <label htmlFor="lastName">Last name: */}
                     <TextField 
                         type="text" 
                         name="lastName" 
@@ -103,8 +134,6 @@ const ParentSignup = () => {
                         label="Last name" 
                         onChange={handleChange}>
                     </TextField>
-                        {/* </label> */}
-                    {/* <label htmlFor="email">Email: */}
                     <TextField 
                         type="text" 
                         name="email" 
@@ -113,7 +142,7 @@ const ParentSignup = () => {
                         label="Email"
                         onChange={handleChange}>
                     </TextField>
-                    {/* </label>  */}
+
                     <Button id="parent-signup-button" onClick={handleSubmit}>Submit</Button> 
                     </Stack>
                     </FormControl>              
@@ -122,7 +151,7 @@ const ParentSignup = () => {
             :
             <div>
                 <p>You have registered!</p>
-                <NavLink exact="true" to={`/parent/${parentUsername}`} end>Click to reveal your access code</NavLink>
+                <NavLink exact="true" to={`/parent/${parentUsername}`} end>Reveal your access code</NavLink>
             </div>
             }
         </Paper>        

@@ -62,7 +62,7 @@
     "examples": [{
         "id": 1,
         "username": "userExample",
-        "password": "userPassword",
+        "password": "123#$abc",
         "access_code": 1234,
         "points": 23,
         "parent_id": 1

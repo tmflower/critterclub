@@ -35,7 +35,7 @@ const {
             return user;
           }
         }    
-        throw new UnauthorizedError("Please enter a valid username and password");
+        throw new UnauthorizedError("Please check your username and password, then try again.");
       }
 
     static async register(
@@ -47,10 +47,16 @@ const {
             WHERE username = $1`,
             [username],
         );
-        if (checkUsername.rows[0]) {
-            throw new BadRequestError(`Username ${username} already taken.`);
-        }
+        if (checkUsername.rows[0]) throw new BadRequestError(`Sorry! The username ${username} is already taken. Please try again`);
 
+        if (username.length < 4 || username.length > 15) throw new BadRequestError('Your username must be between 4-15 characters.')
+
+        if (
+            (password.length < 6 || password.length > 15) || 
+            (!(/[0-9]/g).test(password)) || 
+            (!(/[!@#$%^&*()_+=.,;:"`~]/g).test(password))) { 
+            throw new BadRequestError('Your password must be between 6-15 characters with at least one number and one of these special characters: !@#$%^&*()_+=.,;:"`~')}
+     
         const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
         const result = await db.query(
@@ -71,7 +77,7 @@ const {
             ],
         );
 
-        const enteredCode = accessCode;
+        const enteredCode = +accessCode;
 
         const res = await db.query(
             `SELECT access_code,
@@ -92,7 +98,7 @@ const {
                 WHERE username = $1`,
                 [username]
             )
-                throw new BadRequestError("Please enter the access code from your parent.");
+                throw new BadRequestError("Please enter the correct access code from your parent.");
             }
 
             if (row.access_code === +enteredCode) {

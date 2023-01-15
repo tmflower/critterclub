@@ -88,8 +88,7 @@ console.log(allAnimals);
       setAlert({severity: "success", message: `Welcome to Critter Club, ${userData.username}!`});   
       navigate("/dashboard", { replace: true });
     }
-    catch (err) {   
-      console.log(err);
+    catch (err) {
       setAlert({severity: "warning", message: err});
     }
   }
@@ -117,6 +116,7 @@ console.log(allAnimals);
     localStorage.removeItem('token');
     setJustLoggedOut(true);
     navigate("/", { replace: true });
+    setAlert({severity: "", message: ""})
   }
 
   async function getRandomAnimal() {
@@ -143,7 +143,7 @@ console.log(allAnimals);
         }}>
           <Routes>
             <Route path="/" element={<Home justLoggedOut={justLoggedOut}/>} ></Route>
-            <Route path="/parent" element={<ParentSignup />}></Route>
+            <Route path="/parent" element={<ParentSignup alert={alert} setAlert={setAlert}/>}></Route>
             <Route path="/parent/:username" element={<Code />}></Route>
             <Route path="/signup" element={<Signup signup={signup} alert={alert}/>}></Route>
             <Route path="/login" element={<Login login={login} alert={alert}/>}></Route>

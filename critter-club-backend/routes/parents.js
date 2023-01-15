@@ -11,14 +11,18 @@ const router = express.Router();
 router.post("/register", async function (req, res, next) {
     try {
       const validator = jsonschema.validate(req.body, parentSchema);
-      if (!validator.valid) {
+      if (!validator.valid) { console.log("******************VALIDATION ERROR")
         const errs = validator.errors.map(e => e.stack);
         throw new BadRequestError(errs);
       }
       const parent = await Parent.register(req.body);
       const token = createToken(parent);
       return res.status(201).json({ token });
-    } catch (err) {
+    } catch (err) { 
+      if (err.message.includes("email")) {
+        err.message = "Please enter a valid email address"
+      }
+      console.log("ERROR IS HERE!!**************************", err)
       return next(err);
     }
   });

@@ -57,13 +57,12 @@ Next steps:
    -Unsplash requirements
    -move files from utils to assets; delete utils directory 
    -figure out how to provide correct user feedback for missing or wrong access code
-DONE!
-
-Next: 
-  
    -add length/character requirements to passwords in schema
    -remove level from user schema (now being handled in dashboard only)
    -add a delete operation ('start over')
+DONE!
+
+Next: 
    -write tests for all
    -remove console logs/outdated comments/etc.
    -add readme documentation

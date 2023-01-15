@@ -72,7 +72,7 @@
     "examples": [{
         "id": 1,
         "username": "parentExample",
-        "password": "parentPassword",
+        "password": "123#$abc",
         "first_name": "John",
         "last_name": "Doe",
         "email": "john@doe.com",

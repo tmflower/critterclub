@@ -43,7 +43,7 @@ export function Login({ login, alert }) {
             sx={{ padding: 3 }}>
             {alertShowing &&
             alert.message.length ? 
-            <Alert severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null}
+            <Alert variant="filled" severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null}
             <h1>Login to collect your next badge and level up!</h1>
             <form>
                 <FormControl sx={{ width: '25ch', m: 2 }}>
