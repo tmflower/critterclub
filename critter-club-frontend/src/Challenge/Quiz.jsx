@@ -73,7 +73,7 @@ export function Quiz({
         getAnimalId();
     },[animals, commonName]);
 
-    /** When user submits all answers, if at least 3 are correct:
+    /** When user submits answers:
      * - Redirect user to dashboard
      * - Update user's points
      * - Update user's badges
@@ -85,19 +85,13 @@ export function Quiz({
             await usersAPI.updatePoints({ username, points });
             await usersAPI.addBadge({ animalId, userId });
             handleOpen();
-        }
+    }
 
     // Handle opening and closing of modal to with congratulations message when user earns badge;
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
-    navigate("/dashboard", {replace: true});       
-    refreshPage();    
-    }
-
-    // This function ensures that user will see updated stats on dashboard;
-    function refreshPage(){ 
-        window.location.reload(); 
+    navigate("/dashboard", {replace: true});         
     }
 
     // This function allows user to return from quiz view to animal info view;  
@@ -154,7 +148,6 @@ export function Quiz({
                 setNumQuestions={setNumQuestions}
                 >
             </DietForm>
-
 
             <LocationsForm 
                 commonName={commonName} 

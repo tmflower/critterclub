@@ -63,6 +63,12 @@ class usersAPI {
         return pointsData;
     }
 
+    // Reset user's points to 0 when they choose to start over
+    static async resetPoints(username) {
+        const resetPointsData = await this.request(`users/reset`, username, "patch");
+        return resetPointsData;
+    }
+
     // Update user's badges as they earn them
     static async addBadge(userData) {
         console.log("BADGEUSERDATA:", userData)

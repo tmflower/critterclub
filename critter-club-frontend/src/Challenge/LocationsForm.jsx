@@ -61,7 +61,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
 
    // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
-    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
+    // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
    const handleSubmit = (e) => {
     e.preventDefault();
     // create an array of values from user input
@@ -77,6 +77,17 @@ export function LocationsForm({commonName, locations, message, points, setPoints
     if (userLocationChoices.length !== locations.length) {
         setFeedback(message.incorrect);
     }
+
+    // add correct spacing to multi-word location names to match locations array data
+    for (let location of userLocationChoices) {
+    if (location === "NorthAmerica")
+        userLocationChoices.splice(userLocationChoices.indexOf("NorthAmerica"), 1, "North America");
+    if (location === "SouthAmerica")
+    userLocationChoices.splice(userLocationChoices.indexOf("SouthAmerica"), 1, "South America");
+    if (location === "CentralAmerica")
+    userLocationChoices.splice(userLocationChoices.indexOf("CentralAmerica"), 1, "Central America");
+    }
+
     // sort user's array to match the order of the animal data
     // compare values at matching index from each array
     // provide corresponding feedback message
@@ -126,7 +137,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
         elevation={8}
         sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
-                {validLocations.includes(locations[0]) ? 
+                {validLocations.includes(locations[0].replace(' ', '')) ? 
                 <div>
                     <fieldset>
                     <FormGroup>
@@ -152,6 +163,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Antarctica"
                                 checked={Antarctica}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Antarctica
                         </label>
@@ -162,6 +174,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Asia"
                                 checked={Asia}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Asia
                         </label>
@@ -172,6 +185,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Europe"
                                 checked={Europe}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Europe
                         </label>
@@ -182,6 +196,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="NorthAmerica"
                                 checked={NorthAmerica}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             North America
                         </label>
@@ -192,6 +207,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Eurasia"
                                 checked={Eurasia}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Eurasia
                         </label>
@@ -202,6 +218,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Ocean"
                                 checked={Ocean}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Ocean
                         </label>
@@ -212,6 +229,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="CentralAmerica"
                                 checked={CentralAmerica}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             ></Checkbox>
                             Central America
                         </label>
@@ -222,6 +240,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="SouthAmerica"
                                 checked={SouthAmerica}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             South America
                         </label>
@@ -232,6 +251,7 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                                 name="Oceania"
                                 checked={Oceania}
                                 onChange={handleChange}
+                                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
                             />
                             Oceania
                         </label>

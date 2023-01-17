@@ -64,5 +64,6 @@ DONE!
 
 Next: 
    -write tests for all
+   -comments on backend code
    -remove console logs/outdated comments/etc.
    -add readme documentation

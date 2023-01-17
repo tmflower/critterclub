@@ -27,6 +27,16 @@ router.patch("/points", async function (req, res, next) {
   }
 });
 
+router.patch("/reset", async function (req, res, next) {
+  try {
+    const user = await User.resetPoints(req.body.username);
+    return res.json({ user });
+  }
+  catch(err) {
+    return next(err);
+  }
+});
+
 router.post("/badges", async function (req, res, next) {
   try {
       const badge = await User.addBadge(req.body.animalId, req.body.userId);

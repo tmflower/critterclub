@@ -25,15 +25,16 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
         const { name, value } = e.target;
         console.log(e.target.value)
 		setFormData((formData) => 
-            ({ ...formData, [name]: value })); 
+            ({ ...formData, [name]: value }));
     }
-
+    
     // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
     // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
-        e.preventDefault(); console.log(formData)
+        
+        e.preventDefault(); 
         if (vertebrateGroup === taxClass) {
             setFeedback(message.correct);
             setPoints(points+=10);

@@ -54,6 +54,9 @@ export function Dashboard({ alert, getRandomAnimal }) {
     const [badge, setBadge] = useState("badge");
     const [noBadges, setNoBadges] = useState(false); 
     const [pointsNeeded, setPointsNeeded] = useState(null); 
+    const [numPoints, setNumPoints] = useState(null);
+    const [numBadges, setNumBadges] = useState(null);
+    const [didReset, setDidReset] = useState(false);
        
     // handle display of any alerts
     const [alertShowing, setAlertShowing] = useState(true);
@@ -76,14 +79,23 @@ export function Dashboard({ alert, getRandomAnimal }) {
  * 
  * - We add each animal object and name to userAnimals;
  * 
- * - Updates the user level based on current points;
+ * - We update the user level in UI based on current points;
  * 
  */
     useEffect(() => {
-        async function getBadges() {
-            if (currentUser) {      
-                const userBadges = currentUser.user.userBadges;
-                console.log("USER BADGES:", userBadges)
+        async function makeBadges() {
+            if (currentUser) { console.log(currentUser)
+                const updatedUser = await usersAPI.getUser(currentUser.user.username);
+                
+                console.log(updatedUser);
+                    
+                // const userBadges = currentUser.user.userBadges;
+                const userBadges = updatedUser.user.userBadges;
+                
+                console.log("USER BADGES:", userBadges);
+
+                setNumBadges(updatedUser.user.userBadges.length);
+                setNumPoints(updatedUser.user.points);
                 let animal;
                 const animals = [];
                 for (let animalName of userBadges) {  
@@ -97,7 +109,7 @@ export function Dashboard({ alert, getRandomAnimal }) {
                 setUserAnimals(animals);
 
                 for (let level of levels) {
-                    if (currentUser.user.points >= level.points) { 
+                    if (updatedUser.user.points >= level.points) { 
                         setLevel(level.title);
                         setLevelIcon(level.url);
                         const nextIdx = levels.indexOf(level) + 1;
@@ -109,41 +121,31 @@ export function Dashboard({ alert, getRandomAnimal }) {
                         }
                     }                    
                 }
-                if (currentUser.user.userBadges.length > 1)
+                if (updatedUser.user.userBadges.length > 1)
                     setBadge("badges");
-                if (currentUser.user.userBadges.length === 0)
+                if (updatedUser.user.userBadges.length === 0)
                     setNoBadges(true);
             }        
         }
-        getBadges();
-    }, [currentUser]);
+        makeBadges();
+    }, [currentUser, didReset]);
 
     // Let user know how many points needed to reach next level when user opens modal
     useEffect(() => {
         async function calculatePointsNeeded() {
             if (currentUser && nextLevel) {
-                setPointsNeeded(nextLevel.points - currentUser.user.points);
+                setPointsNeeded(nextLevel.points - numPoints);
             }
         }
         calculatePointsNeeded();
-    }, [currentUser, nextLevel]);
-
-    function refreshPage(){ 
-        window.location.reload(); 
-    }
-
-    
-    // function confirm() {
-    //     setAlert({severity: "warning", message: "WAIT! Are you sure you want to start over? This will remove all of your badges and points!"})
-    //     setAlertShowing(true);  
-    // }
+    }, [currentUser, nextLevel, numPoints]);
     
     // Allow user to reset their account by deleting all badges and points;
     async function reset() {      
-        // window.confirm("WAIT! Are you sure you want to start over? This will remove all of your badges and points!");
         await usersAPI.deleteBadges(currentUser.user.id);
-        await usersAPI.updatePoints({ username: currentUser.user.username, points: -currentUser.user.points });
-        refreshPage();
+        await usersAPI.resetPoints({ username: currentUser.user.username });
+        setDidReset(true);
+        handleCloseDialog();
     }
 
 return (
@@ -182,7 +184,7 @@ return (
             
                     {noBadges ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary }}>You don't have any badges yet. Let's get started!</Typography> 
                     :
-                    <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 3 }}>You've collected {currentUser.user.userBadges.length} {badge} so far and you have {currentUser.user.points} points!</Typography>} 
+                    <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 3 }}>You've collected {numBadges} {badge} so far and you have {numPoints} points!</Typography>} 
                     <Button id="alt-button" onClick={handleOpen}>Level Up</Button>
                 </Paper>                
 
@@ -215,7 +217,7 @@ return (
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={observer} alt="kid clipart" width="80px"/></TableCell>
+                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem' }}><img src={observer} alt="kid clipart" width="80px"/></TableCell>
                                 <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Observer
                                 </TableCell>
                                 <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>0 - 99</TableCell>

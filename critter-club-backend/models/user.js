@@ -176,6 +176,19 @@ const {
         return user;
     }
 
+    static async resetPoints(username) {
+        const pointsRes = await db.query(
+            `UPDATE users
+            SET points=0
+            WHERE username = $1
+            RETURNING points`,
+            [username]
+        );
+        const user = pointsRes.rows[0];
+        console.log(user);
+        return user;
+    }
+
     static async addBadge(animalId, userId) {
         console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ANIMAL ID:", animalId);
         console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ USER ID:", userId);

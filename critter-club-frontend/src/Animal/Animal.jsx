@@ -11,7 +11,7 @@ import { Box, Grid, Paper, Button, Typography, Stack } from '@mui/material';
 import { theme } from '../theme/theme.js';
 import { Fact } from './Fact.jsx'
 
-/** Animal renders a page with a photo, video and facts about a selected animal;
+/** Animal component renders a page with a photo, video and facts about a selected animal;
  * It also renders Quiz, which is only viewable when user clicks on button;
  * animalSelected is a boolean that handles this conditional rendering  */
 
@@ -64,8 +64,7 @@ export function Animal() {
                 setIsLoading(true);
                 setAnimal(await AnimalsAPI.getSingleAnimal(animalName));
             }
-            getAnimalInfo();
-            
+            getAnimalInfo();            
         }
         else setAnimalExists(false);
     }, [animalName]);
@@ -138,30 +137,38 @@ export function Animal() {
     }, [diet]);
 
     // There is data in some of the locations arrays that could be confusing to the user.
-    // We limit locations displayed to those on the validLocations list
+    // We limit locations displayed to those on the validLocations list & add correct spacing for multi-word locations
     useEffect(() => {
         async function checkLocations() {
-
             for (let location of locations) {
                 if (!validLocations.includes(location))
                     setShowLocations(false);
+                if (location === "NorthAmerica")
+                    locations.splice(locations.indexOf("NorthAmerica"), 1, "North America")
+                if (location === "SouthAmerica")
+                locations.splice(locations.indexOf("SouthAmerica"), 1, "South America")
+                if (location === "CentralAmerica")
+                locations.splice(locations.indexOf("CentralAmerica"), 1, "Central America")
             }            
         }
         checkLocations();
-    }, [locations])
+    }, [locations]);
 
     // This function checks to see if the user has already earned the badge for this animal;
     // If already earned, the user receives a message instead of the quiz button;
     useEffect(() => {
-        async function checkForAnimal() {
-            const badges = currentUser.user.userBadges;
-            if (badges.includes(animalName)) {
-                setBadgeCollected(true);
+        async function checkForBadge() {
+            if (currentUser) {
+                const updatedUser = await usersAPI.getUser(currentUser.user.username);
+                const badges = updatedUser.user.userBadges;
+                if (badges.includes(animalName)) {
+                    setBadgeCollected(true);
+                }
             }
         }
-        checkForAnimal();
+        checkForBadge();
     }, [animalName, currentUser])
-
+    
     // Get photo url in order to display animal icon for the badge
     useEffect(() => {
             async function getAnimalIcon() {
