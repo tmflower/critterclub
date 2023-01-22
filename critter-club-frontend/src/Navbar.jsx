@@ -16,17 +16,13 @@ import Close from '@mui/icons-material/Close';
 import { theme } from './theme/theme';
 
 
-export function Navbar({ logout, getRandomAnimal }) {
+export function Navbar({ logout }) {
     
     const currentUser = useContext(UserContext);
     const [open, setOpen] = useState(false);
 
     const onOpenHandler = () => setOpen(true);
     const onCloseHandler = () => setOpen(false);
-
-    const randomAnimal = getRandomAnimal;
-
-    console.log(currentUser)
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -60,7 +56,9 @@ export function Navbar({ logout, getRandomAnimal }) {
                             sx={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/dashboard" end>Dashboard</NavLink>
                             <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/animals/browse" end>Browse</NavLink>
-                            <NavLink onClick={onCloseHandler}className="navbar-link-mobile"exact="true" to="/animals/search">Search</NavLink>
+                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile"exact="true" to="/animals/search">Search</NavLink>
+                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to={`animals/random`} end>Random</NavLink>
+
                             <Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', width: '20%' }} onClick={logout}>Logout</Button>
                         </Box>
                         :
@@ -88,8 +86,7 @@ export function Navbar({ logout, getRandomAnimal }) {
                         <NavLink className="navbar-link" exact="true" to="/dashboard" end>Dashboard</NavLink>
                         <NavLink className="navbar-link" exact="true" to="/animals/browse" end>Browse</NavLink>
                         <NavLink className="navbar-link" exact="true" to="/animals/search" end>Search</NavLink>
-                        {/* <NavLink className="navbar-link" exact="true" to={`animals/${randomAnimal.name}`} end>Random</NavLink> */}
-                        <Button className="navbar-link" id="navbar-simlink" onClick={getRandomAnimal}>Random</Button>
+                        <NavLink className="navbar-link" exact="true" to={`animals/random`} end>Random</NavLink>
                     </>
                     :
                     <>
@@ -110,25 +107,3 @@ export function Navbar({ logout, getRandomAnimal }) {
         </Box>
       );
 }
-
-    // return (
-    //     <AppBar>
-    //         <nav>
-    //             {currentUser ?
-    //             <div>
-    //                 <NavLink className="navbar-link" exact="true" to="/dashboard" end>Dashboard</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/animals/browse" end>Browse</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/animals/search" end>Search</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/" onClick={logout} end>Logout</NavLink>
-    //             </div>         
-    //             :
-    //             <div>
-    //                 <NavLink className="navbar-link" exact="true" to="/" end>Home</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/login" end>Login</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/signup" end>Signup</NavLink>
-    //                 <NavLink className="navbar-link" exact="true" to="/parent" end>Parent Page</NavLink>
-    //             </div>
-    //             }
-    //         </nav>
-    //     </AppBar>
-    // )

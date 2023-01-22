@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-2e4xct-MuiPaper-root"
+  >
+    <form>
+      <fieldset>
+        <label
+          class="MuiFormLabel-root MuiFormLabel-colorPrimary css-tshmje-MuiFormLabel-root"
+        >
+          <legend>
+            What is the hippopotamus's scientific name?
+          </legend>
+        </label>
+        <label
+          for="Scientific name"
+        >
+          Scientific name
+          <input
+            class="input-nonMUI"
+            id="Scientific name"
+            name="userGuess"
+            type="text"
+            value=""
+          />
+        </label>
+        <div>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="submit"
+          >
+            Check answer
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <h5
+          class="MuiTypography-root MuiTypography-h5 css-18czui-MuiTypography-root"
+          id="quiz-feedback"
+        />
+      </fieldset>
+    </form>
+  </div>
+</DocumentFragment>
+`;

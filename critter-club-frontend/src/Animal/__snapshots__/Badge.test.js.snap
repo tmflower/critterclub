@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation18 css-12399m2-MuiPaper-root"
+  >
+    <h6
+      class="MuiTypography-root MuiTypography-h6 css-1f1ge3c-MuiTypography-root"
+    />
+    <img
+      style="max-width: 150px; max-height: 130px;"
+    />
+  </div>
+</DocumentFragment>
+`;

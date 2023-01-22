@@ -26,12 +26,12 @@ app.use("/parents", parentRoutes);
 app.use("/animals", animalRoutes);
 app.use("/auth", authRoutes);
 
-/** Handle 404 errors -- this matches everything */
+// handle not found errors
 app.use(function (req, res, next) {
     return next(new NotFoundError());
   });
   
-/** Generic error handler; anything unhandled goes here. */
+// handle any errors not otherwise caught
 app.use(function (err, req, res, next) {
   if (process.env.NODE_ENV !== "test") console.error(err.stack);
   const status = err.status || 500;

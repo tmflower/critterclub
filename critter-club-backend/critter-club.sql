@@ -16,3 +16,4 @@ CREATE DATABASE critterclub_test;
 \connect critterclub_test
 
 \i critter-club-schema.sql
+\i seed.sql

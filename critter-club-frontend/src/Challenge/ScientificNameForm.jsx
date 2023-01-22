@@ -41,7 +41,6 @@ export function ScientificNameForm({ commonName, scientificName, message, points
 
     // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
-        console.log(ref)
         ref.current.value = "";
         setFeedback('');
     }

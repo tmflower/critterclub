@@ -1,3 +1,5 @@
+/** populate animals relation in db with icons for user badges*/
+
 INSERT INTO animals(common_name, photo)
 VALUES
 ('Adelie Penguin', '/images/adeliepenguin.png'), 
@@ -143,4 +145,7 @@ VALUES
 ('Zebra', '/images/zebra.png'), 
 ('Zebra Finch', '/images/zebrafinch.jpeg'), 
 ('Zebra Mussels', '/images/zebramussels.png'), 
-('Zebu', '/images/zebu.jpeg')
+('Zebu', '/images/zebu.jpeg');
+
+INSERT INTO parents(username, password, first_name, last_name, email, access_code) 
+VALUES('demoParent', 'abc123$%^', 'demo', 'parent', 'demo@parent.com', 3456);

@@ -1,3 +1,5 @@
+/** codes required for making API requests to youtube and unsplash for photos and videos */
+
 const MEDIA = {
     "Adelie Penguin": {"image": "9k9tNQTwMEA","video": "YKqXGNNPNaQ" },
     "Agama Lizard": {"image": "qs2chAlF4Vw","video": "bWKfQFz0LZo" },

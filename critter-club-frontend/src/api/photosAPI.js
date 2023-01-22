@@ -43,7 +43,6 @@ class PhotosAPI {
             const res = await axios.get
             (`${BASE_URL_PHOTOS}/${photoId}`,
             {headers: {"Authorization": `Client-ID ${API_KEY_PHOTOS}`}});
-            console.log("check headers for current usage/limit:", res);
             return res.data
         }
     }

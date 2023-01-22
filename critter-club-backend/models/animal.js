@@ -1,9 +1,13 @@
 "use strict";
 
 const db = require("../db");
+const { NotFoundError } = require("../expressError");
+
+/** methods for accessing animal names and images for badge icons */
 
 class Animal {
     
+    /** get data for animal when given the name */
     static async get(animalName) {
         const animalRes = await db.query(
             `SELECT id,
@@ -15,11 +19,12 @@ class Animal {
         );
         const animal = animalRes.rows[0];
 
-        if (!animal) throw new Error(`No animal: ${animalName}`);
+        if (!animal) throw new NotFoundError(`No animal: ${animalName}`);
 
         return animal;
     }
 
+    /** get data for animal when give the id number */
     static async getById(id) {
         const animalRes = await db.query(
             `SELECT common_name,
@@ -31,11 +36,12 @@ class Animal {
         );
         const animal = animalRes.rows[0];
 
-        if (!animal) throw new Error(`No animal: ${id}`);
+        if (!animal) throw new NotFoundError(`No animal: ${id}`);
 
         return animal;
     }
 
+    /** get data for all animals in db */
     static async getAllAnimals() {
         const res = await db.query(
             `SELECT * FROM animals`
@@ -43,6 +49,7 @@ class Animal {
         return res.rows;
     }
 
+    /** get id numbers of all animals for which the user has collected a badge */
     static async getBadges() {
             const badgesRes = await db.query(
             `SELECT animal_id
@@ -52,7 +59,7 @@ class Animal {
         );
         const badges = badgesRes.rows;
 
-        if (!user) throw new Error(`No user: ${userId}`);
+        if (!user) throw new NotFoundError(`No user: ${userId}`);
 
         return badges;
     }

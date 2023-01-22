@@ -32,7 +32,6 @@ import naturalist from "../assets/images/level-icons/naturalist.gif";
 import ecologist from "../assets/images/level-icons/ecologist.png";
 import zoologist from "../assets/images/level-icons/zoologist.jpg";
 
-
 const levels = [
     {points: 0, title: 'Observer', url: observer},
     {points: 100, title: 'Explorer', url: explorer},
@@ -44,7 +43,7 @@ const levels = [
 
 /** Dashboard provides personalized user information including badges earned, current points, and level achieved */
 
-export function Dashboard({ alert, getRandomAnimal }) {
+export function Dashboard({ alert, setAlert, getRandomAnimal }) {
     
     const currentUser = useContext(UserContext);
     const [userAnimals, setUserAnimals] = useState([]);
@@ -58,10 +57,13 @@ export function Dashboard({ alert, getRandomAnimal }) {
     const [numBadges, setNumBadges] = useState(null);
     const [didReset, setDidReset] = useState(false);
        
-    // handle display of any alerts
+    // handle display of alert
     const [alertShowing, setAlertShowing] = useState(true);
-    const closeAlert = () => setAlertShowing(false);
-    
+    const closeAlert = () => {
+        setAlertShowing(false);
+        setAlert({severity: '', message: ''});
+    }
+
     // handle opening and closing of modal
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -84,28 +86,21 @@ export function Dashboard({ alert, getRandomAnimal }) {
  */
     useEffect(() => {
         async function makeBadges() {
-            if (currentUser) { console.log(currentUser)
+            if (currentUser) {
                 const updatedUser = await usersAPI.getUser(currentUser.user.username);
                 
-                console.log(updatedUser);
-                    
-                // const userBadges = currentUser.user.userBadges;
                 const userBadges = updatedUser.user.userBadges;
-                
-                console.log("USER BADGES:", userBadges);
 
                 setNumBadges(updatedUser.user.userBadges.length);
                 setNumPoints(updatedUser.user.points);
                 let animal;
                 const animals = [];
-                for (let animalName of userBadges) {  
-                    console.log(animalName);              
+                for (let animalName of userBadges) {              
                     animal = await usersAPI.getAnimal(animalName);
                     if (animal) {
                         animals.push({ animalName, ...animal });
                     }
                 }
-                console.log(animals);
                 setUserAnimals(animals);
 
                 for (let level of levels) {
@@ -147,9 +142,9 @@ export function Dashboard({ alert, getRandomAnimal }) {
         setDidReset(true);
         handleCloseDialog();
     }
-
+    
 return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: 5 }} className="Dashboard">
         { !currentUser ?   
             <Paper
                 elevation={8} sx={{ padding: 20 }}>
@@ -168,7 +163,7 @@ return (
             alignItems="center"
             textAlign="center"
             >
-            <Typography variant="h2" sx={{ fontFamily: theme.typography.primary, m: 3 }}>Hello, {currentUser.user.username}!</Typography>  
+            <Typography variant="h2" sx={{ fontFamily: theme.typography.primary, m: 3, maxWidth: '90vw' }}>Hello, {currentUser.user.username}!</Typography>  
             <img src={levelIcon} alt="kid clipart" width="300px"/>
             <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 3 }}>You're a Critter Club <em className="blue-text">{level}</em> !</Typography>                  
         </Grid>
@@ -194,7 +189,7 @@ return (
                     <Box sx={{ mb: 3 }}>
                         <NavLink to="/animals/browse" className="link"><Button className="options-btn">Browse All Animals</Button></NavLink>
                         <NavLink to="/animals/search" className="link"><Button className="options-btn">Search for an Animal</Button></NavLink>
-                        <Button className="options-btn" onClick={getRandomAnimal}>Get a random animal</Button>
+                        <NavLink to="/animals/random" className="link"><Button className="options-btn">Get a Random Animal</Button></NavLink>
                     </Box>
                 </Paper>
 
@@ -274,7 +269,7 @@ return (
                     </Typography>
                     <NavLink to="/animals/browse" className="link"><Button >Browse</Button></NavLink>
                     <NavLink to="/animals/search" className="link"><Button >Search</Button></NavLink>
-                    <Button onClick={getRandomAnimal}>Random</Button>
+                    <NavLink to="/animals/random" className="link"><Button>Random</Button></NavLink>
                 </Paper>
             </Box>
         </Modal>

@@ -33,8 +33,6 @@ export function Animal() {
     const currentUser = useContext(UserContext);
     const params = useParams();
     const animalName = params.animalName;
-    console.log(params)
-    console.log(animalName)
 
     const [animal, setAnimal] = useState(null);
     const [commonName, setCommonName] = useState("");
@@ -93,9 +91,7 @@ export function Animal() {
     const selectAnimal = () => {
         setAnimalSelected(true);
     }
-    console.log(currentUser);
-    console.log(animalName);
-
+    
     // This function sets a second variable with child-friendly language to accompany the taxonomic class of the animal
     useEffect(() => {
         async function modifyGroupName() {
@@ -179,13 +175,13 @@ export function Animal() {
 
     const scientificNameText = `The ${commonName}'s scientific name is ${scientificName}.`
     const taxonomicGroupText = `The ${commonName} belongs to a group of animals called ${taxClass}, more commonly known as ${simpleGroupName}.`
-    const dietText = `${diet}s, including the ${commonName}, eat mostly ${foods}.`
+    const dietText = `${diet}s, including the ${commonName}, eat ${foods}.`
     const locationsText = `Where in the world you'll find the ${commonName}:`
     const featuresText = `A notable ${commonName} feature: ${features}`
     const preyText = `Its diet includes yummy things like: ${prey}!`
     const habitatText = `The ${commonName} makes its home in ${habitat}.`
     const funFactText = `Fun fact about the ${commonName}: ${funFact}`
-
+    
     return (            
         <Box> 
             { !currentUser ?   
@@ -373,211 +369,3 @@ export function Animal() {
 }
 
 export default validLocations;
-
-// return (            
-//     <Box > 
-//         { !currentUser ?   
-//         <Paper
-//             elevation={8} sx={{ padding: 20 }}>
-//             <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
-//             <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
-//         </Paper>
-//     :
-//     <>                            
-//         {isLoading ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Collecting your animal information!</Typography> :
-//             <div>{!animalExists ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sorry, we don't have information about that animal yet!</Typography> : 
-//                 <div>{!animalSelected ?                             
-//                     <Box> 
-//                         <Grid 
-//                             container 
-//                             sx={{ mt: 3 }}
-//                             direction="column"
-//                             alignItems="center"
-//                             >                  
-//                                 <Grid item xs={12}>
-//                                     <h1>Meet the {commonName}!</h1>
-//                                 </Grid> 
-                                                        
-//                                 <Grid item xs={12} sm={6}>
-//                                     <Photo animalName={animalName}/>
-//                                 </Grid>
-                                
-//                                 <Grid item xs={12} sm={6}>
-//                                     <Paper 
-//                                         elevation={18} 
-//                                         sx={{ 
-//                                             borderRadius: '50%', 
-//                                             height: 200, 
-//                                             width: 320, 
-//                                             display: 'flex', 
-//                                             flexDirection: 'column', 
-//                                             alignItems: 'center', 
-//                                             justifyContent: 'center',
-//                                             margin: 2 }}>
-//                                                 <img 
-//                                                     src={animalIcon.animal.photo} 
-//                                                     alt={animalName}
-//                                                     style={{ maxWidth: 150, maxHeight: 130 }}/>        
-//                                     </Paper>
-//                                 </Grid>
-
-//                                 <Grid item xs={12} sm={6}>
-//                                 {badgeCollected ? <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>You've already collected this badge. Great job! Let's try for your next one! <NavLink to="/animals/browse">Check out more animals</NavLink></Typography>
-//                                 :
-//                                 <Button onClick={selectAnimal}>Collect the {commonName} badge!</Button>}                           
-//                                 </Grid>                       
-//                         </Grid>            
-
-//                         <Grid container>
-                            
-//                             {scientificName ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🧠</p>
-//                                     <p>The {commonName}'s scientific name is <em>{scientificName}</em>.</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null}
-
-//                             {funFact ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>😎</p>
-//                                     <p>{commonName} fun fact: {funFact}</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null} 
-
-//                             {habitat ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🏠</p>
-//                                     <p>The {commonName} makes its home in {habitat}.</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null}
-
-//                             {taxClass ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🧬</p>
-//                                     <p>The {commonName} belongs to a group of animals called {taxClass}, more commonly known as {simpleGroupName}.</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null}
-
-//                             {diet ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🍔</p>
-//                                     <p>{diet}s like the {commonName} eat {foods}.</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null}  
-
-//                             {prey ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>😋</p>
-//                                     <span>Its diet includes yummy things like: {prey}!</span>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null} 
-
-//                             {features ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🧐</p>
-//                                     <p>A notable {commonName} feature: {features}</p>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null} 
-
-//                             {locations && showLocations ? 
-//                             <Grid item xs={12} sm={6} lg={4}>
-//                                 <Paper
-//                                     elevation={6}
-//                                     sx={{ 
-//                                         padding: 3, 
-//                                         margin: 3, 
-//                                         color: theme.typography.secondary.color, 
-//                                         backgroundColor: theme.palette.primary.main }}>
-//                                     <p className='emoji'>🌍</p>
-//                                     <List>Where in the world you'll find the {commonName}:{locations.map((location, i) => <ListItem key={i}>{location}</ListItem>)}</List>
-//                                 </Paper>
-//                             </Grid> 
-//                             : null}
-//                         </Grid>
-//                         <Grid 
-//                             container 
-//                             sx={{ mt: 3 }}
-//                             direction="column"
-//                             alignItems="center"
-//                             >  
-//                             <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Check out this video for more about the {commonName}!</Typography>
-
-//                             <Video animalName={animalName}></Video>
-//                         </Grid>
-//                     </Box>                    
-//                     :
-//                     <Quiz 
-//                         commonName={commonName}
-//                         scientificName={scientificName}
-//                         locations={locations}
-//                         diet={diet}
-//                         phylum={phylum}
-//                         taxClass={taxClass}
-//                         setTaxClass={setTaxClass}
-//                         prey={prey}
-//                         features={features}
-//                         setAnimalSelected={setAnimalSelected}
-//                         validLocations={validLocations}
-//                     ></Quiz>
-//                     }
-//             </div>}
-//         </div>}
-//         </>}
-//     </Box> 
-// );

@@ -5,10 +5,10 @@ const { ensureLoggedIn, ensureCorrectUser } = require("../utils/middleware");
 const User = require("../models/user");
 const router = express.Router();
 
+/** get data for a registered, logged-in user */
 router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
     try {
         const user = await User.get(req.params.username);
-        console.log("*********************************USER:", user)
         return res.json({ user })
     }
     catch(err) {
@@ -16,10 +16,10 @@ router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req,
     }
 });
 
+/** add points to user in db as they answer questions correctly */
 router.patch("/points", async function (req, res, next) {
   try {
       const user = await User.updatePoints(req.body.username, req.body.points);
-      console.log("***********************************REQ.BODY", req.body)
       return res.json({ user })
   }
   catch(err) {
@@ -27,6 +27,8 @@ router.patch("/points", async function (req, res, next) {
   }
 });
 
+
+/** reset user points to zero in db if they choose to start over */
 router.patch("/reset", async function (req, res, next) {
   try {
     const user = await User.resetPoints(req.body.username);
@@ -37,10 +39,10 @@ router.patch("/reset", async function (req, res, next) {
   }
 });
 
+/** add new entry to user's list of badges */
 router.post("/badges", async function (req, res, next) {
   try {
       const badge = await User.addBadge(req.body.animalId, req.body.userId);
-      console.log("***********************************REQ.BODY", req.body.animalId, req.body.userId);
       return res.json({ badge })
   }
   catch(err) {
@@ -48,6 +50,7 @@ router.post("/badges", async function (req, res, next) {
   }
 });
 
+/** delete all user's badges if they choose to start over */
 router.delete("/badges/:userId", async function (req, res, next) {
   try {
     await User.deleteBadges(req.params.userId);

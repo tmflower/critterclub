@@ -24,18 +24,18 @@ export function Login({ login, alert }) {
         const { name, value } = evt.target;
         setFormData(formData => ({ ...formData, [name]: value}));
     }
-    
+    // variable and function to control display of alerts
+    const [alertShowing, setAlertShowing] = useState(true);
+    const closeAlert = () => setAlertShowing(false);
+
     // when user submits form, call login function passed from App.js
     async function handleSubmit(evt) {
         evt.preventDefault();
         const user = { username, password }; 
-        await login(user);     
+        await login(user);  
+        setAlertShowing(true);
         setFormData(initial_state);
     }
-
-    // variable and function to control display of alerts
-    const [alertShowing, setAlertShowing] = useState(true);
-    const closeAlert = () => setAlertShowing(false);
 
     return (        
         <Paper 
@@ -48,17 +48,13 @@ export function Login({ login, alert }) {
             <form>
                 <FormControl sx={{ width: '25ch', m: 2 }}>
                 <Stack spacing={2}>
-                {/* <label htmlFor="username">Username: */}
                 <TextField 
-                    // type="text" 
                     name="username" 
                     value={username} 
                     id="username" 
                     label="Username"
                     onChange={handleChange}
                 />
-                {/* </label> */}
-                {/* <label htmlFor="password">Password: */}
                 <Box>
                     <TextField 
                         type={passwordShowing ? "text" : "password"} 
@@ -72,7 +68,6 @@ export function Login({ login, alert }) {
                         <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
                         :
                         <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}
-                    {/* </label> */}
                 </Box>                
                 <Button id="login-button" onClick={handleSubmit}>Submit</Button> 
                 </Stack>

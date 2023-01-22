@@ -27,11 +27,15 @@ router.post("/register", async function (req, res, next) {
     }
   });
 
+// logs in returning user if valid username and password are submitted
 router.post("/login", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, userSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
+      if (errs) {
+        return next(new BadRequestError("Please check your username and password, then try again."))
+      }
       throw new BadRequestError(errs);
     }
     const user = await User.authenticate(req.body.username, req.body.password);
@@ -39,6 +43,7 @@ router.post("/login", async function (req, res, next) {
     return res.json({ token });
   }
   catch(err) {
+    
     return next(err);
   }
 });

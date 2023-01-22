@@ -8,19 +8,17 @@ import { Animal } from './Animal/Animal';
 import { Quiz } from './Challenge/Quiz';
 import { Browse } from './routes/Browse';
 import { Search } from './routes/Search';
+import { Random } from './routes/Random';
 import { Navbar } from './Navbar';
 import { Signup } from './routes/Signup';
 import { Login } from './routes/Login';
 import { Code } from './routes/Code';
-import ParentSignup from './routes/ParentSignup';
+import { ParentSignup } from './routes/ParentSignup';
 import usersAPI from './api/usersAPI';
 import UserContext from './userContext';
 import jwt from 'jsonwebtoken';
 import { Box } from '@mui/material';
 import { theme } from './theme/theme';
-
-
-const totalAnimals = 144;
 
 export function App() {
 
@@ -29,18 +27,7 @@ export function App() {
   const [username, setUsername] = useState(null);
   const [justLoggedOut, setJustLoggedOut] = useState(false);
   const [alert, setAlert] = useState({message: "", severity: ""});
-
   const [currentUser, setCurrentUser] = useState(null);
-  // const [currentUser, setCurrentUser] = useState(() => {
-  //   let loggedInUsername;
-  //   loggedInUsername = JSON.parse(window.localStorage.getItem('username') || null);
-  //   if (username) {
-  //     const user = usersAPI.getUser(loggedInUsername);
-  //     return user;
-  //   }
-  //   return null;
-  // })
-
 
   // if there is a token in localStorage, save it in state;
   // token is saved to localStorage upon successful signup and login
@@ -61,19 +48,15 @@ export function App() {
     getAllAnimals();
   }, []);
 
-console.log(allAnimals);
-
   useEffect(() => {
     async function getUserData() {
       // if signup/login is successful, we save the token in localStorage, decode it to access the user data, and add it to the User model for this user;
       // we set the currentUser in state for access across the app via UserContext
-      if(token) { console.log("THERE IS A TOKEN!!!")
+      if(token) {
         window.localStorage.setItem('token', `"${token}"`);
         const user = jwt.decode(token);
         usersAPI.token = token;
-        console.log("***************USER", user);
         setUsername(user.username);
-        console.log("***************USERNAME", username);
         setCurrentUser(await usersAPI.getUser(username));
       }
     }
@@ -102,7 +85,7 @@ console.log(allAnimals);
       navigate("/dashboard", { replace: true });
     }
     catch(err) {
-      setAlert({severity: "warning", message: "Please enter a valid username and password"});
+      setAlert({severity: "warning", message: err});
     }
   }
 
@@ -119,17 +102,10 @@ console.log(allAnimals);
     setAlert({severity: "", message: ""})
   }
 
-  async function getRandomAnimal() {
-    // display a randomly selected animal
-    const randomNum = Math.floor(Math.random() * totalAnimals);        
-    const animalInfo = await usersAPI.getAnimalById(randomNum);
-    navigate(`/animals/${animalInfo.animal.common_name}`, { replace: true });
-    }
-
   return (
     <div className="App">
       <UserContext.Provider value={currentUser}>
-      <Navbar logout={logout}  getRandomAnimal={getRandomAnimal}/>      
+      <Navbar logout={logout}/>            
       <Box
         sx={{
           color: 'black',
@@ -148,9 +124,10 @@ console.log(allAnimals);
             <Route path="/signup" element={<Signup signup={signup} alert={alert}/>}></Route>
             <Route path="/login" element={<Login login={login} alert={alert}/>}></Route>
             <Route path="/logout" element={<Home />}></Route>
-            <Route path="/dashboard" element={<Dashboard alert={alert} getRandomAnimal={getRandomAnimal}  />}></Route>
+            <Route path="/dashboard" element={<Dashboard alert={alert} setAlert={setAlert} />}></Route>
             <Route path="/animals/browse" element={<Browse allAnimals={allAnimals}/>}></Route>
             <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
+            <Route path="/animals/random" element={<Random/>}></Route>
             <Route path="/animals/:animalName" element={<Animal />}></Route>
             <Route path="/quiz" element={<Quiz />}></Route>
           </Routes>       
@@ -159,3 +136,5 @@ console.log(allAnimals);
     </div>
   );
 }
+
+export default App;

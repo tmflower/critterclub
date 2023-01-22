@@ -78,6 +78,15 @@
   padding-left: 1px;
 }
 
+#navbar-simlink-mobile {
+  text-transform: none;
+  background-color: transparent;
+  border: none;
+  color: #1e91d6ff;
+  font-size: 1rem;
+  margin: 0px 0px 4px 0px;
+}
+
 #navbar-simlink:hover {
   font-size: larger;
 }
@@ -114,7 +123,6 @@
 }
 
 @media (min-width: 375px){
-
     .video {
       width: 350px;
       height: 206px;
@@ -131,18 +139,22 @@
       max-width: 8rem;
     }
 
+    .animalIcon {
+      max-width: 370px;
+    }
+
     #modal-img {
-      width: auto;
-      max-width: 200px;
+      width:300px;
       margin: auto;
     }
 
     #modal-modal-title {
-      font-size: .6rem;
+      font-size: 1.5rem;
+      color: #1e91d6ff;
     }
 
     #modal-modal-description {
-      font-size: .4rem;
+      font-size: 1rem;
     }
   }
   
@@ -159,19 +171,19 @@
       max-width: 10rem;
     }
 
-    }
     #modal-img {
-      max-width: 500px;
+      width: 400px;
     }
 
     #modal-modal-title {
       font-size: 2.5rem;
-      color: #1e91d6ff;
     }
 
     #modal-modal-description {
       font-size: 1.5rem;
     }
+  }
+
   
   @media (min-width: 1024px){
     .video {

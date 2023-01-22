@@ -6,7 +6,6 @@ export function Fact({ emoji, title, text, listItems }) {
     const [factShowing, setFactShowing] = useState(false);
 
     function showFact() {
-        console.log()
         setFactShowing(!factShowing);
     }
     

@@ -1,3 +1,8 @@
+/** List of all animal names used in this app that have a corresponding entry in our db
+ * Referenced in Animal component to check if selected animal exists
+ * Referenced in animalsAPI to narrow results to those on this list
+ *  */ 
+
 const animalsList = [
     "Adelie Penguin",
     "Agama Lizard", 

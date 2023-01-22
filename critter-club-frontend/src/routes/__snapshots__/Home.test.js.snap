@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-y1gt6f"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-container css-1v3lxag-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+      >
+        <h2
+          class="MuiTypography-root MuiTypography-h2 css-1uxfxyc-MuiTypography-root"
+        >
+          Welcome to Critter Club!
+        </h2>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <img
+            alt="uakari"
+            class="img-home"
+            src="uakari.jpeg"
+          />
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-691kut-MuiTypography-root"
+          >
+            Ever heard of an uakari?
+          </h5>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-691kut-MuiTypography-root"
+          >
+            What does a sea dragon eat?
+          </h5>
+          <img
+            alt="seadragon"
+            class="img-home"
+            src="seadragon.png"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <img
+            alt="lion"
+            class="img-home"
+            src="lion.png"
+          />
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-691kut-MuiTypography-root"
+          >
+            Are all lions from Africa?
+          </h5>
+        </div>
+      </div>
+      <h4
+        class="MuiTypography-root MuiTypography-h4 css-1cfo33-MuiTypography-root"
+      >
+        Find out the answers to these questions and SO many more when you join Critter Club!
+      </h4>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+          >
+            🧐  🧠  💭
+          </h3>
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-vw05hv-MuiTypography-root"
+          >
+            Learn and test your knowledge about all kinds of animals!
+          </h5>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+          >
+            🦊  🐼  🐷
+          </h3>
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-vw05hv-MuiTypography-root"
+          >
+            Earn points and collect fun animal badges!
+          </h5>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6 MuiGrid-grid-lg-4 css-o9ws9g-MuiGrid-root"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-aqpv91-MuiPaper-root"
+        >
+          <h3
+            class="MuiTypography-root MuiTypography-h3 css-gepadz-MuiTypography-root"
+          >
+            🔬  🏆  🥼
+          </h3>
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-vw05hv-MuiTypography-root"
+          >
+            Level up from Observer to Zoologist!
+          </h5>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+      >
+        <a
+          class="link"
+          href="/signup"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            Sign me up!
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </a>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+      >
+        <a
+          class="link"
+          href="/login"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+            tabindex="0"
+            type="button"
+          >
+            I already signed up
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

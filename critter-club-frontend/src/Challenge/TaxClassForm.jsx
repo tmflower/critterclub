@@ -23,7 +23,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
     // Set formData to user's input
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(e.target.value)
 		setFormData((formData) => 
             ({ ...formData, [name]: value }));
     }
@@ -61,7 +60,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </FormLabel>
                 <label htmlFor='Amphibians'>
                     <Radio 
-                        // type="radio"
                         name="vertebrateGroup"
                         value="amphibia"
                         id="Amphibians"
@@ -72,7 +70,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <label htmlFor='Birds'>
                     <Radio 
-                        // type="radio"
                         name="vertebrateGroup"
                         value="aves"
                         id="Birds"
@@ -83,14 +80,12 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <label htmlFor='Mammals'>
                     <Radio
-                        // type="radio"
                         name="vertebrateGroup"
                         value="mammalia"
                         id="Mammals"
                         onChange={handleChange}
                         checked={vertebrateGroup === "mammalia"}
                     />
-                    {/* </input> */}
                     Mammals
                 </label>
                 <label htmlFor='Reptiles'>
@@ -102,7 +97,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         onChange={handleChange}
                         checked={vertebrateGroup === "reptilia"}
                     />
-                    {/* </input> */}
                     Reptiles
                 </label>
                 <label htmlFor='Fish'>
@@ -114,7 +108,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         onChange={handleChange}
                         checked={vertebrateGroup === "fish"}
                     />
-                    {/* </input> */}
                     Fish
                 </label>
                 <label htmlFor='Other'>
@@ -126,7 +119,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                         onChange={handleChange}
                         checked={vertebrateGroup === "other"}
                     />
-                    {/* </input> */}
                     Other
                 </label>
                 <div>

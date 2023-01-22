@@ -28,13 +28,13 @@ function authenticateJWT(req, res, next) {
   }
 }
 
-/** Middleware to use when they must be logged in.
+/** Middleware to check if user is logged in.
  *
  * If not, raises Unauthorized.
  */
 
 function ensureLoggedIn(req, res, next) {
-  try { console.log("res.locals.user***********************************", res.locals.user)
+  try {
     if (!res.locals.user) throw new UnauthorizedError();
     return next();
   } catch (err) {
@@ -49,7 +49,7 @@ function ensureLoggedIn(req, res, next) {
  */
 
 function ensureCorrectUser(req, res, next) {
-  try { console.log("res.locals.user***********************************", res.locals.user)
+  try {
     const user = res.locals.user;
     if (!(user && (user.username === req.params.username))) {
       throw new UnauthorizedError();

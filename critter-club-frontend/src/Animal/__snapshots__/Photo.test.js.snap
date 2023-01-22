@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-1833ari"
+  >
+    <div
+      class="css-nen11g-MuiStack-root"
+    >
+      <img
+        alt="none available"
+        class="photo"
+        src="https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif"
+        width="200px"
+      />
+      <h5
+        class="MuiTypography-root MuiTypography-h5 css-691kut-MuiTypography-root"
+      >
+        We don't have a photo of the Hippopotamus yet.
+      </h5>
+    </div>
+  </div>
+</DocumentFragment>
+`;

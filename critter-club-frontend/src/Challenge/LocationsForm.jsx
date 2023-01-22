@@ -44,21 +44,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
             ({ ...formData, [name]: checked }));
     }
 
-    // narrow the list of valid locations to compare to user's choices
-    // this prevents problems resulting from missing or messy location data from the api
-//     const validLocations = [ 
-//         "Africa",
-//         "Antarctica",
-//         "Asia",
-//         "Europe",
-//         "NorthAmerica",
-//         "Eurasia",
-//         "Ocean",
-//         "CentralAmerica",
-//         "SouthAmerica",
-//         "Oceania"
-//    ];
-
    // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
     // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
@@ -92,8 +77,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
     // compare values at matching index from each array
     // provide corresponding feedback message
     userLocationChoices.sort();
-    console.log("userLocationChoices:", userLocationChoices);
-    console.log("locations:", locations)
     let pointer1 = 0;
     let pointer2 = 0;
 
@@ -147,7 +130,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                     </FormLabel>
                         <label htmlFor='Africa'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Africa"
                                 name="Africa"
                                 checked={Africa}
@@ -158,7 +140,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Antarctica'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Antarctica"
                                 name="Antarctica"
                                 checked={Antarctica}
@@ -169,7 +150,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Asia'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Asia"
                                 name="Asia"
                                 checked={Asia}
@@ -180,7 +160,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Europe'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Europe"
                                 name="Europe"
                                 checked={Europe}
@@ -191,7 +170,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='North America'>
                             <Checkbox
-                                // type="checkbox"
                                 id="North America"
                                 name="NorthAmerica"
                                 checked={NorthAmerica}
@@ -202,7 +180,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Eurasia'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Eurasia"
                                 name="Eurasia"
                                 checked={Eurasia}
@@ -213,7 +190,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Ocean'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Ocean"
                                 name="Ocean"
                                 checked={Ocean}
@@ -224,7 +200,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Central America'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Central America"
                                 name="CentralAmerica"
                                 checked={CentralAmerica}
@@ -235,7 +210,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='South America'>
                             <Checkbox
-                                // type="checkbox"
                                 id="South America"
                                 name="SouthAmerica"
                                 checked={SouthAmerica}
@@ -246,7 +220,6 @@ export function LocationsForm({commonName, locations, message, points, setPoints
                         </label>
                         <label htmlFor='Oceania'>
                             <Checkbox
-                                // type="checkbox"
                                 id="Oceania"
                                 name="Oceania"
                                 checked={Oceania}

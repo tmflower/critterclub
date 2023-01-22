@@ -31,11 +31,8 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
         // checking is inclusive; any term that exists in the prey array will be accepted as correct
 
         e.preventDefault();
-        console.log(prey);
         const modifiedPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
-        console.log(modifiedPrey, userGuess)
         const modifiedUserGuess = userGuess.replace(/[,.]/gi, "").toLowerCase().split(' ');
-        console.log(modifiedUserGuess);
         for (let guess of modifiedUserGuess) {
             if (modifiedPrey.includes(guess)) {
                 setFeedback(message.correct);
@@ -44,22 +41,10 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
             }
             else setFeedback(message.incorrect);
         }
-
-        // e.preventDefault();
-        // console.log(prey);
-        // const modifiedPrey = prey.replace(/[,.]/gi, "").toLowerCase().split(' ');
-        // console.log(modifiedPrey, userGuess)
-        // if (modifiedPrey.includes(userGuess.toLowerCase())) {
-        //     setFeedback(message.correct);
-        //     setPoints(points+=10);
-        //     setNumQuestions(numQuestions+1);
-        // }
-        // else setFeedback(message.incorrect);
     }
     
     // clear form responses & message when user clicks "Try again" button
     const handleReset = (e) => {
-        console.log(ref);
         ref.current.value = '';
         setFormData(initialState)
         setFeedback('');
@@ -71,12 +56,10 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
         sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
-
             <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
                 <legend>What is one thing the {commonName.toLowerCase()} eats?</legend>
             </FormLabel>
-            <label htmlFor='Prey'>Prey
-            
+            <label htmlFor='Prey'>Prey            
             <input
                 type="text"
                 name="userGuess"

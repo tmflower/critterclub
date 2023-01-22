@@ -4,6 +4,7 @@ const express = require("express");
 const Animal = require("../models/animal.js");
 const router = express.Router();
 
+/** get the name and photo for an animal when given its id number */
 router.get("/animal/:animalId", async function (req, res, next) {
     try {
         const animal = await Animal.getById(req.params.animalId);
@@ -14,6 +15,7 @@ router.get("/animal/:animalId", async function (req, res, next) {
     }
 });
 
+/** get the id number and photo for an animal when given its name */
 router.get("/:animalName", async function (req, res, next) {
     try {
         const animal = await Animal.get(req.params.animalName);
@@ -24,6 +26,9 @@ router.get("/:animalName", async function (req, res, next) {
     }
 });
 
+/** get a list of all the animals in the db
+ * each entry contains the id number, animal name, and path to image for creating user badges
+ */
 router.get("/", async function (req, res, next) {
     try {
         const animals = await Animal.getAllAnimals();

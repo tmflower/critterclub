@@ -6,7 +6,7 @@ import { Paper, FormControl, TextField, Button, Stack, Box, Alert } from '@mui/m
 // displays a form that allows parent to register and get access code
 // child will need parent access code to set up a user account
 
-const ParentSignup = ({ alert, setAlert }) => {
+export function ParentSignup ({ alert, setAlert }) {
 
     // set initial TextField values to blank
     const initial_state = {
@@ -33,49 +33,25 @@ const ParentSignup = ({ alert, setAlert }) => {
     const [formWasSubmitted, setFormWasSubmitted] = useState(false);
     const [parentUsername, setParentUsername] = useState("");
 
-    // variable and function to control display of alerts
-    // const [alertShowing, setAlertShowing] = useState(true);
-    // const closeAlert = () => setAlertShowing(false);
-
-    const [token, setToken] = useState('');
-    
     async function signup(parent) {
         // responses for successful and unsuccessful signup
         try {
-          setToken(await usersAPI.registerParent(parent));
+          await usersAPI.registerParent(parent)
         }
         catch (err) {
           setAlert({severity: "warning", message: err});
         }
       }
-    
+
     async function handleSubmit(evt) {
         evt.preventDefault();
         const parent = { username, password, firstName, lastName, email }      
         await signup(parent);
-        if (token) {
-            setParentUsername(username); 
-            setAlert({severity: "success", message: `You have registered, ${username}!`});
-            setFormData(initial_state);   
-            setFormWasSubmitted(true);            
-        }  
+        setParentUsername(username); 
+        setAlert({severity: "success", message: `You have registered, ${username}!`});
+        setFormData(initial_state);   
+        setFormWasSubmitted(true);
     }
-
-    // async function handleSubmit(evt) {        
-    //     evt.preventDefault();
-    //     try {            
-    //         const parent = { username, password, firstName, lastName, email }   
-    //         await signup(parent);   
-    //         await usersAPI.registerParent(parent);
-    //         setParentUsername(username);
-    //         setFormWasSubmitted(true);
-    //     }
-    //     catch(err) {
-    //         console.log("caught the err!!!")
-    //         setAlert({severity: "warning", message: err});
-    //     }
-    //     setFormData(initial_state);
-    // }
 
     return (
         <Paper
@@ -84,7 +60,7 @@ const ParentSignup = ({ alert, setAlert }) => {
             
             {alert.message.length ? 
                 <Alert variant="filled" severity={alert.severity}>{alert.message}</Alert> : null}
-                {/* <Alert variant="filled" severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> : null} */}
+
             {!formWasSubmitted ?
             <div>
                 <h1>Welcome, Parents!</h1>
@@ -149,13 +125,11 @@ const ParentSignup = ({ alert, setAlert }) => {
                 </form>
             </div>
             :
-            <div>
-                <p>You have registered!</p>
+            <Box sx={{ p: 3 }}>
                 <NavLink exact="true" to={`/parent/${parentUsername}`} end>Reveal your access code</NavLink>
-            </div>
+            </Box>
+            
             }
         </Paper>        
     )
 }
-
-export default ParentSignup;

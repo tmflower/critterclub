@@ -25,7 +25,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
     // update user's points
     // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
     const handleSubmit = (e) => {
-        e.preventDefault(); console.log(formData)
+        e.preventDefault();
         if (animalDiet === diet) {
             setFeedback(message.correct);
             setPoints(points+=10);
@@ -34,7 +34,7 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
         else setFeedback(message.incorrect);
     }
 
-    // clear form responses & message when user clicks "Try again" button
+    // clear form responses & message when user clicks "Clear answer" button
     const handleReset = (e) => {
         setFormData(initialState);
         setFeedback('');
@@ -53,7 +53,6 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
             
             <label htmlFor='Carnivore'>
             <Radio 
-                // type="radio"
                 name="animalDiet"
                 value="Carnivore"
                 id="Carnivore"
@@ -64,7 +63,6 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
             </label>
             <label htmlFor='Herbivore'>
             <Radio 
-                // type="radio"
                 name="animalDiet"
                 value="Herbivore"
                 id="Herbivore"
@@ -75,7 +73,6 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
             </label>
             <label htmlFor="Omnivore">
             <Radio
-                // type="radio"
                 name="animalDiet"
                 value="Omnivore"
                 id="Omnivore"

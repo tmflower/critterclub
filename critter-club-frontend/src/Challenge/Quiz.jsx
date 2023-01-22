@@ -33,7 +33,7 @@ export function Quiz({
                     setAnimalSelected,
                     icon }) {
 
-    const currentUser = useContext(UserContext); 
+    const currentUser = useContext(UserContext);
     const username = currentUser.user.username;
     const userId = currentUser.user.id;
     const navigate = useNavigate();
@@ -53,7 +53,6 @@ export function Quiz({
     useEffect(() => {
         async function getAnimals() {
             const res = await usersAPI.getAllAnimals();
-            console.log(res);
             setAnimals(res.animals);
         }
         getAnimals();
@@ -66,7 +65,6 @@ export function Quiz({
         async function getAnimalId() {
             if(animals.length) {
                 const animal = animals.filter(animal => commonName === animal.common_name);
-                console.log(animal[0])
                 setAnimalId(animal[0].id);
             }
         } 
@@ -78,8 +76,6 @@ export function Quiz({
      * - Update user's points
      * - Update user's badges
      * - Provide congratulations message to user
-     * 
-     * 
      */
     async function handleSubmit() {
             await usersAPI.updatePoints({ username, points });
@@ -101,7 +97,7 @@ export function Quiz({
 
     const randomNum = Math.floor(Math.random() * gifs.length);
     const gif = gifs[randomNum];
-    
+
     return (
         <Box sx={{ mt: 5 }}>
             <Modal
@@ -117,24 +113,47 @@ export function Quiz({
                     </IconButton>
                     <Stack>
                         <img id="modal-img"src={gif} alt="celebration"/>
-                        <Typography id="modal-modal-title" variant="h3" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>Congratulations, {username}!</Typography>
-                        <Typography id="modal-modal-description" variant="h5" sx={{ mt: 2, fontFamily: theme.typography.primary, textAlign: 'center' }}>You earned {points} points and the {commonName} badge!</Typography>
+                        <Typography 
+                        id="modal-modal-title" 
+                        variant="h4" 
+                        sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>Congratulations, {username}!
+                        </Typography>
+                        <Typography 
+                        id="modal-modal-description" 
+                        variant="h5" 
+                        sx={{ mt: 2, fontFamily: theme.typography.primary, textAlign: 'center' }}>You earned {points} points and the {commonName} badge!
+                        </Typography>
                     </Stack>
 
                 </Paper>
                 </Box>
             </Modal>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!</Typography>
-                <img src={icon} alt={commonName} width="400px"/>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>Earn 10 points for each correct answer. Check each answer as you go. If you get it wrong, you can check the animal info and try again.</Typography>
+            <Box sx={{ 
+                display: 'flex',
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                textAlign: 'center'}}>
+                <Typography 
+                variant="h3" 
+                sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!
+                </Typography>
+                <img src={icon} alt={commonName} width="400px" className="animalIcon"/>
+                <Typography 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, m: 2 }}>Earn 10 points for each correct answer. Check each answer as you go. If you get it wrong, you can check the animal info and try again.</Typography>
                 <img src={icon} alt={commonName} width="80px"/>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>When at least 2 answers are correct, the <span id="mock-btn">Submit Answers</span> button will appear at the bottom of the page.</Typography>
+                <Typography 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, m: 2 }}>When at least 2 answers are correct, the <span id="mock-btn">Submit Answers</span> button will appear at the bottom of the page.</Typography>
                 <img src={icon} alt={commonName} width="80px"/>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>For more points and faster leveling up, answer any additional questions before you submit your answers.</Typography>
+                <Typography 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, m: 2 }}>For more points and faster leveling up, answer any additional questions before you submit your answers.</Typography>
                 <img src={icon} alt={commonName} width="80px"/>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 2 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
+                <Typography 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, m: 2 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
             </Box>
 
 

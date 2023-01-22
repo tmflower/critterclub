@@ -60,10 +60,7 @@ export const theme = createTheme({
                 backgroundColor: '#1e91d6ff',
                 fontFamily: 'Lexend Deca, Arial',
                 '&:hover': {
-                    backgroundColor: 'hsla(203, 75%, 48%, .2)',
-                    // color: '#1e91d6ff',
-                    // border: '1px solid #1e91d6ff'
-                
+                    backgroundColor: 'hsla(203, 75%, 48%, .2)',                
                 }               
             },
         }

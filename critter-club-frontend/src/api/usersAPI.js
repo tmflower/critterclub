@@ -1,8 +1,8 @@
 import axios from "axios";
 
 /**
- * Users class provides methods for requesting user-related data from our api;
- * Routes include users, parents, and animals;
+ * Users class provides methods for requesting user-related data from our database;
+ * Routes include auth, users, parents, and animals;
  * 
  */
 
@@ -31,13 +31,12 @@ class usersAPI {
         }
       }
 
-    /** User Routes */
+    /** Authorization Routes */
 
     // Register a new user
     static async registerUser(newUser) {
         const registerData = await this.request(`auth/register`, 
         newUser, "post");
-        console.log(registerData);
         return registerData.token;
     }
 
@@ -45,9 +44,10 @@ class usersAPI {
     static async loginUser(userData) {
         const loginData = await this.request(`auth/login`,
         userData, "post");
-        console.log(loginData)
         return loginData.token;
     }
+
+    /** User Routes */
 
     // Retrieve user's information
     static async getUser(username) {
@@ -57,9 +57,7 @@ class usersAPI {
 
     // Update user's points as they earn badges
     static async updatePoints(userData) {
-        console.log("USERDATA:", userData)
         const pointsData = await this.request(`users/points`, userData, "patch");
-        console.log("UPDATE POINTS DATA:", pointsData);
         return pointsData;
     }
 
@@ -71,9 +69,7 @@ class usersAPI {
 
     // Update user's badges as they earn them
     static async addBadge(userData) {
-        console.log("BADGEUSERDATA:", userData)
         const badgesData = await this.request(`users/badges`, userData, "post");
-        console.log("UPDATE BADGES DATA:", badgesData);
         return badgesData;
     }
 
@@ -89,7 +85,6 @@ class usersAPI {
     // Get parent's information
     static async getParent(parentUsername) {
         const parentData = await this.request(`parents/${parentUsername}`);
-        console.log(parentData);
         return parentData;
     }
 
@@ -109,7 +104,6 @@ class usersAPI {
     // We need this in order to provide and track user badges
     static async getAnimal(animalName) {
         const animalData = await this.request(`animals/${animalName}`);
-        console.log(animalData);
         return animalData;
     }
 
@@ -117,7 +111,6 @@ class usersAPI {
     // We need this to compare to user's badges and determine if badge already earned for given animal
     static async getAllAnimals() {
         const animals = await this.request(`animals/`);
-        console.log("ANIMALS:", animals);
         return animals;
     }
 
@@ -125,7 +118,6 @@ class usersAPI {
     // We use this to allow user to select a random animal
     static async getAnimalById(id) {
         const animalData = await this.request(`animals/animal/${id}`);
-        console.log(animalData);
         return animalData;
     }
 

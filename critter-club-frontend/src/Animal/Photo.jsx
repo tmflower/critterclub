@@ -12,7 +12,6 @@ export function Photo ({ animalName }) {
     useEffect(() => {
         async function getAnimalPhoto() {
             const photoData = await PhotosAPI.getPhoto(animalName);
-            console.log("PHOTODATA", photoData)
             if (photoData) {
                 setPhoto(photoData.urls.small);
                 setPhotographer(photoData.user.name);
