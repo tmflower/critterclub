@@ -4,7 +4,15 @@ import { theme } from '../theme/theme';
 
 /** TaxClassForm renders a question with radio button answers */
 
-export function TaxClassForm({commonName, taxClass, setTaxClass, message, points, setPoints, numQuestions, setNumQuestions  }) {
+export function TaxClassForm({
+    commonName, 
+    taxClass, 
+    setTaxClass, 
+    message, 
+    points, 
+    setPoints, 
+    numQuestions, 
+    setNumQuestions  }) {
     
     if (taxClass === "sarcopterygii" || taxClass === "actinopterygii" || taxClass === "chondrichthyes") {
         setTaxClass("fish");
@@ -50,8 +58,8 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
 
     return (
         <Paper
-        elevation={8}
-        sx={{ padding: 3, mt: 3 }}>
+            elevation={8}
+            sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
                 <RadioGroup>
@@ -90,7 +98,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <label htmlFor='Reptiles'>
                     <Radio
-                        // type="radio"
                         name="vertebrateGroup"
                         value="reptilia"
                         id="Reptiles"
@@ -101,7 +108,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <label htmlFor='Fish'>
                     <Radio
-                        // type="radio"
                         name="vertebrateGroup"
                         value="fish"
                         id="Fish"
@@ -112,7 +118,6 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <label htmlFor='Other'>
                     <Radio 
-                        // type="radio"
                         name="vertebrateGroup"
                         value="other"
                         id="Other"
@@ -123,13 +128,21 @@ export function TaxClassForm({commonName, taxClass, setTaxClass, message, points
                 </label>
                 <div>
                     { !feedback ? 
-                    <Button type="submit">Check answer</Button>
+                        <Button type="submit">Check answer</Button>
                     : null }
                     { feedback === message.incorrect ?
-                    <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
+                        <Button 
+                            id="alt-button" 
+                            type="reset" 
+                            onClick={handleReset}>Clear answer
+                        </Button>
                     : null }
                 </div>
-                <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+                <Typography 
+                    id="quiz-feedback" 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}
+                </Typography>
             </RadioGroup>
             </fieldset>
         </form>

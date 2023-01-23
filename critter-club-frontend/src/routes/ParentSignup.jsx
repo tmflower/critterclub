@@ -36,7 +36,10 @@ export function ParentSignup ({ alert, setAlert }) {
     async function signup(parent) {
         // responses for successful and unsuccessful signup
         try {
-          await usersAPI.registerParent(parent)
+            await usersAPI.registerParent(parent);
+            setParentUsername(username);
+            setAlert({severity: "success", message: `You have registered, ${username}!`});  
+            setFormWasSubmitted(true);
         }
         catch (err) {
           setAlert({severity: "warning", message: err});
@@ -47,10 +50,6 @@ export function ParentSignup ({ alert, setAlert }) {
         evt.preventDefault();
         const parent = { username, password, firstName, lastName, email }      
         await signup(parent);
-        setParentUsername(username); 
-        setAlert({severity: "success", message: `You have registered, ${username}!`});
-        setFormData(initial_state);   
-        setFormWasSubmitted(true);
     }
 
     return (
@@ -59,7 +58,12 @@ export function ParentSignup ({ alert, setAlert }) {
             sx={{ padding: 3 }}>
             
             {alert.message.length ? 
-                <Alert variant="filled" severity={alert.severity}>{alert.message}</Alert> : null}
+                <Alert 
+                    variant="filled" 
+                    severity={alert.severity}>{alert.message}
+                </Alert> 
+            : 
+            null}
 
             {!formWasSubmitted ?
             <div>
@@ -72,63 +76,75 @@ export function ParentSignup ({ alert, setAlert }) {
                 <form className="signup-form">
                     <FormControl sx={{ width: '25ch', m: 2 }}>
                     <Stack spacing={2}>
-                    <TextField 
-                        type="text" 
-                        name="username" 
-                        value={username} 
-                        id="username" 
-                        label="Username"
-                        onChange={handleChange}>
-                    </TextField>
-                    <Box>
                         <TextField 
-                            type={passwordShowing ? "text" : "password"} 
-                            name="password" 
-                            value={password} 
-                            id="password"
-                            label="Password" 
+                            type="text" 
+                            name="username" 
+                            value={username} 
+                            id="username" 
+                            label="Username"
                             onChange={handleChange}>
-                        </TextField>                        
-                            {!passwordShowing ?
-                            <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
-                            :
-                            <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}                        
-                    </Box>
-                    <TextField 
-                        type="text" 
-                        name="firstName" 
-                        value={firstName} 
-                        id="firstName" 
-                        label="First name"
-                        onChange={handleChange}>
-                    </TextField>
-                    <TextField 
-                        type="text" 
-                        name="lastName" 
-                        value={lastName} 
-                        id="lastName"
-                        label="Last name" 
-                        onChange={handleChange}>
-                    </TextField>
-                    <TextField 
-                        type="text" 
-                        name="email" 
-                        value={email} 
-                        id="email" 
-                        label="Email"
-                        onChange={handleChange}>
-                    </TextField>
+                        </TextField>
+                        <Box>
+                            <TextField 
+                                type={passwordShowing ? "text" : "password"} 
+                                name="password" 
+                                value={password} 
+                                id="password"
+                                label="Password" 
+                                onChange={handleChange}>
+                            </TextField>                        
+                                {!passwordShowing ?
+                                <span 
+                                    className="material-symbols-outlined" 
+                                    onClick={toggle}>visibility
+                                </span>
+                                :
+                                <span 
+                                    className="material-symbols-outlined" 
+                                    onClick={toggle}>visibility_off
+                                </span>}                        
+                        </Box>
+                        <TextField 
+                            type="text" 
+                            name="firstName" 
+                            value={firstName} 
+                            id="firstName" 
+                            label="First name"
+                            onChange={handleChange}>
+                        </TextField>
+                        <TextField 
+                            type="text" 
+                            name="lastName" 
+                            value={lastName} 
+                            id="lastName"
+                            label="Last name" 
+                            onChange={handleChange}>
+                        </TextField>
+                        <TextField 
+                            type="text" 
+                            name="email"                    
+                            value={email} 
+                            id="email" 
+                            label="Email"
+                            onChange={handleChange}>
+                        </TextField>
 
-                    <Button id="parent-signup-button" onClick={handleSubmit}>Submit</Button> 
+                        <Button 
+                            id="parent-signup-button" 
+                            onClick={handleSubmit}>Submit
+                        </Button> 
                     </Stack>
                     </FormControl>              
                 </form>
             </div>
             :
             <Box sx={{ p: 3 }}>
-                <NavLink exact="true" to={`/parent/${parentUsername}`} end>Reveal your access code</NavLink>
-            </Box>
-            
+                <NavLink 
+                    exact="true" 
+                    to={`/parent/${parentUsername}`} 
+                    end>Reveal your access code
+                </NavLink>
+            </Box>            
             }
         </Paper>        
     )

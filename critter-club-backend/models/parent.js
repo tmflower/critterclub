@@ -9,6 +9,7 @@ const {
   } = require("../expressError");
 
   /** methods for adding a new parent to the db and accessing data for registered parent */
+
   class Parent {
     /** add a new parent to db */
     static async register(
@@ -24,9 +25,10 @@ const {
         if (checkUsername.rows[0]) {
             throw new BadRequestError(`Sorry! The username ${username} is already taken.`);
         }
-        /** ensure that username meets requirements */
-        if (username.length < 4 || username.length > 15) throw new BadRequestError('Your username must be between 4-15 characters.')
+        /** ensure that username meets length requirements */
+        if (username.length < 4 || username.length > 15) throw new BadRequestError('Your username must be between 4-15 characters.');
 
+        /** ensure that username meets complexity requirements */
         if ((password.length < 6 || password.length > 15) || 
             (!(/[0-9]/g).test(password)) || 
             (!(/[!@#$%^&*()_+=.,;:"`~]/g).test(password))) { 
@@ -83,7 +85,7 @@ const {
   
       const parent = parentRes.rows[0];
   
-      if (!parent) throw new Error(`No parent: ${username}`);
+      if (!parent) throw new BadRequestError(`No parent by the name ${username} has registered.`);
   
       return parent;
     }

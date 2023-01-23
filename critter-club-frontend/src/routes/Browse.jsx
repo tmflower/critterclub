@@ -12,7 +12,7 @@ import usersAPI from '../api/usersAPI';
  * 
  */
 
-export function Browse({allAnimals}) {
+export function Browse({ allAnimals }) {
     
     // Variable to check if user is logged in
     const currentUser = useContext(UserContext);
@@ -48,40 +48,74 @@ export function Browse({allAnimals}) {
 
     return (
         <Paper
-        elevation={8}
-        sx={{ padding: 8 }}>
+            elevation={8}
+            sx={{ padding: 8 }}>
         {!currentUser ? 
-        <div>
-            <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
-            <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
-        </div>
-        :
-        <Box sx={{ maxWidth: '800px' }}>
-            {!allAnimals.length ? (
             <div>
-                <p>Please wait while we collect all the animals!</p>
-                <img src="https://media.giphy.com/media/a9wFQSc0oRQGI/giphy.gif" alt="herding cats"></img>
-            </div>) 
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:
+                </Typography>
+                <NavLink 
+                    to="/signup" 
+                    className='navbar-link'>
+                        <Button>Join the Critter Club!</Button>
+                </NavLink>    
+            </div>
             :
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1, textAlign: 'center' }}>Browse All Animals</Typography>
-                
-                {animalsByAlphabet.length > 0 ? <Button id="alt-button" onClick={reset}>Clear List</Button> : null}
+            <Box sx={{ maxWidth: '800px' }}>
+                {!allAnimals.length ? 
+                (<div>
+                    <p>Please wait while we collect all the animals!</p>
+                    <img 
+                        src="https://media.giphy.com/media/a9wFQSc0oRQGI/giphy.gif" 
+                        alt="herding cats">
+                    </img>
+                </div>) 
+                :
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Typography 
+                        variant="h3" 
+                        sx={{ fontFamily: theme.typography.primary, m: 1, textAlign: 'center' }}>Browse All Animals
+                    </Typography>
+                    
+                    {animalsByAlphabet.length > 0 ? 
+                        <Button 
+                            id="alt-button" 
+                            onClick={reset}>Clear List
+                        </Button> 
+                    : null}
 
-                {animalsByAlphabet.map((animal, i) => 
-                (
-                <NavLink className="link" to={`/animals/${animal.name}`} key={i}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>                        
-                        <Typography variant="h5" fontFamily={theme.typography.list} sx={{ m: 3 }} key={i}>{animal.name}</Typography>
-                        <img src={animalIcons.filter((animalIcon) => (animalIcon.common_name === animal.name)).map((animalIcon) => animalIcon.photo)} alt={animal.name} height='60px' width='auto'/>
-                    </Box>
-                </NavLink>)
-                )}
-                <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                {alphabet.map((letter) => (<Button id="alphabet-button" onClick={handleClick} value={letter} key={letter}>{letter}</Button>))}   
-                </Box>            
-            </Box>}           
-        </Box>}
+                    {animalsByAlphabet.map((animal, i) => 
+                    (<NavLink 
+                        className="link" 
+                        to={`/animals/${animal.name}`} 
+                        key={i}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>                        
+                            <Typography 
+                                variant="h5" 
+                                fontFamily={theme.typography.list} 
+                                sx={{ m: 3 }} 
+                                key={i}>{animal.name}
+                            </Typography>
+                            <img 
+                                src={animalIcons.filter((animalIcon) => (animalIcon.common_name === animal.name)).map((animalIcon) => animalIcon.photo)} alt={animal.name} 
+                                height='60px' 
+                                width='auto'/>
+                        </Box>
+                    </NavLink>)
+                    )}
+                    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                    {alphabet.map((letter) => 
+                        (<Button 
+                            id="alphabet-button" 
+                            onClick={handleClick} 
+                            value={letter} 
+                            key={letter}>{letter}
+                        </Button>))}   
+                    </Box>            
+                </Box>}           
+            </Box>}
         </Paper>
     )
 }

@@ -4,7 +4,15 @@ import { theme } from '../theme/theme';
 
 /** LocationsForm renders a question with checkbox answers */
 
-export function LocationsForm({commonName, locations, message, points, setPoints, numQuestions, setNumQuestions, validLocations  }) {
+export function LocationsForm({
+    commonName, 
+    locations, 
+    message, 
+    points, 
+    setPoints, 
+    numQuestions, 
+    setNumQuestions, 
+    validLocations  }) {
 
     // set each location choice to unchecked by default
     const initialState = { 

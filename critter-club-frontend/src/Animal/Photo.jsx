@@ -25,13 +25,35 @@ export function Photo ({ animalName }) {
         <Box sx={{ width: "auto", display: "flex", flexDirection: "column", alignItems: "center"}}>
             {photo.length ?
             <Stack>
-                <img src={photo} alt={animalName} width="200px" className="photo"/>
-                <small>Photo by <a href={photographerLink} target="_blank" rel="noreferrer">{photographer}</a> on <a href="https://unsplash.com/?utm_source=critterclub&utm_medium=referral" target="_blank" rel="noreferrer">Unsplash</a></small>
+                <img 
+                    src={photo} 
+                    alt={animalName} 
+                    width="200px" 
+                    className="photo"/>
+                <small>Photo by 
+                    <a 
+                        href={photographerLink} 
+                        target="_blank" 
+                        rel="noreferrer">{photographer}
+                    </a> on 
+                    <a 
+                        href="https://unsplash.com/?utm_source=critterclub&utm_medium=referral" 
+                        target="_blank" 
+                        rel="noreferrer">Unsplash
+                    </a>
+                </small>
             </Stack>
             :
             <Stack>
-                <img src="https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif" alt="none available" width="200px" className="photo"/>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary }}>We don't have a photo of the {animalName} yet.</Typography>
+                <img 
+                    src="https://media.giphy.com/media/WTVw3goakrX68WnHk8/giphy.gif" 
+                    alt="none available" 
+                    width="200px" 
+                    className="photo"/>
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary }}>We don't have a photo of the {animalName} yet.
+                </Typography>
             </Stack>
             }
 

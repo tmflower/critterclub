@@ -21,10 +21,17 @@ export function Fact({ emoji, title, text, listItems }) {
                 backgroundColor: theme.palette.primary.main }}>
             <p className='emoji'>{emoji}</p>
             {!factShowing ?
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.secondary }}>{title}</Typography>
+            <Typography 
+                variant="h6" 
+                sx={{ fontFamily: theme.typography.secondary }}>{title}
+            </Typography>
             :
-            <Typography variant="h6" sx={{ fontFamily: theme.typography.secondary }}>{text}
-                {listItems ? <List>{listItems.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</List> : null}
+            <Typography 
+                variant="h6" 
+                sx={{ fontFamily: theme.typography.secondary }}>{text}
+                {listItems ? 
+                    <List>{listItems.map((item, i) => <ListItem key={i}>{item}</ListItem>)}</List> 
+                : null}
             </Typography>                
             }            
         </Paper>

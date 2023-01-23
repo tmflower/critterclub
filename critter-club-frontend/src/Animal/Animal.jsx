@@ -186,14 +186,33 @@ export function Animal() {
         <Box> 
             { !currentUser ?   
             <Paper
-                elevation={8} sx={{ padding: 20 }}>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
-                <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
+                elevation={8} 
+                sx={{ padding: 20 }}>
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:
+                </Typography>
+                <NavLink 
+                    to="/signup" 
+                    className='navbar-link'>
+                    <Button>Join the Critter Club!</Button>
+                </NavLink>    
             </Paper>
             :
             <>                            
-            {isLoading ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Collecting your animal information!</Typography> :
-                <div>{!animalExists ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sorry, we don't have information about that animal yet!</Typography> : 
+            {isLoading ? 
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Collecting your animal information!
+                </Typography>
+                :
+                <div>
+                {!animalExists ? 
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sorry, we don't have information about that animal yet!
+                    </Typography>
+                    : 
                     <div>{!animalSelected ?                             
                         <Box> 
                             <Grid 
@@ -205,14 +224,22 @@ export function Animal() {
                                 textAlign="center"
                                 >                  
                                     <Grid item xs={12} lg={6}>
-                                        <Typography variant="h2" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Meet the {commonName}!</Typography>
+                                        <Typography 
+                                            variant="h2" 
+                                            sx={{ fontFamily: theme.typography.primary, m: 1 }}>Meet the {commonName}!
+                                        </Typography>
                                         
-                                        <Stack
-                                            alignItems="center">
+                                        <Stack alignItems="center">
                                         {badgeCollected ? 
                                         <>
-                                        <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}>You've already collected this badge. Great job! Let's try for your next one!</Typography>
-                                        <Typography variant="h6" sx={{ fontFamily: theme.typography.primary, m: 1 }}> <NavLink to="/animals/browse">Check out more animals</NavLink></Typography>
+                                        <Typography 
+                                            variant="h6" 
+                                            sx={{ fontFamily: theme.typography.primary, m: 1 }}>You've already collected this badge. Great job! Let's try for your next one!
+                                        </Typography>
+                                        <Typography 
+                                            variant="h6" 
+                                            sx={{ fontFamily: theme.typography.primary, m: 1 }}> <NavLink to="/animals/browse">Check out more animals</NavLink>
+                                        </Typography>
                                         </>
                                         :
                                         <Button onClick={selectAnimal}>Earn the {commonName} badge</Button>} 
@@ -242,9 +269,11 @@ export function Animal() {
 
                             <Grid container textAlign="center"> 
                                 <Grid item xs={12} sx={{ mt: 3 }}>
-                                    <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Click on each topic to learn about the {commonName}</Typography>
+                                    <Typography 
+                                        variant="h4" 
+                                        sx={{ fontFamily: theme.typography.primary, m: 1 }}>Click on each topic to learn about the {commonName}
+                                    </Typography>
                                 </Grid>
-
 
                             {scientificName ? 
                                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -340,7 +369,10 @@ export function Animal() {
                                 direction="column"
                                 alignItems="center"
                                 >  
-                                <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Check out this video for more about the {commonName}!</Typography>
+                                <Typography 
+                                    variant="h4" 
+                                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Check out this video for more about the {commonName}!
+                                </Typography>
 
                                 <Video animalName={animalName}></Video>
                             </Grid>

@@ -13,9 +13,6 @@ export function Signup({ signup, alert }) {
         password: '',
         accessCode: ''
     }
-    // variable and function to control display of alerts
-    const [alertShowing, setAlertShowing] = useState(false);
-    const closeAlert = () => setAlertShowing(false);
 
     // control masking and unmasking of password field
     const [passwordShowing, setPasswordShowing] = useState(false);
@@ -35,63 +32,67 @@ export function Signup({ signup, alert }) {
         evt.preventDefault();
         const newUser = { username, password, accessCode };        
         await signup(newUser);
-        setAlertShowing(true);  
         localStorage.setItem("username", username);
         setFormData(initial_state);       
     }
-
-
 
     return (
         <Paper
         elevation={8}
         sx={{ padding: 3 }}>            
-            {alert.message.length && alertShowing ? 
-            <Alert variant="filled" severity={alert.severity}>{alert.message}</Alert> : null}            
+            {alert.message.length ? 
+            <Alert 
+                variant="filled" 
+                severity={alert.severity}>{alert.message}
+            </Alert> 
+            : null}            
             <h1>Join the Critter Club!</h1>
             <p>You'll need the access code from your parent's account to sign up.</p>
-            <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.</p>
+            <p>Don't have an access code yet? Grab your nearest parent and ask them to hop on over to the <NavLink to="/parent">Parent Page</NavLink>.
+            </p>
             <form>                
                 <FormControl sx={{ width: '25ch', m: 2 }}>
                 <Stack spacing={2}>
-                <TextField 
-                    type="text" 
-                    name="username" 
-                    value={username} 
-                    id="username" 
-                    label="Username"
-                    onChange={handleChange}>
-                </TextField>
-
-                <Box>
                     <TextField 
-                        type={passwordShowing ? "text" : "password"} 
-                        name="password" 
-                        value={password} 
-                        id="password" 
-                        label="Password"
+                        type="text" 
+                        name="username" 
+                        value={username} 
+                        id="username" 
+                        label="Username"
                         onChange={handleChange}>
                     </TextField>
-                        {!passwordShowing ?
-                        <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
-                        :
-                        <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}
-                </Box>
 
-                <TextField                
-                    type="text" 
-                    name="accessCode" 
-                    value={accessCode} 
-                    id="accessCode"
-                    label="Access code" 
-                    onChange={handleChange}>
-                </TextField>
+                    <Box>
+                        <TextField 
+                            type={passwordShowing ? "text" : "password"} 
+                            name="password" 
+                            value={password} 
+                            id="password" 
+                            label="Password"
+                            onChange={handleChange}>
+                        </TextField>
+                            {!passwordShowing ?
+                            <span className="material-symbols-outlined" onClick={toggle}>visibility</span>
+                            :
+                            <span className="material-symbols-outlined" onClick={toggle}>visibility_off</span>}
+                    </Box>
 
-                <Button id="signup-button" onClick={handleSubmit}>Submit</Button> 
+                    <TextField                
+                        type="text" 
+                        name="accessCode" 
+                        value={accessCode} 
+                        id="accessCode"
+                        label="Access code" 
+                        onChange={handleChange}>
+                    </TextField>
+
+                    <Button 
+                        id="signup-button" 
+                        onClick={handleSubmit}>Submit
+                    </Button> 
                 </Stack> 
                 </FormControl>                           
-            </form>
-            
+            </form>            
         </Paper>
     )
 }

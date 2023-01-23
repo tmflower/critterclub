@@ -43,7 +43,9 @@ export function Navbar({ logout }) {
                             fullWidth>
                         <AppBar position="static">
                             <Toolbar>
-                                <Typography variant="h5" sx={{ flexGrow: 1, fontFamily: theme.typography.secondary }}>
+                                <Typography 
+                                    variant="h5" 
+                                    sx={{ flexGrow: 1, fontFamily: theme.typography.secondary }}>
                                     Menu
                                 </Typography>
                                 <IconButton onClick={onCloseHandler}>
@@ -54,20 +56,75 @@ export function Navbar({ logout }) {
                         {currentUser ? 
                         <Box
                             sx={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/dashboard" end>Dashboard</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/animals/browse" end>Browse</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile"exact="true" to="/animals/search">Search</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to={`animals/random`} end>Random</NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to="/dashboard" 
+                                end>Dashboard
+                                </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to="/animals/browse" 
+                                end>Browse
+                            </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile"
+                                exact="true" 
+                                to="/animals/search">Search
+                            </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to={`animals/random`} 
+                                end>Random
+                            </NavLink>
 
-                            <Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', width: '20%' }} onClick={logout}>Logout</Button>
+                            <Button 
+                                variant="contained" 
+                                sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', width: '20%' }} 
+                                onClick={logout}>Logout
+                            </Button>
                         </Box>
                         :
                         <Box
                             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/" end>Home</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/signup" end>Signup</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link-mobile" exact="true" to="/parent" end>Parent Page</NavLink>
-                            <NavLink onClick={onCloseHandler} className="navbar-link" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to="/" 
+                                end>Home
+                            </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler}   
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to="/signup" 
+                                end>Signup
+                            </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link-mobile" 
+                                exact="true" 
+                                to="/parent" 
+                                end>Parent Page
+                            </NavLink>
+                            <NavLink 
+                                onClick={onCloseHandler} 
+                                className="navbar-link" 
+                                exact="true" 
+                                to="/login" 
+                                end>
+                                <Button 
+                                    variant="contained" 
+                                    sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login
+                                </Button>
+                            </NavLink>
                         </Box>}
                     </Dialog>
                 </Hidden>
@@ -83,24 +140,71 @@ export function Navbar({ logout }) {
                         }}>
                     {currentUser ? 
                     <>
-                        <NavLink className="navbar-link" exact="true" to="/dashboard" end>Dashboard</NavLink>
-                        <NavLink className="navbar-link" exact="true" to="/animals/browse" end>Browse</NavLink>
-                        <NavLink className="navbar-link" exact="true" to="/animals/search" end>Search</NavLink>
-                        <NavLink className="navbar-link" exact="true" to={`animals/random`} end>Random</NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/dashboard" 
+                            end>Dashboard
+                        </NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/animals/browse" 
+                            end>Browse
+                        </NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/animals/search" 
+                            end>Search
+                        </NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to={`animals/random`} 
+                            end>Random
+                        </NavLink>
                     </>
                     :
                     <>
-                        <NavLink className="navbar-link" exact="true" to="/" end>Home</NavLink>                           
-                        <NavLink className="navbar-link" exact="true" to="/signup" end>Signup</NavLink>
-                        <NavLink className="navbar-link" exact="true" to="/parent" end>Parent Page</NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/" 
+                            end>Home
+                        </NavLink>                           
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/signup" 
+                            end>Signup
+                        </NavLink>
+                        <NavLink 
+                            className="navbar-link" 
+                            exact="true" 
+                            to="/parent" 
+                            end>Parent Page
+                        </NavLink>
                     </>}                   
                 </Typography>
                 {currentUser ? 
-                    <Button variant="contained" sx={{ fontFamily: theme.typography.secondary }} onClick={logout}>Logout</Button>
+                    <Button 
+                        variant="contained" 
+                        sx={{ fontFamily: theme.typography.secondary }} 
+                        onClick={logout}>Logout
+                    </Button>
                     :
-                    <NavLink className="navbar-link" exact="true" to="/login" end><Button variant="contained" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login</Button></NavLink>
-                }
-                    
+                    <NavLink 
+                        className="navbar-link" 
+                        exact="true" 
+                        to="/login" 
+                        end>
+                        <Button 
+                            variant="contained" 
+                            sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}>Login
+                        </Button>
+                    </NavLink>
+                }                   
               </Hidden>             
             </Toolbar>
           </AppBar>

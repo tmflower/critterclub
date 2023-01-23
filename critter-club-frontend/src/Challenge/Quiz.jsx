@@ -107,21 +107,26 @@ export function Quiz({
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10rem' }}>
-                <Paper className="popup" sx={{ padding: '2rem '}}>
+                <Paper 
+                    className="popup" 
+                    sx={{ padding: '2rem '}}>
                     <IconButton onClick={handleClose}>
                         <Close sx={{ color: theme.typography.primary }}/>
                     </IconButton>
                     <Stack>
-                        <img id="modal-img"src={gif} alt="celebration"/>
+                        <img 
+                            id="modal-img"
+                            src={gif} 
+                            alt="celebration"/>
                         <Typography 
-                        id="modal-modal-title" 
-                        variant="h4" 
-                        sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>Congratulations, {username}!
+                            id="modal-modal-title" 
+                            variant="h4" 
+                            sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>Congratulations, {username}!
                         </Typography>
                         <Typography 
-                        id="modal-modal-description" 
-                        variant="h5" 
-                        sx={{ mt: 2, fontFamily: theme.typography.primary, textAlign: 'center' }}>You earned {points} points and the {commonName} badge!
+                            id="modal-modal-description" 
+                            variant="h5" 
+                            sx={{ mt: 2, fontFamily: theme.typography.primary, textAlign: 'center' }}>You earned {points} points and the {commonName} badge!
                         </Typography>
                     </Stack>
 
@@ -130,32 +135,48 @@ export function Quiz({
             </Modal>
 
             <Box sx={{ 
-                display: 'flex',
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                textAlign: 'center'}}>
+                    display: 'flex',
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    textAlign: 'center'}}>
                 <Typography 
-                variant="h3" 
-                sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!
+                    variant="h3" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Take the {commonName.toUpperCase()} challenge!
                 </Typography>
-                <img src={icon} alt={commonName} width="400px" className="animalIcon"/>
+                <img 
+                    src={icon} 
+                    alt={commonName} 
+                    width="400px" 
+                    className="animalIcon"/>
                 <Typography 
-                variant="h5" 
-                sx={{ fontFamily: theme.typography.primary, m: 2 }}>Earn 10 points for each correct answer. Check each answer as you go. If you get it wrong, you can check the animal info and try again.</Typography>
-                <img src={icon} alt={commonName} width="80px"/>
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 2 }}>Earn 10 points for each correct answer. Check each answer as you go. If you get it wrong, you can check the animal info and try again.
+                </Typography>
+                <img 
+                    src={icon} 
+                    alt={commonName} 
+                    width="80px"/>
                 <Typography 
-                variant="h5" 
-                sx={{ fontFamily: theme.typography.primary, m: 2 }}>When at least 2 answers are correct, the <span id="mock-btn">Submit Answers</span> button will appear at the bottom of the page.</Typography>
-                <img src={icon} alt={commonName} width="80px"/>
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 2 }}>When at least 2 answers are correct, the <span id="mock-btn">Submit Answers</span> button will appear at the bottom of the page.
+                </Typography>
+                <img 
+                    src={icon} 
+                    alt={commonName} 
+                    width="80px"/>
                 <Typography 
-                variant="h5" 
-                sx={{ fontFamily: theme.typography.primary, m: 2 }}>For more points and faster leveling up, answer any additional questions before you submit your answers.</Typography>
-                <img src={icon} alt={commonName} width="80px"/>
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 2 }}>For more points and faster leveling up, answer any additional questions before you submit your answers.
+                </Typography>
+                <img 
+                    src={icon} 
+                    alt={commonName} 
+                    width="80px"/>
                 <Typography 
-                variant="h5" 
-                sx={{ fontFamily: theme.typography.primary, m: 2 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.</Typography>
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 2 }}>Visit your <Link to="/dashboard">dashboard</Link> to see your current level and how many points you need to level up.
+                </Typography>
             </Box>
-
 
             <DietForm 
                 commonName={commonName} 
@@ -179,48 +200,60 @@ export function Quiz({
                 validLocations={validLocations}
                 >
             </LocationsForm>
+
             {phylum === "Chordata" ?  
-            <TaxClassForm 
-                commonName={commonName} 
-                taxClass={taxClass} 
-                setTaxClass={setTaxClass} 
-                phylum={phylum}
-                message={message}
-                points={points}
-                setPoints={setPoints}
-                numQuestions={numQuestions}
-                setNumQuestions={setNumQuestions}
-                >
-            </TaxClassForm> 
-            : null}            
+                <TaxClassForm 
+                    commonName={commonName} 
+                    taxClass={taxClass} 
+                    setTaxClass={setTaxClass} 
+                    phylum={phylum}
+                    message={message}
+                    points={points}
+                    setPoints={setPoints}
+                    numQuestions={numQuestions}
+                    setNumQuestions={setNumQuestions}
+                    >
+                </TaxClassForm> 
+            : null} 
+
             { prey ? 
-            <PreyForm 
-                commonName={commonName} 
-                prey={prey}
-                message={message}
-                points={points}
-                setPoints={setPoints}
-                numQuestions={numQuestions}
-                setNumQuestions={setNumQuestions}
-                >
-            </PreyForm> 
+                <PreyForm 
+                    commonName={commonName} 
+                    prey={prey}
+                    message={message}
+                    points={points}
+                    setPoints={setPoints}
+                    numQuestions={numQuestions}
+                    setNumQuestions={setNumQuestions}
+                    >
+                </PreyForm> 
             : null }
+
             {scientificName ?
-            <ScientificNameForm 
-                commonName={commonName} 
-                scientificName={scientificName}
-                message={message}
-                points={points}
-                setPoints={setPoints}
-                numQuestions={numQuestions}
-                setNumQuestions={setNumQuestions}
-                >
-            </ScientificNameForm>  
+                <ScientificNameForm 
+                    commonName={commonName} 
+                    scientificName={scientificName}
+                    message={message}
+                    points={points}
+                    setPoints={setPoints}
+                    numQuestions={numQuestions}
+                    setNumQuestions={setNumQuestions}
+                    >
+                </ScientificNameForm>  
             : null }   
-            <Button type="button" onClick={handleClick} id="alt-button">Return to animal info</Button>
+
+            <Button 
+                type="button" 
+                onClick={handleClick} 
+                id="alt-button">Return to animal info
+            </Button>
             { numQuestions >= minNumQuestionsRequired ?           
-            <Button type="submit" onClick={handleSubmit} id="alt-button">Submit Your Answers</Button> : null }
-            <Link to="/dashboard"></Link>
+                <Button 
+                    type="submit" 
+                    onClick={handleSubmit} 
+                    id="alt-button">Submit Your Answers
+                </Button> 
+            : null }
         </Box>
     )
 }

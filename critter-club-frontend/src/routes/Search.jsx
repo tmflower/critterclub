@@ -50,30 +50,76 @@ export function Search({ allAnimals }) {
             sx={{ padding: 20 }}>
         {!currentUser ? 
             <div>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
-                <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:
+                </Typography>
+                <NavLink 
+                    to="/signup" 
+                    className='navbar-link'>
+                    <Button>Join the Critter Club!</Button>
+                </NavLink>    
             </div>
         :
         <div>
-            {!allAnimals.length ? (
-            <div>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1}}>Please wait while we collect all the animals!</Typography>
-                <img src="https://media.giphy.com/media/a9wFQSc0oRQGI/giphy.gif" alt="herding cats"></img>
+            {!allAnimals.length ? 
+            (<div>
+                <Typography 
+                    variant="h5" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1}}>
+                    Please wait while we collect all the animals!
+                </Typography>
+                <img 
+                    src="https://media.giphy.com/media/a9wFQSc0oRQGI/giphy.gif" 
+                    alt="herding cats"/>
             </div>) 
             :
             <div>
-                <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Search for an Animal</Typography>
+                <Typography 
+                    variant="h3" 
+                    sx={{ fontFamily: theme.typography.primary, m: 1 }}>
+                    Search for an Animal
+                </Typography>
                 <form onSubmit={handleSubmit}>                    
-                    <TextField type="search" onChange={handleSearch} value={searchTerm} label="Search"></TextField>                    
+                    <TextField 
+                        type="search" 
+                        onChange={handleSearch} 
+                        value={searchTerm} 
+                        label="Search">
+                    </TextField>                    
                 </form>
-                {!searchTerm.length ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Start typing to search for an animal.</Typography> : 
-                <Box>
-                    {matchingAnimals.length ? 
-                    (matchingAnimals.map((animal, i) => (<NavLink className="link" to={`/animals/${animal.name}`} key={i}>
-                        <Box sx={{ display: 'flex', flexDirection: 'row'}}><Typography variant="h5" fontFamily={theme.typography.list} sx={{ m: 3 }} key={i}>{animal.name}</Typography>
-                    <img src={animalIcons.filter((animalIcon) => (animalIcon.common_name === animal.name)).map((animalIcon) => animalIcon.photo)} alt={animal.name} height='60px' width='auto'/></Box></NavLink>)))                    
-                    : (<p>Sorry, we don't have information about that animal.</p>)}
-                </Box>
+                {!searchTerm.length ? 
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.primary, m: 1 }}>
+                        Start typing to search for an animal.
+                    </Typography> 
+                : 
+                    <Box>
+                        {matchingAnimals.length ? 
+                        (matchingAnimals.map((animal, i) => 
+                            (<NavLink 
+                                className="link" 
+                                to={`/animals/${animal.name}`} 
+                                key={i}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+                                        <Typography 
+                                            variant="h5" 
+                                            fontFamily={theme.typography.list} 
+                                            sx={{ m: 3 }} 
+                                            key={i}>{animal.name}
+                                        </Typography>
+                                        <img 
+                                            src={animalIcons.filter((animalIcon) => 
+                                                (animalIcon.common_name === animal.name))
+                                                .map((animalIcon) => animalIcon.photo)} 
+                                            alt={animal.name} 
+                                            height='60px' 
+                                            width='auto'/>
+                                    </Box>
+                            </NavLink>)))                    
+                        : (<p>Sorry, we don't have information about that animal.</p>)}
+                    </Box>
                 }
             </div> }       
             <div/>

@@ -4,7 +4,14 @@ import { theme } from '../theme/theme';
 
 /** ScientificNameForm renders a question with a text input */
 
-export function ScientificNameForm({ commonName, scientificName, message, points, setPoints, numQuestions, setNumQuestions  }) {
+export function ScientificNameForm({ 
+    commonName, 
+    scientificName, 
+    message, 
+    points, 
+    setPoints, 
+    numQuestions, 
+    setNumQuestions  }) {
     
     // Display form with no default answers and no initial message
     const initialState = {userGuess: ''}
@@ -67,13 +74,21 @@ export function ScientificNameForm({ commonName, scientificName, message, points
             </label>
             <div>
                 { !feedback ? 
-                <Button type="submit">Check answer</Button>
+                    <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
-                : null }
+                    <Button 
+                        id="alt-button" 
+                        type="reset" 
+                        onClick={handleReset}>Clear answer
+                    </Button>
+                    : null }
             </div>
-            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+            <Typography 
+                id="quiz-feedback" 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}
+            </Typography>
             </fieldset>
         </form>
         </Paper>

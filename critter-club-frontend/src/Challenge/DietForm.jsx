@@ -4,7 +4,14 @@ import { theme } from '../theme/theme';
 
 /** DietForm renders a question with radio button answers */
 
-export function DietForm({commonName, diet, message, points, setPoints, numQuestions, setNumQuestions }) {
+export function DietForm({
+    commonName, 
+    diet, 
+    message, 
+    points, 
+    setPoints, 
+    numQuestions, 
+    setNumQuestions }) {
 
     // Display form with no default answers and no initial message
     const initialState = {animalDiet: ''};
@@ -42,8 +49,8 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
 
     return (
         <Paper
-        elevation={8}
-        sx={{ padding: 3, mt: 3 }}>
+            elevation={8}
+            sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
             <RadioGroup>
@@ -83,13 +90,21 @@ export function DietForm({commonName, diet, message, points, setPoints, numQuest
             </label>
             <div>
                 { !feedback ? 
-                <Button type="submit">Check answer</Button>
+                    <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
+                    <Button 
+                        id="alt-button" 
+                        type="reset" 
+                        onClick={handleReset}>Clear answer
+                    </Button>
                 : null }
             </div>
-            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+            <Typography 
+                id="quiz-feedback" 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}
+            </Typography>
             </RadioGroup>
             </fieldset>
         </form>

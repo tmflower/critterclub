@@ -5,7 +5,6 @@ import AnimalsAPI from './api/animalsAPI';
 import { Home } from './routes/Home';
 import { Dashboard } from './routes/Dashboard';
 import { Animal } from './Animal/Animal';
-import { Quiz } from './Challenge/Quiz';
 import { Browse } from './routes/Browse';
 import { Search } from './routes/Search';
 import { Random } from './routes/Random';
@@ -94,7 +93,6 @@ export function App() {
     setToken('');
     setUsername('');
     setCurrentUser(null);
-    localStorage.removeItem('user');
     localStorage.removeItem('username');
     localStorage.removeItem('token');
     setJustLoggedOut(true);
@@ -129,7 +127,6 @@ export function App() {
             <Route path="/animals/search" element={<Search allAnimals={allAnimals} />}></Route>
             <Route path="/animals/random" element={<Random/>}></Route>
             <Route path="/animals/:animalName" element={<Animal />}></Route>
-            <Route path="/quiz" element={<Quiz />}></Route>
           </Routes>       
       </Box>
       </UserContext.Provider>

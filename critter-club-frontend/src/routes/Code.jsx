@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import usersAPI from "../api/usersAPI";
 import { useParams, NavLink } from "react-router-dom";
 import { Button, Typography, Paper } from "@mui/material";
+import komodo from "../assets/images/animal-icons/komododragon.jpg";
 
 /** Code renders the 4-digit number generated when parent registered for account
  * The child will need to enter the access code when setting up their account
@@ -28,10 +29,28 @@ export function Code() {
     },[parentUsername]);
 
     return (
-        <Paper elevation={8} sx={{ p: 4 }}>
-            {accessCode ? <Typography>Your access code is: {accessCode}</Typography> : null}
-            <Typography>Your child will need to enter this code in order to set up a user account.</Typography>
-            <NavLink className="link" exact="true" to="/signup" end><Button>Child signup</Button></NavLink>
+        <Paper 
+            elevation={8} 
+            sx={{ p: 4 }}>
+            {accessCode ? 
+            <>            
+                <Typography>Your access code is: {accessCode}</Typography> 
+                <Typography>Your child will need to enter this code in order to set up a user account.</Typography>
+                <NavLink 
+                    className="link" 
+                    exact="true" 
+                    to="/signup" 
+                    end>
+                    <Button>Child signup</Button>
+                </NavLink>
+            </>
+            : 
+            <>
+                <p>Hmmm...our komodo dragon seems to have eaten your access code.</p>
+                <img src={komodo} alt="komodo dragon" width="80px"/>
+                <p>Please try to <NavLink to="/parent">register</NavLink> again.</p>
+            </>
+            }
         </Paper>
     )
 }

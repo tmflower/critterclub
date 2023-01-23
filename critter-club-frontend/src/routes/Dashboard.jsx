@@ -87,8 +87,8 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
     useEffect(() => {
         async function makeBadges() {
             if (currentUser) {
-                const updatedUser = await usersAPI.getUser(currentUser.user.username);
-                
+                // ensure that the latest badges and points have been added to the current user
+                const updatedUser = await usersAPI.getUser(currentUser.user.username);                
                 const userBadges = updatedUser.user.userBadges;
 
                 setNumBadges(updatedUser.user.userBadges.length);
@@ -103,6 +103,8 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
                 }
                 setUserAnimals(animals);
 
+                // get current user's level to display
+                // get next level to enable calculating points needed to level up
                 for (let level of levels) {
                     if (updatedUser.user.points >= level.points) { 
                         setLevel(level.title);
@@ -116,6 +118,7 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
                         }
                     }                    
                 }
+                // handle correct display of user's number of badges
                 if (updatedUser.user.userBadges.length > 1)
                     setBadge("badges");
                 if (updatedUser.user.userBadges.length === 0)
@@ -144,28 +147,51 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
     }
     
 return (
-    <Box sx={{ mt: 5 }} className="Dashboard">
+    <Box 
+        sx={{ mt: 5 }} 
+        className="Dashboard">
         { !currentUser ?   
-            <Paper
-                elevation={8} sx={{ padding: 20 }}>
-                <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:</Typography>
-                <NavLink to="/signup" className='navbar-link'><Button>Join the Critter Club!</Button></NavLink>    
-            </Paper>
+        <Paper
+            elevation={8} 
+            sx={{ padding: 20 }}>
+            <Typography 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, m: 1 }}>Sign up for a free account to earn badges and level up:
+            </Typography>
+            <NavLink 
+                to="/signup" 
+                className='navbar-link'>
+                <Button>Join the Critter Club!</Button>
+            </NavLink>    
+        </Paper>
         :
         <Box>  
-        {alertShowing &&
-            alert.message.length ? 
-            <Alert variant="filled" severity={alert.severity} onClose={() => {closeAlert()}}>{alert.message}</Alert> 
-            : null}
+        {alertShowing && alert.message.length ? 
+            <Alert 
+                variant="filled" 
+                severity={alert.severity} 
+                onClose={() => {closeAlert()}}>{alert.message}
+            </Alert> 
+        : null}
         <Grid 
             container
             direction="column"
             alignItems="center"
             textAlign="center"
             >
-            <Typography variant="h2" sx={{ fontFamily: theme.typography.primary, m: 3, maxWidth: '90vw' }}>Hello, {currentUser.user.username}!</Typography>  
-            <img src={levelIcon} alt="kid clipart" width="300px"/>
-            <Typography variant="h4" sx={{ fontFamily: theme.typography.primary, m: 3 }}>You're a Critter Club <em className="blue-text">{level}</em> !</Typography>                  
+            <Typography 
+                variant="h2" 
+                sx={{ fontFamily: theme.typography.primary, m: 3, maxWidth: '90vw' }}>Hello, {currentUser.user.username}!
+            </Typography>  
+            <img 
+                src={levelIcon} 
+                alt="kid clipart" 
+                width="300px"/>
+            <Typography 
+                variant="h4" 
+                sx={{ fontFamily: theme.typography.primary, m: 3 }}>You're a Critter Club 
+                     <em className="blue-text"> {level}</em> !
+            </Typography>                  
         </Grid>
 
         <Grid 
@@ -175,76 +201,206 @@ return (
             marginTop="2rem"           
             >            
             <Grid item xs={12} md={6} sx={{ px: 4 }}>                
-                <Paper elevation={8} sx={{ p: 4, mt: 3, mb: 8 }}>
+                <Paper 
+                    elevation={8} 
+                    sx={{ p: 4, mt: 3, mb: 8 }}>
             
-                    {noBadges ? <Typography variant="h5" sx={{ fontFamily: theme.typography.primary }}>You don't have any badges yet. Let's get started!</Typography> 
+                    {noBadges ? 
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.primary }}>You don't have any badges yet. Let's get started!
+                    </Typography> 
                     :
-                    <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 3 }}>You've collected {numBadges} {badge} so far and you have {numPoints} points!</Typography>} 
-                    <Button id="alt-button" onClick={handleOpen}>Level Up</Button>
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.primary, m: 3 }}>You've collected {numBadges} {badge} so far and you have {numPoints} points!
+                    </Typography>} 
+                    <Button 
+                        id="alt-button" 
+                        onClick={handleOpen}>Level Up
+                    </Button>
                 </Paper>                
 
-                <Paper elevation={8} sx={{ p: 4, mb: 8 }}>
-                    <Typography variant="h5" sx={{ fontFamily: theme.typography.primary, m: 3 }}>Explore the Critter Club animal collection to earn more badges and level up:</Typography>
+                <Paper 
+                    elevation={8} 
+                    sx={{ p: 4, mb: 8 }}>
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.primary, m: 3 }}>Explore the Critter Club animal collection to earn more badges and level up:
+                    </Typography>
 
                     <Box sx={{ mb: 3 }}>
-                        <NavLink to="/animals/browse" className="link"><Button className="options-btn">Browse All Animals</Button></NavLink>
-                        <NavLink to="/animals/search" className="link"><Button className="options-btn">Search for an Animal</Button></NavLink>
-                        <NavLink to="/animals/random" className="link"><Button className="options-btn">Get a Random Animal</Button></NavLink>
+                        <NavLink 
+                            to="/animals/browse" 
+                            className="link">
+                            <Button className="options-btn">Browse All Animals</Button>
+                        </NavLink>
+                        <NavLink 
+                            to="/animals/search" 
+                            className="link">
+                            <Button className="options-btn">Search for an Animal</Button>
+                        </NavLink>
+                        <NavLink 
+                            to="/animals/random" 
+                            className="link">
+                            <Button className="options-btn">Get a Random Animal</Button>
+                        </NavLink>
                     </Box>
                 </Paper>
 
-                <Paper elevation={8} sx={{ p: 4, mb: 4, backgroundColor: '#1e91d6ff',  }}>
-                    <Typography variant="h5" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', m: 1 }}>Scroll down to see all your badges!</Typography>
-                    <Typography variant="h3" sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}> ☟  ☟  ☟</Typography>
+                <Paper 
+                    elevation={8} 
+                    sx={{ p: 4, mb: 4, backgroundColor: '#1e91d6ff',  }}>
+                    <Typography 
+                        variant="h5" 
+                        sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', m: 1 }}>Scroll down to see all your badges!
+                    </Typography>
+                    <Typography 
+                        variant="h3" 
+                        sx={{ fontFamily: theme.typography.secondary, textAlign: 'center' }}> ☟  ☟  ☟
+                    </Typography>
                 </Paper>                
             </Grid> 
 
             <Grid item xs={12} md={6}>
-                <Paper elevation={8} sx={{ p: 4, mt: 3 }}>
-                <Table>
+                <Paper 
+                    elevation={8} 
+                    sx={{ p: 4, mt: 3 }}>
+                    <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Level</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '2rem'}}>Points</TableCell>
-                                
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '2rem'}}>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '2rem'}}>Level
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '2rem'}}>Points
+                                </TableCell>                                
                             </TableRow>
                         </TableHead>
+
                         <TableBody>
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem' }}><img src={observer} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Observer
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem' }}>
+                                    <img 
+                                        src={observer} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
                                 </TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>0 - 99</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Observer
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>0 - 99
+                                </TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={explorer} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Explorer</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>100 - 499</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>
+                                    <img 
+                                        src={explorer} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Explorer
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>100 - 499
+                                </TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={adventurer} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Adventurer</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>500 - 999</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>
+                                    <img 
+                                        src={adventurer} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Adventurer
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>500 - 999
+                                </TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={naturalist} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Naturalist</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>1000 - 2499</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>
+                                    <img 
+                                        src={naturalist} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Naturalist
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>1000 - 2499
+                                </TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={ecologist} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Ecologist</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>2500 - 4999</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>
+                                    <img 
+                                        src={ecologist} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Ecologist
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>2500 - 4999
+                                </TableCell>
                             </TableRow>
+
                             <TableRow>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}><img src={zoologist} alt="kid clipart" width="80px"/></TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>Zoologist</TableCell>
-                                <TableCell sx={{ fontFamily: theme.typography.primary, fontSize: '1.2rem'}}>5000 +</TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>
+                                    <img 
+                                        src={zoologist} 
+                                        alt="kid clipart" 
+                                        width="80px"/>
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>Zoologist
+                                </TableCell>
+                                <TableCell sx={{ 
+                                    fontFamily: theme.typography.primary, 
+                                    fontSize: '1.2rem'}}>5000 +
+                                </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
-                    </Paper>
+                </Paper>
             </Grid>   
         
         </Grid>
@@ -255,63 +411,109 @@ return (
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10rem' }}>
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                marginTop: '10rem' }}>
                 <Paper sx={{ padding: '2rem '}}>
                     <IconButton onClick={handleClose} autoFocus>
                         <Close sx={{ color: theme.typography.primary }}/>
                     </IconButton>
-                    <Typography id="modal-modal-title" variant="h3" component="h2" sx={{ fontFamily: theme.typography.primary }}>
+                    <Typography 
+                        id="modal-modal-title" 
+                        variant="h3" 
+                        component="h2" 
+                        sx={{ fontFamily: theme.typography.primary }}>
                     Level Up!
                     </Typography>
-                    <img src={nextLevel.url} alt="kid clipart" width="80px"/>
-                    <Typography id="modal-modal-description" sx={{ mt: 2, fontSize: '2rem', fontFamily: theme.typography.primary }}>
+                    <img 
+                        src={nextLevel.url} 
+                        alt="kid clipart" 
+                        width="80px"/>
+                    <Typography 
+                        id="modal-modal-description" 
+                        sx={{ mt: 2, fontSize: '2rem', fontFamily: theme.typography.primary }}>
                         You need <span className="blue-text">{ pointsNeeded }</span> more points to level up to <span className="blue-text">{ nextLevel.title }</span>. Start earning points now! 
                     </Typography>
-                    <NavLink to="/animals/browse" className="link"><Button >Browse</Button></NavLink>
-                    <NavLink to="/animals/search" className="link"><Button >Search</Button></NavLink>
-                    <NavLink to="/animals/random" className="link"><Button>Random</Button></NavLink>
+                    <NavLink 
+                        to="/animals/browse" 
+                        className="link">
+                        <Button >Browse</Button>
+                    </NavLink>
+                    <NavLink 
+                        to="/animals/search" 
+                        className="link">
+                        <Button >Search</Button>
+                    </NavLink>
+                    <NavLink 
+                        to="/animals/random" 
+                        className="link">
+                        <Button>Random</Button>
+                    </NavLink>
                 </Paper>
             </Box>
         </Modal>
         </Box>}
 
         {currentUser ? 
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 5}}>
-            {userAnimals.length ? <Typography variant="h3" sx={{ fontFamily: theme.typography.primary, mb: 5 }}>Your Badges:</Typography> : null}
+        <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            mt: 5}}>
+            {userAnimals.length ? 
+            <Typography 
+                variant="h3" 
+                sx={{ fontFamily: theme.typography.primary, mb: 5 }}>Your Badges:
+            </Typography> 
+            : null}
             <Grid 
                 container 
                 justifyContent="center"
                 spacing={{ xs: 2, md: 3 }} 
                 columnSpacing={{ xs: 2, md: 3 }} 
                 columns={{ xs: 4, sm: 8, md: 12 }}>
-                {userAnimals.map((a, i) => <Badge key={i} animalName={a.animalName} url={a.animal.photo}/>)}
+                {userAnimals.map((a, i) => <Badge 
+                                                key={i} 
+                                                animalName={a.animalName} 
+                                                url={a.animal.photo}/>)}
             </Grid>
-            <Button id="reset-btn" onClick={handleOpenDialog}>Start Over</Button>
-        </Box>: null}
+            <Button 
+                id="reset-btn" 
+                onClick={handleOpenDialog}>Start Over
+            </Button>
+        </Box>
+        : null}
         
-
         <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{ fontFamily: theme.typography.primary.main}}
-      >
-        <DialogTitle id="alert-dialog-title" sx={{ fontFamily: theme.typography.primary, fontSize: '2rem' }}>
-          {"WAIT!!! Are you sure?"}
-        </DialogTitle>
-        <DialogContent >
-          <DialogContentText id="alert-dialog-description" sx={{ fontFamily: theme.typography.primary, fontSize: '1.5rem' }}>
-          Do you really want to start over? This will remove all of your badges and points!
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions sx={{  }}>
-          <Button onClick={reset}>Yes, I want to start over with no badges and 0 points.</Button>
-          <Button onClick={handleCloseDialog} autoFocus>
-            Nope! Save my points and badges!
-          </Button>
-        </DialogActions>
-      </Dialog>
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            sx={{ fontFamily: theme.typography.primary.main}}>
+            <DialogTitle 
+                id="alert-dialog-title" 
+                sx={{ fontFamily: theme.typography.primary, fontSize: '2rem' }}>
+                {"WAIT!!! Are you sure?"}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText 
+                    id="alert-dialog-description" 
+                    sx={{ fontFamily: theme.typography.primary, fontSize: '1.5rem' }}>
+                    Do you really want to start over? This will remove all of your badges and points!
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button 
+                    onClick={reset}>
+                    Yes, I want to start over with no badges and 0 points.
+                </Button>
+                <Button 
+                    onClick={handleCloseDialog} autoFocus>
+                    Nope! Save my points and badges!
+                </Button>
+            </DialogActions>
+        </Dialog>
     </Box>
     )
 }

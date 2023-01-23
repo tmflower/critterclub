@@ -4,7 +4,14 @@ import { theme } from '../theme/theme';
 
 /** PreyForm renders a question with a text input */
 
-export function PreyForm({ commonName, prey, message, points, setPoints, numQuestions, setNumQuestions  }) {
+export function PreyForm({ 
+    commonName, 
+    prey, 
+    message, 
+    points, 
+    setPoints, 
+    numQuestions, 
+    setNumQuestions  }) {
 
     // Display form with no default answers and no initial message
     const ref = useRef();
@@ -52,8 +59,8 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
 
     return (
         <Paper
-        elevation={8}
-        sx={{ padding: 3, mt: 3 }}>
+            elevation={8}
+            sx={{ padding: 3, mt: 3 }}>
         <form onSubmit={handleSubmit}>
             <fieldset>
             <FormLabel sx={{ fontSize: '1.5rem', fontFamily: 'Lexend Deca, Arial',}}>
@@ -72,13 +79,20 @@ export function PreyForm({ commonName, prey, message, points, setPoints, numQues
             </label>
             <div>
                 { !feedback ? 
-                <Button type="submit">Check answer</Button>
+                    <Button type="submit">Check answer</Button>
                 : null }
                 { feedback === message.incorrect ?
-                <Button id="alt-button" type="reset" onClick={handleReset}>Clear answer</Button>
+                    <Button 
+                    id="alt-button" 
+                    type="reset" 
+                    onClick={handleReset}>Clear answer</Button>
                 : null }
             </div>
-            <Typography id="quiz-feedback" variant="h5" sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}</Typography>
+            <Typography 
+                id="quiz-feedback" 
+                variant="h5" 
+                sx={{ fontFamily: theme.typography.primary, textAlign: 'center' }}>{feedback}
+            </Typography>
 
             </fieldset>
         </form>
