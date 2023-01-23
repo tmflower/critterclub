@@ -11,8 +11,6 @@ A kid-friendly web application for learning about animals, earning animal badges
   - [APIs](#apis)
   - [Launch Instructions](#launch-instructions)
   - [User Views](#user-views)
-  - [||](#)
-  - [|\<img src="/images/dashboard-mobile.png" width=100" alt="dashboard mobile"\>|](#img-srcimagesdashboard-mobilepng-width100-altdashboard-mobile)
   - [About the Developer](#about-the-developer)
 
 ## Live site
@@ -55,8 +53,7 @@ To install and run this project locally:
 
 Landing page seen by all visitors, whether logged in or not:
 
-|<img src="/images/landing.png" width="400" alt="landing">|
--
+<img src="/images/landing.png" width="400" alt="landing">
 
 Signup page for parent:
 
@@ -104,8 +101,7 @@ Mobile views:
 
 - Dashboard:
 
-|<img src="/images/dashboard-mobile.png" width=100" alt="dashboard mobile">|
--
+<img src="/images/dashboard-mobile.png" width="400" alt="dashboard mobile">
 
 - Animal:
   
