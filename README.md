@@ -105,7 +105,7 @@ Mobile views:
 
 - Animal:
   
-<img src="/images/animal-mobile.png" width="100" alt="animal mobile" style="border: 1px solid black">
+<img src="/images/animal-mobile.png" width="100" alt="animal mobile">
 
 - Challenge:
 <img src="/images/challenge-mobile.png" width="100" alt="challenge mobile">
