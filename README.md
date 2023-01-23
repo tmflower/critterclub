@@ -101,11 +101,11 @@ Mobile views:
 
 - Dashboard:
 
-<img src="/images/dashboard-mobile.png" width="400" alt="dashboard mobile">
+<img src="/images/dashboard-mobile.png" width="100" alt="dashboard mobile">
 
 - Animal:
   
-<img src="/images/animal-mobile.png" width="100" alt="animal mobile">
+<img src="/images/animal-mobile.png" width="100" alt="animal mobile" style="border: 1px solid black">
 
 - Challenge:
 <img src="/images/challenge-mobile.png" width="100" alt="challenge mobile">
