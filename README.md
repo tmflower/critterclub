@@ -11,6 +11,8 @@ A kid-friendly web application for learning about animals, earning animal badges
   - [APIs](#apis)
   - [Launch Instructions](#launch-instructions)
   - [User Views](#user-views)
+  - [|!\[landing\](/images/landing.png =400x)|](#landingimageslandingpng-400x)
+  - [|!\[dashboard-mobile\](/images/dashboard-mobile.png =100x)|](#dashboard-mobileimagesdashboard-mobilepng-100x)
   - [About the Developer](#about-the-developer)
 
 ## Live site
@@ -28,7 +30,7 @@ The app provides an informational page including facts, videos, and photographs 
 - Express 4.18.2
 - Postgres 14
 - MUI 5.11.2
-- 
+  
 ## APIs
 
 - [Animals API](https://api-ninjas.com/api/animals)
@@ -53,63 +55,65 @@ To install and run this project locally:
 
 Landing page seen by all visitors, whether logged in or not:
 
-<img src="/images/landing.png" width="400">
+|![landing](/images/landing.png =400x)|
+-
 
 Signup page for parent:
 
-<img src="/images/parent-page.png" width="400>
+![parent-page](/images/parent-page.png =400x)
 
 User signup page:
 
-<img src="/images/signup.png" width="400">
+![signup](/images/signup.png =400x)
 
 User login page:
 
-<img src="/images/login.png" width="400">
+![login](/images/login.png =400x)
 
 Views for logged-in users:
 
 - Dashboard:
 
-<img src="/images/dashboard.png" width="400">
+![dashboard](/images/dashboard.png =400x)
 
 - Browse:
 
-<img src="/images/browse.png" width="400">
+![browse](/images/browse.png =400x)
 
 - Search:
 
-<img src="/images/search.png" width="400">
+![search](/images/search.png =400x)
 
 - Animal info before clicking on fact cards:
 
-<img src="/images/animal-facts-closed.png" width="400">
+![animal-facts-closed](/images/animal-facts-closed.png =400x)
 
 - Animal info with facts showing (user can toggle fact to open or close):
 
-<img src="/images/animal-facts-open.png" width="400">
+![animal-facts-open](/images/animal-facts-open.png =400x)
 
-- Challenge questions before submitting:
+- Challenge questions:
 
-<img src="/images/challenge.png" width="400">
+![challenge](/images/challenge.png =400x)
 
 - Challenge after submitting:
 
-<img src="/images/challenge-completed.png" width="400">
+![challenge-completed](/images/challenge-completed.png =400x)
 
 Mobile views:
 
 - Dashboard:
 
-<img src="/images/dashboard-mobile.png" width="200">
+|![dashboard-mobile](/images/dashboard-mobile.png =100x)|
+-
 
 - Animal:
   
-<img src="/images/animal-mobile.png" width="200">
+![animal-mobile](/images/animal-mobile.png =100x)
 
 - Challenge:
   
-<img src="/images/challenge-mobile.png" width="200" display="inline-block">
+![challenge-mobile](/images/challenge-mobile.png =100x)
 
 
 ## About the Developer
