@@ -55,39 +55,55 @@ Landing page seen by all visitors, whether logged in or not:
 
 <img src="/images/landing.png" width="400">
 
+Signup page for parent:
 
+<img src="/images/parent-page.png" width="400>
 
-Login and signup pages:
+User signup page:
 
-![parent signup page](/images/parent-page.png)
-![signup page](/images/signup.png)
-![login page](/images/login.png)
+<img src="/images/signup.png" width="400">
 
+User login page:
 
-Logged in user views:
+<img src="/images/login.png" width="400">
 
-![dashboard](/images/dashboard.png)
+Views for logged-in users:
 
-![browse](/images/browse.png)
+- Dashboard:
 
-![search](/images/search.png)
+<img src="/images/dashboard.png" width="400">
 
-![animal facts hidden](/images/animal-facts-closed.png)
+- Browse:
 
-![animal facts showing](/images/animal-facts-open.png)
+<img src="/images/browse.png" width="400">
 
-![challenge](/images/challenge.png)
+- Search:
 
-![challenge-completed](/images/challenge-completed.png)
+<img src="/images/search.png" width="400">
+
+- Animal info before clicking on fact cards:
+
+<img src="/images/animal-facts-closed.png" width="400">
+
+- Animal info with facts showing (user can toggle fact to open or close):
+
+<img src="/images/animal-facts-open.png" width="400">
+
+- Challenge questions before submitting:
+
+<img src="/images/challenge.png" width="400">
+
+- Challenge after submitting:
+
+<img src="/images/challenge-completed.png" width="400">
 
 Mobile views of dashboard, animal, and challenge:
 
-![dashboard](/images/dashboard-mobile.png)
+<img src="/images/dashboard-mobile.png" width="200" display="inline-block" margin-right="10">
 
-![animal](/images/animal-mobile.png)
+<img src="/images/animal-mobile.png" width="200" display="inline-block" margin-right="10">
 
-![challenge](/images/challenge-mobile.png)
-
+<img src="/images/challenge-mobile.png" width="200" display="inline-block">
 
 ## About the Developer
 
