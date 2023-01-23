@@ -60,7 +60,7 @@ Landing page seen by all visitors, whether logged in or not:
 
 Signup page for parent:
 
-![parent-page](/images/parent-page.png =400x)
+![parent-page](https://github.com/mjbvz/vscode-markdown-image-size/raw/master/./images/parent-page.png =400x)
 
 User signup page:
 
