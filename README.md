@@ -11,8 +11,8 @@ A kid-friendly web application for learning about animals, earning animal badges
   - [APIs](#apis)
   - [Launch Instructions](#launch-instructions)
   - [User Views](#user-views)
-  - [|!\[landing\](/images/landing.png =400x)|](#landingimageslandingpng-400x)
-  - [|!\[dashboard-mobile\](/images/dashboard-mobile.png =100x)|](#dashboard-mobileimagesdashboard-mobilepng-100x)
+  - [||](#)
+  - [|\<img src="/images/dashboard-mobile.png" width=100" alt="dashboard mobile"\>|](#img-srcimagesdashboard-mobilepng-width100-altdashboard-mobile)
   - [About the Developer](#about-the-developer)
 
 ## Live site
@@ -55,66 +55,64 @@ To install and run this project locally:
 
 Landing page seen by all visitors, whether logged in or not:
 
-|![landing](/images/landing.png =400x)|
+|<img src="/images/landing.png" width="400" alt="landing">|
 -
 
 Signup page for parent:
 
-![parent-page](https://github.com/mjbvz/vscode-markdown-image-size/raw/master/./images/parent-page.png =400x)
+<img src="/images/parent-page.png" width="400" alt="parent page">
 
 User signup page:
 
-![signup](/images/signup.png =400x)
+<img src="/images/signup.png" width="400" alt="signup">
 
 User login page:
 
-![login](/images/login.png =400x)
+<img src="/images/login.png" width="400" alt="signup">
 
 Views for logged-in users:
 
 - Dashboard:
 
-![dashboard](/images/dashboard.png =400x)
+<img src="/images/dashboard.png" width="400" alt="dashboard">
 
 - Browse:
 
-![browse](/images/browse.png =400x)
+<img src="/images/browse.png" width="400" alt="browse">
 
 - Search:
 
-![search](/images/search.png =400x)
+<img src="/images/search.png" width="400" alt="browse">
 
 - Animal info before clicking on fact cards:
 
-![animal-facts-closed](/images/animal-facts-closed.png =400x)
+<img src="/images/animal-facts-closed.png" width="400" alt="animal page with facts closed">
 
 - Animal info with facts showing (user can toggle fact to open or close):
 
-![animal-facts-open](/images/animal-facts-open.png =400x)
+<img src="/images/animal-facts-open.png" width="400" alt="animal pages with facts showing">
 
 - Challenge questions:
 
-![challenge](/images/challenge.png =400x)
+<img src="/images/challenge.png" width="400" alt="challenge">
 
 - Challenge after submitting:
 
-![challenge-completed](/images/challenge-completed.png =400x)
+<img src="/images/challenge-completed.png" width="400" alt="challenge completed">
 
 Mobile views:
 
 - Dashboard:
 
-|![dashboard-mobile](/images/dashboard-mobile.png =100x)|
+|<img src="/images/dashboard-mobile.png" width=100" alt="dashboard mobile">|
 -
 
 - Animal:
   
-![animal-mobile](/images/animal-mobile.png =100x)
+<img src="/images/animal-mobile.png" width="100" alt="animal mobile">
 
 - Challenge:
-  
-![challenge-mobile](/images/challenge-mobile.png =100x)
-
+<img src="/images/challenge-mobile.png" width="100" alt="challenge mobile">
 
 ## About the Developer
 
