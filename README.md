@@ -97,13 +97,20 @@ Views for logged-in users:
 
 <img src="/images/challenge-completed.png" width="400">
 
-Mobile views of dashboard, animal, and challenge:
+Mobile views:
 
-<img src="/images/dashboard-mobile.png" width="200" display="inline-block" margin-right="10">
+- Dashboard:
 
-<img src="/images/animal-mobile.png" width="200" display="inline-block" margin-right="10">
+<img src="/images/dashboard-mobile.png" width="200">
 
+- Animal:
+  
+<img src="/images/animal-mobile.png" width="200">
+
+- Challenge:
+  
 <img src="/images/challenge-mobile.png" width="200" display="inline-block">
+
 
 ## About the Developer
 
