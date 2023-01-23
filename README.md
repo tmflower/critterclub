@@ -11,7 +11,7 @@ A kid-friendly web application for learning about animals, earning animal badges
   - [APIs](#apis)
   - [Launch Instructions](#launch-instructions)
   - [User Views](#user-views)
-  - [About the Developer:](#about-the-developer)
+  - [About the Developer](#about-the-developer)
 
 ## Live site
 
@@ -51,9 +51,10 @@ To install and run this project locally:
 
 ## User Views
 
-Landing page:
+Landing page seen by all visitors, whether logged in or not:
 
-![landing page](/images/landing.png)
+<img src="/images/landing.png" width="400">
+
 
 
 Login and signup pages:
@@ -88,6 +89,6 @@ Mobile views of dashboard, animal, and challenge:
 ![challenge](/images/challenge-mobile.png)
 
 
-## About the Developer:
+## About the Developer
 
 😊 Please visit my [portfolio](https://tmflower.github.io/portfolio2/#) for more examples of my work. 
