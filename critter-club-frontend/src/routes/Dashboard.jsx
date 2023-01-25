@@ -203,7 +203,7 @@ return (
             <Grid item xs={12} md={6} sx={{ px: 4 }}>                
                 <Paper 
                     elevation={8} 
-                    sx={{ p: 4, mt: 3, mb: 8 }}>
+                    sx={{ p: 4, mt: 3, mb: 4 }}>
             
                     {noBadges ? 
                     <Typography 
@@ -223,7 +223,7 @@ return (
 
                 <Paper 
                     elevation={8} 
-                    sx={{ p: 4, mb: 8 }}>
+                    sx={{ p: 4, mb: 4 }}>
                     <Typography 
                         variant="h5" 
                         sx={{ fontFamily: theme.typography.primary, m: 3 }}>Explore the Critter Club animal collection to earn more badges and level up:
@@ -250,7 +250,7 @@ return (
 
                 <Paper 
                     elevation={8} 
-                    sx={{ p: 4, mb: 4, backgroundColor: '#1e91d6ff',  }}>
+                    sx={{ p: 2, mb: 4, backgroundColor: '#1e91d6ff',  }}>
                     <Typography 
                         variant="h5" 
                         sx={{ fontFamily: theme.typography.secondary, textAlign: 'center', m: 1 }}>Scroll down to see all your badges!

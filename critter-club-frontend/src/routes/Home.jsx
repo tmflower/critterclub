@@ -6,9 +6,12 @@ import uakari from "../assets/images/animal-icons/uakari.jpeg";
 import seadragon from "../assets/images/animal-icons/seadragon.png";
 import lion from "../assets/images/animal-icons/lion.png";
 
-export function Home({ justLoggedOut }) {
+export function Home({ justLoggedOut, setJustLoggedOut }) {
     const [alertShowing, setAlertShowing] = useState(true);
-    const closeAlert = () => setAlertShowing(false);
+    const closeAlert = () => {
+        setAlertShowing(false);
+        setJustLoggedOut(false);
+    }
 
     return (
         <Box sx={{ mt: 5 }}>

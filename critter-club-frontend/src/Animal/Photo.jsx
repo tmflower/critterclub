@@ -30,13 +30,11 @@ export function Photo ({ animalName }) {
                     alt={animalName} 
                     width="200px" 
                     className="photo"/>
-                <small>Photo by 
-                    <a 
+                <small>Photo by <a 
                         href={photographerLink} 
                         target="_blank" 
                         rel="noreferrer">{photographer}
-                    </a> on 
-                    <a 
+                    </a> on <a 
                         href="https://unsplash.com/?utm_source=critterclub&utm_medium=referral" 
                         target="_blank" 
                         rel="noreferrer">Unsplash

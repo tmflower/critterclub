@@ -170,18 +170,6 @@
     .img-home {
       max-width: 10rem;
     }
-
-    #modal-img {
-      width: 400px;
-    }
-
-    #modal-modal-title {
-      font-size: 2.5rem;
-    }
-
-    #modal-modal-description {
-      font-size: 1.5rem;
-    }
   }
 
   
@@ -193,27 +181,12 @@
     .photo {
       width: 600px;
     }
-    .popup {
-      width: 500px;
-    }
-
-    #modal-modal-title {
-      font-size: 3rem;
-    }
-
-    #modal-modal-description {
-      font-size: 2rem;
-    }
-
   }
   
   @media (min-width: 1200px){
     .video {
       width: 800px;
       height: 471px;
-    }
-    .photo {
-      width: 700px;
     }
   }
 

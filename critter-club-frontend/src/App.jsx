@@ -116,7 +116,7 @@ export function App() {
           padding: '3rem'
         }}>
           <Routes>
-            <Route path="/" element={<Home justLoggedOut={justLoggedOut}/>} ></Route>
+            <Route path="/" element={<Home justLoggedOut={justLoggedOut} setJustLoggedOut={setJustLoggedOut}/>} ></Route>
             <Route path="/parent" element={<ParentSignup alert={alert} setAlert={setAlert}/>}></Route>
             <Route path="/parent/:username" element={<Code />}></Route>
             <Route path="/signup" element={<Signup signup={signup} alert={alert}/>}></Route>

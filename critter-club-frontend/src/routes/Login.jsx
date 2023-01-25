@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Paper, FormControl, TextField, Button, Stack, Box, Alert } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 /** Login renders a form with inputs for username and password
  * Enables returning user to access their account */
@@ -87,6 +88,7 @@ export function Login({ login, alert }) {
                 </Stack>
                 </FormControl>                             
             </form>
+            <NavLink to="/signup">Need to sign up for an account?</NavLink>
         </Paper>
     )
 }
