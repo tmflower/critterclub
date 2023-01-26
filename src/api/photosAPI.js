@@ -7,21 +7,21 @@ import axios from "axios";
  * 
  */
 
-const BASE_URL_BACKEND = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL_PHOTOS = "https://api.unsplash.com/photos";
 let API_KEY_PHOTOS;
 let MEDIA;
 
 // Retrieve the required key to access the public api
 const getKey = async () => {
-    const res = await axios.get(`${BASE_URL_BACKEND}/util/keys`);
+    const res = await axios.get(`${BASE_URL}/util/keys`);
     API_KEY_PHOTOS = res.data.photos_api_key;
     return (API_KEY_PHOTOS);
 }
 
 // Provide access to stored photo id numbers
 const getMedia = async () => {
-    const res = await axios.get(`${BASE_URL_BACKEND}/util/media`);
+    const res = await axios.get(`${BASE_URL}/util/media`);
     MEDIA = res.data.media;
     return MEDIA;
 }
