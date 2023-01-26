@@ -14,7 +14,7 @@ let MEDIA;
 
 // Retrieve the required key to access the public api
 const getKey = async () => {
-    const res = await axios.get(`http://${BASE_URL_BACKEND}/util/keys`);
+    const res = await axios.get(`${BASE_URL_BACKEND}/util/keys`);
     API_KEY_PHOTOS = res.data.photos_api_key;
     return (API_KEY_PHOTOS);
 }
