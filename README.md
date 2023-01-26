@@ -6,6 +6,7 @@ A kid-friendly web application for learning about animals, earning animal badges
 - [Critter Club](#critter-club)
   - [Table of Contents](#table-of-contents)
   - [Live site](#live-site)
+  - [Backend repo](#backend-repo)
   - [Introduction](#introduction)
   - [Technologies](#technologies)
   - [APIs](#apis)
@@ -13,13 +14,20 @@ A kid-friendly web application for learning about animals, earning animal badges
   - [User Views](#user-views)
   - [About the Developer](#about-the-developer)
 
-## Live site
+## Live site 
 
-Coming soon
+[🐞 🐸 🐷 Critter Club 🦉 🦊 🐙](https://critterclub.surge.sh)
+
+## Backend repo
+
+All backend code has been moved into its own repo located at:
+[Critter Club Backend](https://github.com/tmflower/critterclub-backend)
 
 ## Introduction
 
-The app provides an informational page including facts, videos, and photographs about each of 144 different animals. Users can search for an animal, browse all the animals, or get a randomly selected animal. Each animal page offers the user the option to earn a badge for that animal and earn points toward leveling up by answering questions based on the facts provided. New users begin at the "Observer" level and attempt to earn their way up to "Zoologist". Users must register for an account and be logged in to access the app, and a parent account is required in order to register a user account.
+Upon registering and logging in, the app welcomes the user to their personalized dashboard. The dashboard displays the user's current player level, determined by the number of points they've earned. Users will also see any badges they've earned, and options for viewing animal information by browsing, searching, or random selection.
+
+Each animal informational page displays facts, videos, and photographs about the selected animal. Each page also offers the user the option to earn a badge for that animal and earn points toward leveling up by answering questions based on the facts provided. New users begin at the "Observer" level and attempt to earn their way up to "Zoologist". Users must register for an account and be logged in to access the app, and a parent account is required in order to register a user account.
 
 ## Technologies
 
