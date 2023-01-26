@@ -21,7 +21,7 @@ const getKey = async () => {
 
 // Provide access to stored photo id numbers
 const getMedia = async () => {
-    const res = await axios.get(`http://${BASE_URL_BACKEND}/util/keys`);
+    const res = await axios.get(`${BASE_URL_BACKEND}/util/keys`);
     MEDIA = res.data.media;
     return MEDIA;
 }
