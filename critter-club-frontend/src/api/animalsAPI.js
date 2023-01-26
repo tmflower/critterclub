@@ -8,12 +8,13 @@ import animalsList from "../assets/animalsList";
  * 
  */
 
+const BASE_URL_BACKEND = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL_ANIMALS = "https://api.api-ninjas.com/v1/animals?name=";
 let API_KEY_ANIMALS;
 
 // Retrieve the required key to access the public api
 const getKey = async () => {
-    const res = await axios.get("http://localhost:3001/util/keys");
+    const res = await axios.get(`http://${BASE_URL_BACKEND}/util/keys`);
     API_KEY_ANIMALS = res.data.animals_api_key;
     return API_KEY_ANIMALS;
 }
