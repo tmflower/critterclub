@@ -143,6 +143,15 @@
       max-width: 370px;
     }
 
+    .Dashboard {
+      max-width: 360px;
+      padding: 10px;
+    }
+
+    .kid-clipart {
+      width: 50px;
+    }
+
     #modal-img {
       width:300px;
       margin: auto;
@@ -158,6 +167,19 @@
     }
   }
   
+  @media (min-width: 560px) {
+    .Dashboard {
+      max-width: 100%;
+    }
+
+    .table-paper {
+      padding: 4%;
+    }
+
+    .kid-clipart {
+      width: 80px;
+    }
+  }
   @media (min-width: 768px){
     .video {
       width: 500px;

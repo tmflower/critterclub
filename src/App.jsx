@@ -107,13 +107,14 @@ export function App() {
       <Box
         sx={{
           color: 'black',
-          minHeight: '100vh',
+          minHeight: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           fontFamily: theme.typography.primary,
-          padding: '3rem'
+          padding: '3rem',
+          // padding: '3rem 3rem 3rem 0rem'
         }}>
           <Routes>
             <Route path="/" element={<Home justLoggedOut={justLoggedOut} setJustLoggedOut={setJustLoggedOut}/>} ></Route>

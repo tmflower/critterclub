@@ -265,7 +265,8 @@ return (
             <Grid item xs={12} md={6}>
                 <Paper 
                     elevation={8} 
-                    sx={{ p: 4, mt: 3 }}>
+                    sx={{ mt: 3 }}
+                    className="table-paper">
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -291,7 +292,8 @@ return (
                                     fontSize: '1.2rem' }}>
                                     <img 
                                         src={observer} 
-                                        alt="kid clipart" 
+                                        alt="kid clipart"
+                                        className="kid-clipart" 
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
@@ -311,6 +313,7 @@ return (
                                     <img 
                                         src={explorer} 
                                         alt="kid clipart" 
+                                        className="kid-clipart" 
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
@@ -330,6 +333,7 @@ return (
                                     <img 
                                         src={adventurer} 
                                         alt="kid clipart" 
+                                        className="kid-clipart" 
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
@@ -348,7 +352,8 @@ return (
                                     fontSize: '1.2rem'}}>
                                     <img 
                                         src={naturalist} 
-                                        alt="kid clipart" 
+                                        alt="kid clipart"
+                                        className="kid-clipart"  
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
@@ -367,7 +372,8 @@ return (
                                     fontSize: '1.2rem'}}>
                                     <img 
                                         src={ecologist} 
-                                        alt="kid clipart" 
+                                        alt="kid clipart"
+                                        className="kid-clipart"  
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
@@ -387,6 +393,7 @@ return (
                                     <img 
                                         src={zoologist} 
                                         alt="kid clipart" 
+                                        className="kid-clipart" 
                                         width="80px"/>
                                 </TableCell>
                                 <TableCell sx={{ 
