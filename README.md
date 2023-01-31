@@ -18,6 +18,10 @@ A kid-friendly web application for learning about animals, earning animal badges
 
 [🐞 🐸 🐷 Critter Club 🦉 🦊 🐙](https://critterclub.surge.sh)
 
+To demo the site without setting up an account, you may use the demo account:
+- username: SadieCat
+- password: meow!345
+
 ## Backend repo
 
 All backend code has been moved into its own repo located at:
