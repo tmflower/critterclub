@@ -5,27 +5,24 @@ exports[`matches snapshot 1`] = `
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 css-180j490-MuiPaper-root"
   >
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-    >
-      Your child will need to enter this code in order to set up a user account.
+    <p>
+      Hmmm...our komodo dragon seems to have eaten your access code.
     </p>
-    <a
-      class="link"
-      exact="true"
-      href="/signup"
-    >
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
+    <img
+      alt="komodo dragon"
+      src="komododragon.jpg"
+      width="80px"
+    />
+    <p>
+      Please try to 
+      <a
+        class=""
+        href="/parent"
       >
-        Child signup
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
-    </a>
+        register
+      </a>
+       again.
+    </p>
   </div>
 </DocumentFragment>
 `;

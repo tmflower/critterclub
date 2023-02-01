@@ -250,9 +250,6 @@ exports[`matches snapshot 1`] = `
         class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
       />
     </button>
-    <a
-      href="/dashboard"
-    />
   </div>
 </DocumentFragment>
 `;

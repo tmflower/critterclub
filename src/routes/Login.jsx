@@ -89,6 +89,11 @@ export function Login({ login, alert }) {
                 </FormControl>                             
             </form>
             <NavLink to="/signup">Need to sign up for an account?</NavLink>
+            <p>Just want a quick demo without signing up? Use our demo account:</p>
+            <ul>
+                <li>username: SadieCat</li>
+                <li>password: meow!345</li>
+            </ul>
         </Paper>
     )
 }

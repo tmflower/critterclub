@@ -92,7 +92,8 @@ export function Signup({ signup, alert }) {
                     </Button> 
                 </Stack> 
                 </FormControl>                           
-            </form>            
+            </form>
+            <p>Just want a quick demo without signing up? Go to <NavLink to="/login">Login</NavLink> and use our demo account.</p>           
         </Paper>
     )
 }

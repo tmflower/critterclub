@@ -161,6 +161,23 @@ exports[`matches snapshot 1`] = `
         </div>
       </div>
     </form>
+    <a
+      class=""
+      href="/signup"
+    >
+      Need to sign up for an account?
+    </a>
+    <p>
+      Just want a quick demo without signing up? Use our demo account:
+    </p>
+    <ul>
+      <li>
+        username: SadieCat
+      </li>
+      <li>
+        password: meow!345
+      </li>
+    </ul>
   </div>
 </DocumentFragment>
 `;
