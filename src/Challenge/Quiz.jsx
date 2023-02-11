@@ -94,7 +94,8 @@ export function Quiz({
     const handleClick = () => {
         setAnimalSelected(false);
     }
-
+    
+    // Selects a gif at random to display in modal when user earns badge;
     const randomNum = Math.floor(Math.random() * gifs.length);
     const gif = gifs[randomNum];
 
