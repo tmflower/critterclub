@@ -16,7 +16,7 @@ import gifs from '../assets/gifs';
 
 
 /** Quiz renders a set of questions about the selected animal;
- * User can check each answer individually and submit when 3 or more are correct;
+ * User can check each answer individually and submit when 2 or more are correct;
  * User receives points and badge and is redirected to dashboard;
  */
 const minNumQuestionsRequired = 2;
