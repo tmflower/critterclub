@@ -15,11 +15,19 @@ import { theme } from "../theme/theme";
 import gifs from '../assets/gifs';
 
 
-/** Quiz renders a set of questions about the selected animal;
- * User can check each answer individually and submit when 2 or more are correct;
- * User receives points and badge and is redirected to dashboard;
+/** Quiz component renders a set of questions about the selected animal;
+ * User can check each answer individually;
+ * Submit button only displays when 2 or more answers are correct;
+ * User may go back to review facts on animal page, then return to Quiz;
+ * On submit, user receives points and badge and is redirected to dashboard;
+ * User will also see a congratulations messages with a celebration gif;
  */
 const minNumQuestionsRequired = 2;
+
+/** Quiz accepts props from Animal component; these provide the basis for the questions 
+* Logged-in user is accessed with useContext;
+* If user is not logged in, Quiz is not displayed; user will be prompted to sign up or log in
+*/
 
 export function Quiz({
                     taxClass,
