@@ -85,7 +85,7 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
  * 
  */
     useEffect(() => {
-        async function makeBadges() {
+        async function updateDashboard() {
             if (currentUser) {
                 // ensure that the latest badges and points have been added to the current user
                 const updatedUser = await usersAPI.getUser(currentUser.user.username);                
@@ -125,7 +125,7 @@ export function Dashboard({ alert, setAlert, getRandomAnimal }) {
                     setNoBadges(true);
             }        
         }
-        makeBadges();
+        updateDashboard();
     }, [currentUser, didReset]);
 
     // Let user know how many points needed to reach next level when user opens modal
