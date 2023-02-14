@@ -14,10 +14,12 @@ export function TaxClassForm({
     numQuestions, 
     setNumQuestions  }) {
     
+    // Reclassify complex class names to kid-friendly term (i.e. fish)
     if (taxClass === "sarcopterygii" || taxClass === "actinopterygii" || taxClass === "chondrichthyes") {
         setTaxClass("fish");
     }
 
+    // Cover any outliers in the data set
     if (!taxClass) setTaxClass("other");
     
     // Display form with no default answers and no initial message
@@ -25,7 +27,7 @@ export function TaxClassForm({
     const [formData, setFormData] = useState(initialState);
     const [feedback, setFeedback] = useState('');
 
-    // Deconstruct formData properties
+    // Deconstruct formData property
     const { vertebrateGroup } = formData;
 
     // Set formData to user's input
@@ -38,9 +40,7 @@ export function TaxClassForm({
     // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
     // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
-    const handleSubmit = (e) => {
-        // compare user's selection to animal data to check if correct; provide corresponding feedback message
-        
+    const handleSubmit = (e) => {    
         e.preventDefault(); 
         if (vertebrateGroup === taxClass) {
             setFeedback(message.correct);
