@@ -32,7 +32,7 @@ export function ScientificNameForm({
 
     // compare user's selection to animal data to check if correct; provide corresponding feedback message
     // update user's points
-    // increment numQuestions; when numQuestions is >=3, user can submit answers and earn badge
+    // increment numQuestions; when numQuestions is >=2, user can submit answers and earn badge
     const handleSubmit = (e) => {
         // compare user's selection to animal data to check if correct; provide corresponding feedback message
         e.preventDefault();
